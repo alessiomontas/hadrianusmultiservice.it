@@ -214,6 +214,45 @@ td.num{font-family:var(--display);color:var(--inchiostro);font-size:1.5em;line-h
   border-color:var(--riga-inv);                              /* ripiego */
   border-color:color-mix(in srgb,var(--accento-inv) 50%,transparent)}
 
+/* ---------------- le pagine di legge ----------------
+
+   ⚠️ IL TITOLO SI COLORA A MANO, E C'E' UN MOTIVO.
+   `h1` nel resto del sito sta SEMPRE sopra una fotografia scura: e' scritto
+   color crema fisso (#F8F3E8) con un'ombra nera sotto. Qui la fotografia non
+   c'e' e il fondo e' sabbia: crema su sabbia non si legge — «PRIVACY» era
+   un'ombra bianca sul chiaro. Si rimette l'inchiostro e si toglie l'ombra,
+   che senza fondo scuro sporca e basta. */
+.testa-legge h1{color:var(--inchiostro);text-shadow:none}
+.testa-legge .sotto{max-width:54ch}
+/* ---------------- le pagine di legge ----------------
+   Privacy e cookie: pagine da LEGGERE, non da guardare. Tre pezzi soli,
+   e nessuno di questi serve altrove. */
+
+/* La data in cima. Piccola e spenta: conta che ci sia, non che si veda. */
+.quando{font-size:.92rem;color:var(--morbido);letter-spacing:.04em;
+  margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--riga);
+  display:inline-block}
+.inversa .quando{color:var(--morbido-inv);border-top-color:var(--riga-inv)}
+
+/* La riga di servizio in fondo a una sezione: un avvertimento, una
+   precisazione. Rientra e si spegne, cosi' si distingue dal discorso. */
+.nota{font-size:.96rem;color:var(--morbido);max-width:58ch;margin-top:2rem;
+  padding-left:1.1rem;border-left:2px solid var(--riga)}
+.inversa .nota{color:var(--morbido-inv);border-left-color:var(--riga-inv)}
+
+/* I nomi tecnici (`hadrianus-consenso`, `localStorage`) vanno scritti come
+   sono: se si scrivono nel carattere del testo sembrano parole, e uno li
+   cerca nelle impostazioni senza trovarli. */
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:var(--fondo-2);border:1px solid var(--riga);border-radius:3px;
+  padding:.12em .45em;white-space:nowrap}
+.inversa code{background:rgba(255,255,255,.07);border-color:var(--riga-inv)}
+
+/* Nelle pagine di legge le voci puntate sono UNA COLONNA: sono frasi
+   lunghe, e su due colonne si leggono a zig-zag. Altrove restano a griglia,
+   perche' li' sono voci corte. */
+.p-pulizie .voci{grid-template-columns:1fr;max-width:62ch;gap:.9rem}
+
 /* ---------------- entrano salendo ----------------
    RICETTA 3 della dottrina (`web/.claude/skills/movimento`): l'entrata a
    scaglioni. I numeri non sono a gusto, sono quelli scritti li':
