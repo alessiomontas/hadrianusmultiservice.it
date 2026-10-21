@@ -144,27 +144,48 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 <footer class="piede-pagina" id="contatti">
   <div class="dentro">
-    <nav class="menu" aria-label="Le pagine del sito">
-      <a href="gestione.html">Gestione completa</a>
-      <a href="pulizie.html">Le pulizie</a>
-      <a href="prenota.html">Prenota un soggiorno</a>
-      <a href="chi-siamo.html">Chi siamo</a>
-      <a href="compenso.html">Il compenso</a>
-      <a href="index.html">La pagina d'ingresso</a>
+    <!-- L'INSEGNA ANCHE QUI. Chi arriva in fondo scorrendo ha perso di vista
+         la barra in alto: il nome va ridetto, e porta all'ingresso. -->
+    <a class="marchio insegna-piede" href="index.html"
+       aria-label="Hadrianus Multiservice, torna all&rsquo;ingresso"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
+    <p class="mestiere">Gestione di case vacanza a Roma e sul litorale di
+      Ostia. Pulizia alberghiera anche per chi gestisce da s&eacute;.</p>
+
+    <nav class="colonne" aria-label="Le pagine del sito">
+      <div class="gruppo">
+        <h2>Cosa facciamo</h2>
+        <a href="gestione.html">Gestione completa</a>
+        <a href="pulizie.html">Le pulizie</a>
+        <a href="prenota.html">Prenota un soggiorno</a>
+      </div>
+      <div class="gruppo">
+        <h2>Prima di decidere</h2>
+        <a href="compenso.html">Il compenso</a>
+        <a href="domande.html">Domande frequenti</a>
+        <a href="notizie.html">Notizie del settore</a>
+      </div>
+      <div class="gruppo">
+        <h2>L'azienda</h2>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="index.html">La pagina d'ingresso</a>
+        <a href="privacy.html">Privacy</a>
+        <span class="qui">Cookie</span>
+      </div>
     </nav>
+
     <!-- Il numero CHIAMA, non e' un testo da copiare: DESIGN.md.
          ⚠️ 21/10: Alessio ha tolto i pulsanti «Chiama» dal corpo delle
          pagine — resta solo «Scrivici ora». Il numero QUI nel piede NON si
          tocca: non e' un pulsante, e' il recapito, e dal telefono chiama
-         lo stesso. Due inviti all'azione uno accanto all'altro si
-         annullano: ne resta uno, ed e' quello che porta a una risposta
-         scritta. -->
+         lo stesso. -->
     <div class="recapiti">
       <a href="mailto:info@hadrianusmultiservice.it">info@hadrianusmultiservice.it</a>
       <a href="tel:+393517305472">+39 351 730 5472</a>
       <span>Roma e il litorale di Ostia</span>
     </div>
-    <!-- Dalla visura camerale e dal certificato di attribuzione P.IVA. -->
+
+    <!-- Dalla visura camerale e dal certificato di attribuzione P.IVA.
+         Per una S.R.L.S. vanno scritti sul sito: non sono decorazione. -->
     <div class="legale">
       <span>Hadrianus Multiservice S.R.L.S.</span>
       <span>Via Francesco Donati 274, 00126 Roma</span>
@@ -175,11 +196,46 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <div class="legale ultimo">
       <span>&copy; 2026 Hadrianus Multiservice S.R.L.S.</span>
       <a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a>
-      <!-- Qui c'era «prova di lavoro, non e' online». Il sito E' online dal
-           21 ottobre: la riga si e' tolta. Lasciata, diceva al visitatore
-           che quello che sta leggendo non vale. -->
     </div>
   </div>
+
+  <!-- ─────────── LA SCHEDA PER I MOTORI DI RICERCA ───────────
+       Gli stessi dati di sopra, scritti nel formato che Google legge per
+       mostrare l'attivita' nella mappa e nella scheda a lato: nome,
+       indirizzo, telefono, zona servita. Non e' testo nuovo e non promette
+       niente: e' la stessa visura, in una forma che una macchina capisce.
+       ⚠️ NON c'e' `aggregateRating` con il 5,0 di Google, e NON e' una
+       dimenticanza: dichiarare da soli il proprio voto medio e' contro le
+       regole di Google (le recensioni le deve contare lui, non noi) e si
+       rischia una penalizzazione manuale. Il 5,0 resta scritto in pagina,
+       dov'e' vero e verificabile. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Hadrianus Multiservice S.R.L.S.",
+    "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
+    "url": "https://hadrianusmultiservice.it/prova/",
+    "email": "info@hadrianusmultiservice.it",
+    "telephone": "+39 351 730 5472",
+    "vatID": "IT18302601002",
+    "taxID": "18302601002",
+    "foundingDate": "2025-11-12",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via Francesco Donati 274",
+      "postalCode": "00126",
+      "addressLocality": "Roma",
+      "addressRegion": "RM",
+      "addressCountry": "IT"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Roma"},
+      {"@type": "Place", "name": "Ostia, Lido di Roma"}
+    ],
+    "knowsLanguage": ["it", "en", "fr", "es", "de"]
+  }
+  </script>
 </footer>
 
 <script>

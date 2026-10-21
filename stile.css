@@ -200,6 +200,41 @@ b{color:var(--inchiostro)}
 .monumento i{font-style:normal;font-family:var(--display);color:var(--morbido);
   font-size:clamp(1.4rem,1.05rem + 1.7vw,2.4rem);line-height:1.2;max-width:14ch}
 
+/* ---------------- le notizie del settore ----------------
+   Articoli in colonna, separati da un filo come le domande. Niente
+   griglia di schedine con l'immagine in cima: non ci sono immagini e
+   inventarne sarebbe esattamente il cliche' che `DESIGN.md` vieta.
+   La riga della fonte e' il pezzo piu' importante del disegno: piccola,
+   spenta, ma SEMPRE presente. E' quella che distingue questa pagina da
+   una di quelle piene di finte notizie scritte per riempire. */
+.pezzi{max-width:72ch}
+.pezzo{padding:2.8rem 0;border-top:1px solid var(--riga)}
+.pezzo:first-child{border-top:0;padding-top:0}
+.pezzo h3{font-size:clamp(1.42rem,1.1rem + 1.3vw,2.05rem);line-height:1.18;
+  margin:.7rem 0 1.1rem;max-width:30ch}
+.pezzo p{margin-bottom:1rem}
+.pezzo .nota{margin-top:1.4rem}
+.fonte{margin-top:1.6rem;font-size:.86rem;color:var(--morbido);
+  letter-spacing:.03em;padding-top:.8rem;border-top:1px dotted var(--riga);
+  display:inline-block}
+.inversa .fonte{color:var(--morbido-inv);border-top-color:var(--riga-inv)}
+
+/* ---------------- le domande frequenti ----------------
+   Niente pannelli che si aprono e si chiudono. Ci ho pensato ed e' sbagliato
+   qui: chi apre questa pagina sta decidendo se affidarci una casa, e vuole
+   LEGGERE tutto, non cliccare dodici volte per scoprire cosa gli nascondi.
+   Un accordion fa guadagnare spazio e fa perdere fiducia — e su Google il
+   testo chiuso conta meno. Tutto aperto, separato da un filo. */
+.domande{max-width:70ch}
+.qa{padding:2.2rem 0;border-top:1px solid var(--riga)}
+.qa:first-child{border-top:0;padding-top:0}
+.qa h3{font-size:clamp(1.3rem,1.1rem + .9vw,1.72rem);margin-bottom:.9rem;
+  line-height:1.2;max-width:34ch}
+.qa p{margin-bottom:.9rem}
+.qa p:last-child{margin-bottom:0}
+.qa .nota{margin-top:1.3rem}
+.qa .chiamata{margin-top:1.2rem}
+
 /* ---------------- le tre prove ----------------
    Tre fatti in fila, il numero grande e la spiegazione sotto. Non sono
    «riquadri con l'icona in cima» — che `DESIGN.md` chiama il cliche'
@@ -347,13 +382,34 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
   color:var(--inchiostro);
   padding:clamp(48px,7vw,86px) var(--lato) clamp(30px,4vw,48px);font-size:1rem}
 .piede-pagina .dentro{width:var(--dentro);margin-inline:auto}
-.menu{display:flex;flex-wrap:wrap;gap:.8rem 2.4rem;align-items:baseline;
-  padding-bottom:26px;border-bottom:1px solid var(--riga)}
-.menu a{color:var(--inchiostro);text-decoration:none;font-size:1.04rem;
-  border-bottom:1px solid transparent;transition:color .2s ease,border-color .2s ease}
-.menu a:hover{color:var(--accento)}
-.menu a::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
-  background:var(--accento);margin-right:.65rem;vertical-align:.2em}
+/* ---- il piede a colonne (21/10) -------------------------------
+   Era una fila unica di voci tutte uguali. Chi arriva in fondo a una
+   pagina sta cercando UNA cosa, e nove voci in fila non lo aiutano a
+   trovarla: adesso sono tre gruppi con un titolo ciascuno.
+   `auto-fit` e non tre colonne fisse: a 700 px diventano due da sole, e
+   piu' stretto una sola — senza scrivere nessuna misura a mano. */
+.insegna-piede{margin-bottom:.9rem}
+.insegna-piede .nome{font-size:clamp(1rem,.86rem + .4vw,1.2rem)}
+.mestiere{color:var(--morbido);max-width:46ch;margin:0 0 2.6rem;font-size:1.02rem}
+
+.colonne{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));
+  gap:2.2rem 2.6rem;padding-bottom:2.4rem;border-bottom:1px solid var(--riga)}
+.gruppo{display:flex;flex-direction:column;align-items:flex-start;gap:.62rem}
+/* Il titolo del gruppo e' un `h2` per chi usa un lettore di schermo — che
+   naviga per titoli — ma non deve PESARE come un titolo di sezione:
+   piccolo, spaziato, color accento. Come gli occhielli del resto del sito. */
+.gruppo h2{font-family:var(--testo);font-size:.74rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--accento);
+  margin:0 0 .3rem;
+  /* due righe di spazio riservate: se un titolo va a capo, le colonne
+     restano allineate invece di partire a tre altezze diverse */
+  min-height:2.1em}
+.gruppo a{color:var(--inchiostro);text-decoration:none;font-size:1.04rem;
+  border-bottom:1px solid transparent}
+.gruppo a:hover{color:var(--accento);border-bottom-color:var(--accento)}
+/* La pagina in cui si e' gia': non un collegamento, un segnaposto. */
+.gruppo .qui{color:var(--morbido);font-size:1.04rem;opacity:.7}
+
 .recapiti{margin-top:26px;display:flex;flex-wrap:wrap;gap:.5rem 2.4rem;
   align-items:baseline;font-size:1.1rem}
 .recapiti a{color:var(--accento);text-decoration:none;
@@ -444,7 +500,12 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
   th,td{font-size:1.1rem;padding:.9rem .7rem .9rem 0}
   td.num,.p-compenso td.num{font-size:1.35em}
   .chiamata{padding:1.1em 2.2em;font-size:1.06rem;letter-spacing:.14em}
-  .menu a{font-size:1.16rem}
+  .gruppo a,.gruppo .qui{font-size:1.16rem}
+  .gruppo h2{font-size:.84rem}
+  .mestiere{font-size:1.16rem;margin-bottom:2rem}
+  .colonne{gap:1.9rem}
+  .qa{padding:1.9rem 0}
+  .pezzo{padding:2.3rem 0}
   .recapiti{font-size:1.2rem;gap:.5rem 1.4rem}
   .legale{font-size:1.04rem;gap:.3rem 1.2rem}
   .legale.ultimo{font-size:.98rem}
