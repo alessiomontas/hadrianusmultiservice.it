@@ -143,7 +143,6 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <p class="sotto">Sopralluogo e stima di quanto pu&ograve; rendere. Senza
       impegno e senza costo. Se non ha senso, te lo diciamo.</p>
     <a class="chiamata" href="mailto:info@hadrianusmultiservice.it?subject=Sopralluogo">Scrivici ora</a>
-    <a class="chiamata vuota" href="tel:+393517305472" style="margin-left:.8rem">Chiama</a>
   </div>
 </section>
 
@@ -156,7 +155,13 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       <a href="compenso.html">Il compenso</a>
       <a href="index.html">La pagina d'ingresso</a>
     </nav>
-    <!-- Il numero CHIAMA, non e' un testo da copiare: DESIGN.md. -->
+    <!-- Il numero CHIAMA, non e' un testo da copiare: DESIGN.md.
+         ⚠️ 21/10: Alessio ha tolto i pulsanti «Chiama» dal corpo delle
+         pagine — resta solo «Scrivici ora». Il numero QUI nel piede NON si
+         tocca: non e' un pulsante, e' il recapito, e dal telefono chiama
+         lo stesso. Due inviti all'azione uno accanto all'altro si
+         annullano: ne resta uno, ed e' quello che porta a una risposta
+         scritta. -->
     <div class="recapiti">
       <a href="mailto:info@hadrianusmultiservice.it">info@hadrianusmultiservice.it</a>
       <a href="tel:+393517305472">+39 351 730 5472</a>
@@ -179,33 +184,125 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 </footer>
 
 <script>
-/* LE SEZIONI ENTRANO SALENDO quando le si raggiunge.
-   Con «meno movimento» acceso NON si registra niente e tutto resta al suo
-   posto, visibile. Il caso «fermo» e' quello in cui non si fa NULLA: senza
-   lo scrollino la pagina e' gia' giusta. E' l'opposto dell'errore che aveva
-   tenuto rotta la pagina d'ingresso, dove l'accensione del motore stava
-   dentro un `if` e con «meno movimento» non partiva mai. */
-/* `pageshow` e non `load`: scatta anche quando il browser ripesca la pagina
+/* IL MOVIMENTO DELLE PAGINE — ricette 3 e 1 della dottrina
+   (`web/.claude/skills/movimento`). Nessuna libreria: GSAP sarebbe 70 kB
+   compressi, e per un'entrata a scaglioni e uno strato che scorre non
+   servono. Il budget delle librerie resta intatto.
+
+   Due cose sole, e tutte e due legate allo scorrimento:
+     1. le scritte entrano salendo, a scaglioni, quando le si raggiunge;
+     2. le fotografie a tutta larghezza scorrono piu' piano della pagina.
+
+   `pageshow` e non `load`: scatta anche quando il browser ripesca la pagina
    dalla sua memoria tornando indietro, dove `load` non scatta affatto.
-   Se c'e' un'ancora nell'indirizzo (#contatti) non si tocca niente: li' andare
-   in fondo e' proprio quello che ha chiesto chi ha cliccato. */
+   Se c'e' un'ancora nell'indirizzo (#contatti) non si tocca niente: li'
+   andare in fondo e' proprio quello che ha chiesto chi ha cliccato. */
 addEventListener('pageshow', function () {
   if (!location.hash) scrollTo(0, 0);
 });
 
 (function () {
+  /* CHI HA CHIESTO MENO MOVIMENTO RICEVE MENO MOVIMENTO. Non e' opzionale,
+     ed e' la prima riga perche' da qui in giu' non deve succedere nulla.
+     Il foglio di stile rimette gia' tutto a posto da solo. */
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
-  var roba = document.querySelectorAll('section:not(.eroe) > .dentro > *');
-  for (var i = 0; i < roba.length; i++) roba[i].classList.add('sale');
+
+  /* ---------- 1 · le scritte entrano a scaglioni ---------- */
+
+  /* TRE O QUATTRO PER SEZIONE, NON TUTTE. Sta scritto nella dottrina e ha
+     una ragione: se si muove tutto, non si muove niente — l'occhio non ha
+     piu' un punto fermo da cui giudicare. Si animano i primi quattro figli
+     (occhiello, titolo, frase, elenco o pulsante) e il resto sta fermo.
+     Prima si animavano TUTTI, fino all'ultima riga del piede. */
+  var QUANTI = 4;
+  var PASSO = 70;        // ms fra un elemento e il successivo (dottrina: 60-90)
+
+  var sezioni = document.querySelectorAll('section:not(.eroe) > .dentro');
+  var roba = [];
+  for (var s = 0; s < sezioni.length; s++) {
+    var figli = sezioni[s].children;
+    for (var i = 0; i < figli.length && i < QUANTI; i++) {
+      /* MAI ANIMARE QUELLO CHE E' GIA' SULLO SCHERMO AL CARICAMENTO.
+         Su uno schermo alto la prima sezione si vede subito: farla
+         "arrivare" vorrebbe dire farla sparire e ricomparire sotto gli
+         occhi di chi ha appena aperto la pagina. */
+      if (figli[i].getBoundingClientRect().top < innerHeight * 0.92) continue;
+      figli[i].style.setProperty('--ritardo', (i * PASSO) + 'ms');
+      figli[i].classList.add('sale');
+      roba.push(figli[i]);
+    }
+  }
+
   var occhio = new IntersectionObserver(function (viste) {
-    viste.forEach(function (v, n) {
-      if (!v.isIntersecting) return;
-      v.target.style.transitionDelay = Math.min(n, 5) * 70 + 'ms';
-      v.target.classList.add('dentro-schermo');
-      occhio.unobserve(v.target);
-    });
+    for (var k = 0; k < viste.length; k++) {
+      if (!viste[k].isIntersecting) continue;
+      viste[k].target.classList.add('dentro-schermo');
+      /* UNA VOLTA SOLA. Un elemento che si rianima ogni volta che ci
+         ripassi davanti e' la firma del sito fatto in fretta. */
+      occhio.unobserve(viste[k].target);
+    }
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
   for (var j = 0; j < roba.length; j++) occhio.observe(roba[j]);
+
+  /* ---------- 2 · le fasce scorrono piu' piano ---------- */
+
+  /* Un solo strato, un solo tasso. La fotografia e' alta il 124% della
+     fascia, quindi puo' muoversi di 12 punti per parte senza mai scoprire
+     il fondo. `--scorre` va da 1 (fascia che entra dal basso) a -1 (che
+     esce dall'alto), ed e' una proporzione lineare: MAI un'easing su una
+     cosa legata al dito, se no l'immagine arriva dopo di lui.
+
+     Si scrive solo dentro `requestAnimationFrame`, e solo per le fasce che
+     si vedono: scriverlo a ogni evento di scorrimento vorrebbe dire far
+     ricalcolare al telefono anche quelle che stanno tre schermate piu' in
+     giu'. */
+  var fasce = [].slice.call(document.querySelectorAll('.fascia'));
+  if (!fasce.length) return;
+
+  var inVista = [];
+  var occhioFasce = new IntersectionObserver(function (viste) {
+    for (var k = 0; k < viste.length; k++) {
+      var f = viste[k].target;
+      var dove = inVista.indexOf(f);
+      if (viste[k].isIntersecting && dove < 0) inVista.push(f);
+      else if (!viste[k].isIntersecting && dove >= 0) inVista.splice(dove, 1);
+    }
+    if (inVista.length) chiedi();
+  }, { rootMargin: '20% 0px 20% 0px' });
+  for (var q = 0; q < fasce.length; q++) occhioFasce.observe(fasce[q]);
+
+  /* UN GIRO PER OGNI SCORRIMENTO, NON UNO CONTINUO.
+     La prima versione si richiamava da sola finche' una fascia era in
+     vista: anche a pagina ferma il telefono restava a disegnare sessanta
+     volte al secondo per niente, e si sente sulla batteria. Adesso il
+     giro lo chiede l'evento di scorrimento — che e' `passive`, quindi
+     non rallenta il dito — e dopo aver disegnato si ferma. */
+  var inCoda = false;
+  function chiedi() {
+    if (inCoda || !inVista.length) return;
+    inCoda = true;
+    requestAnimationFrame(disegna);
+  }
+  function disegna() {
+    inCoda = false;
+    var h = innerHeight || 1;
+    for (var k = 0; k < inVista.length; k++) {
+      var r = inVista[k].getBoundingClientRect();
+      /* 1 quando la fascia sta tutta sotto il bordo basso dello schermo,
+         -1 quando sta tutta sopra: il centro della fascia al centro dello
+         schermo vale 0, e li' l'inquadratura e' esattamente quella scelta
+         da chi ha ritagliato la fotografia. In mezzo e' una proporzione
+         dritta — MAI un'easing su una cosa legata al dito, se no
+         l'immagine arriva dopo di lui e sembra rotta. */
+      var centro = r.top + r.height / 2;
+      var p = (centro - h / 2) / ((h + r.height) / 2);
+      p = p < -1 ? -1 : p > 1 ? 1 : p;
+      var im = inVista[k].querySelector('img');
+      if (im) im.style.setProperty('--scorre', p.toFixed(3));
+    }
+  }
+  addEventListener('scroll', chiedi, { passive: true });
+  addEventListener('resize', chiedi, { passive: true });
 })();
 </script>

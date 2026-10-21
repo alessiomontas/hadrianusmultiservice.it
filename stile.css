@@ -69,7 +69,7 @@ body::after{content:'';position:fixed;inset:-50%;z-index:60;pointer-events:none;
    queste due righe l'altezza al 100% si misurerebbe su di lei, che e' alta
    quanto il contenuto, e l'immagine collasserebbe. */
 .eroe picture{display:contents}
-.fascia picture{display:block;width:100%;height:100%}
+.fascia picture{display:block;position:absolute;inset:0}
 .eroe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:center 42%;z-index:-2}
 .eroe::before{content:'';position:absolute;inset:0;z-index:-1;
@@ -182,7 +182,7 @@ b{color:var(--inchiostro)}
 
 /* ---------------- la fascia di marmo ---------------- */
 .fascia{position:relative;height:clamp(220px,34vw,460px);overflow:hidden;background:#000}
-.fascia img{width:100%;height:100%;object-fit:cover;object-position:center 44%}
+.fascia img{width:100%;object-fit:cover;object-position:center 44%}
 .fascia::after{content:'';position:absolute;inset:0;
   background:linear-gradient(to bottom,var(--fondo),transparent 20%,transparent 80%,var(--fondo))}
 .fascia.verso-inversa::after{
@@ -214,10 +214,47 @@ td.num{font-family:var(--display);color:var(--inchiostro);font-size:1.5em;line-h
   border-color:var(--riga-inv);                              /* ripiego */
   border-color:color-mix(in srgb,var(--accento-inv) 50%,transparent)}
 
-/* ---------------- entrano salendo ---------------- */
-.sale{opacity:0;transform:translateY(22px);
-  transition:opacity .7s cubic-bezier(.16,.84,.34,1),transform .7s cubic-bezier(.16,.84,.34,1)}
+/* ---------------- entrano salendo ----------------
+   RICETTA 3 della dottrina (`web/.claude/skills/movimento`): l'entrata a
+   scaglioni. I numeri non sono a gusto, sono quelli scritti li':
+   scostamento 16-24 px, durata 400-600 ms, ritardo fra un elemento e il
+   successivo 60-90 ms, e si anima UNA VOLTA SOLA.
+
+   Erano 22 px e 700 ms: lo scostamento andava bene, la durata era fuori di
+   un decimo. Adesso 20 e 560 — e il ritardo non si scrive piu' a mano
+   nello stile dell'elemento ma arriva da `--ritardo`, che lo script mette
+   contando la posizione DENTRO LA SUA SEZIONE. Prima contava la posizione
+   nel mucchio che il browser gli passava: due elementi della stessa
+   sezione potevano partire col ritardo di sezioni diverse, e lo scaglione
+   usciva storto senza che si capisse perche'. */
+.sale{opacity:0;transform:translateY(20px);
+  transition:opacity .56s cubic-bezier(.16,.84,.34,1) var(--ritardo,0s),
+             transform .56s cubic-bezier(.16,.84,.34,1) var(--ritardo,0s)}
 .sale.dentro-schermo{opacity:1;transform:none}
+/* Il titolo parte da un filo piu' giu' e ci mette un filo di piu': arriva
+   per primo e si posa per ultimo, cosi' la frase sotto lo segue invece di
+   corrergli accanto. */
+h2.sale{transform:translateY(26px);transition-duration:.64s}
+
+/* ---------------- la fascia che respira ----------------
+   RICETTA 1 della dottrina ridotta a UNO strato: la fotografia scorre piu'
+   piano della pagina. Un solo tasso, nessuna libreria, solo `transform`.
+   L'immagine e' alta il 124% della fascia e parte 12% piu' su: cosi' puo'
+   scorrere di 12 punti in su e 12 in giu' SENZA MAI scoprire il fondo —
+   che e' l'errore numero due scritto nella dottrina.
+   `--scorre` la scrive lo script, da -1 a 1. Senza script resta 0 e la
+   fotografia sta ferma, incorniciata esattamente come prima. */
+.fascia img{height:124%;top:-12%;position:absolute;left:0;width:100%;
+  transform:translate3d(0,calc(var(--scorre,0) * -8%),0);will-change:transform}
+/* ⚠️ PERCHE' 8 E NON 12. Il margine che ho sopra e sotto e' il 12%
+   DELLA FASCIA. Ma una percentuale dentro `translate` NON si misura sulla
+   fascia: si misura sull'ELEMENTO CHE SI MUOVE, e l'immagine e' alta il
+   124% della fascia. Scrivendo 12 si sarebbe spostata di 0,12 x 1,24 =
+   14,9 punti di fascia contro 12 di margine: a fine corsa scopriva il
+   fondo nero per quasi 3 punti. E' l'errore numero due scritto nella
+   dottrina, e me l'ero tirato addosso da solo.
+   Con 8: 0,08 x 1,24 = 9,9 punti di corsa contro 12 di margine. Restano
+   2 punti di margine buono anche con gli arrotondamenti del browser. */
 
 /* ---------------- il piede ---------------- */
 .piede-pagina{background:var(--fondo-3);border-top:1px solid var(--riga);
@@ -291,7 +328,16 @@ td.num{font-family:var(--display);color:var(--inchiostro);font-size:1.5em;line-h
      leggersi tenendolo in mano. Ogni misura sale, nessuna scende. */
   body{font-size:1.24rem;line-height:1.56}
   .tasti a{font-size:.95rem;padding:.62em 1.1em;letter-spacing:.14em}
-  .tasti .secondo{display:none}   /* in tre non ci stanno: misurato */
+  /* IN TRE NON CI STANNO: marchio + due tasti sforano su uno schermo da
+     360 px. Ne resta uno, e dal 21/10 e' «CONTATTACI», non «PRENOTA»:
+     l'ha chiesto Alessio. Ha ragione — dal telefono la pagina la apre chi
+     ha una casa e vuole parlare con qualcuno, non chi cerca una stanza a
+     Ostia; e «Prenota» non si perde, e' una voce del menu nel piede.
+     Il tasto rimasto prende il vestito pieno: da solo in una barra, un
+     riquadro vuoto sembra spento. */
+  .tasti .primario{display:none}
+  .tasti .secondo{background:var(--accento);border-color:var(--accento);
+    color:var(--fondo);font-weight:600}
   .marchio .nome{font-size:1.16rem}
   .eroe,.p-prenota .eroe{min-height:min(76vh,640px)}
   .p-pulizie .eroe{min-height:min(60vh,500px)}
@@ -319,7 +365,10 @@ td.num{font-family:var(--display);color:var(--inchiostro);font-size:1.5em;line-h
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .sale{opacity:1;transform:none;transition:none}
+  .sale,h2.sale{opacity:1;transform:none;transition:none}
+  /* la fascia torna incorniciata e ferma: non basta spegnere lo script,
+     perche' l'immagine resta alta il 124% e starebbe storta */
+  .fascia img{height:100%;top:0;transform:none;will-change:auto}
   .chiamata:hover{transform:none}
   body::after{display:none}
 }

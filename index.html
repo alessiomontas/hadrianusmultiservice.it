@@ -175,7 +175,8 @@ p{margin:0}
    Col CSS non si poteva: `text-align-last:justify` distribuisce gli spazi FRA
    LE PAROLE, e MULTISERVICE e' una parola sola — non succedeva niente, e la
    parola restava appoggiata a sinistra sotto una piu' larga. */
-.marchio{display:inline-flex;flex-direction:column;line-height:1}
+.marchio{display:inline-flex;flex-direction:column;line-height:1;
+  text-decoration:none;color:inherit}
 /* La spaziatura fra le lettere aggiunge spazio ANCHE DOPO L'ULTIMA, quindi la
    scatola di HADRIANUS e' piu' larga della parola di .3em. MULTISERVICE si
    allarga sulla scatola: senza questo margine negativo sporgeva a sinistra
@@ -193,15 +194,20 @@ p{margin:0}
   font-size:.46em;margin-top:.42em;white-space:nowrap}
 .barra .marchio .ditta{font-size:.52em}
 .barra .tasti{display:flex;align-items:center;gap:.55rem}
-.barra a{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-chiaro);
+/* ⚠️ `.barra .tasti a`, NON `.barra a`. Dal 21/10 anche il marchio e' un
+   collegamento (porta ai contatti), e con `.barra a` si prendeva addosso il
+   vestito dei pulsanti: riquadro dorato, lettere piccole, tutto maiuscolo.
+   Si vedeva — una cornice attorno a HADRIANUS MULTISERVICE. Queste regole
+   sono dei TASTI, e adesso lo dicono. */
+.barra .tasti a{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-chiaro);
   text-decoration:none;border:1px solid rgba(200,162,75,.45);padding:.55em 1.3em;
   white-space:nowrap;transition:background .2s ease,color .2s ease,border-color .2s ease}
-.barra a:hover{background:var(--oro);color:#1A1309}
+.barra .tasti a:hover{background:var(--oro);color:#1A1309}
 /* PRENOTA e' l'azione piena: oro pieno, testo scuro. CONTATTACI resta il
    contorno di prima. Un solo pulsante «acceso» per schermata, come dice
    DESIGN.md: se si accendono tutti e due non decide piu' niente. */
-.barra a.primario{background:var(--oro);border-color:var(--oro);color:#1A1309;font-weight:600}
-.barra a.primario:hover{background:var(--oro-chiaro);border-color:var(--oro-chiaro)}
+.barra .tasti a.primario{background:var(--oro);border-color:var(--oro);color:#1A1309;font-weight:600}
+.barra .tasti a.primario:hover{background:var(--oro-chiaro);border-color:var(--oro-chiaro)}
 
 /* ---------------- il film ---------------- */
 #film{position:fixed;inset:0;z-index:0;background:#000;overflow:hidden}
@@ -644,7 +650,7 @@ p{margin:0}
      Sono +27% sul marchio e +25% sul tasto. */
   .barra{padding:12px 14px}
   .barra .marchio .nome{font-size:1.22rem}
-  .barra a{font-size:1rem;padding:.6em 1.05em;letter-spacing:.18em}
+  .barra .tasti a{font-size:1rem;padding:.6em 1.05em;letter-spacing:.18em}
   /* IN TRE NON CI STANNO, ed e' geometria: misurato su uno schermo da 360 px,
      marchio + Prenota + Contattaci fanno 409 px sui 314 disponibili. Stringendo
      le scritte fino a 14,4 px sforano lo stesso — e sarebbe tornare indietro
@@ -652,7 +658,15 @@ p{margin:0}
      Quindi sul telefono la barra tiene l'azione piena, PRENOTA. «Contattaci»
      non si perde: sta nel piede e nella sezione finale, dov'e' gia' un
      pulsante grande («Scrivici ora»). */
-  .barra .secondo{display:none}
+  /* DAL 21/10 RESTA «CONTATTACI», NON «PRENOTA» — l'ha chiesto Alessio.
+     Il conto di sopra non cambia: in tre non ci stanno lo stesso, cambia
+     solo quale dei due sopravvive. «Prenota» non si perde: e' una voce
+     del menu nel piede di pagina.
+     Il tasto rimasto prende il vestito pieno, se no da solo in una barra
+     un riquadro vuoto sembra spento. */
+  .barra .primario{display:none}
+  .barra .secondo{background:var(--oro);border-color:var(--oro);
+    color:#1A1309;font-weight:600}
   /* la chiusura e il piede di pagina */
   /* IL PIEDE DI PAGINA. Non ha vincoli di altezza — e' una sezione che
      scorre — quindi qui comanda solo la larghezza. «SCRIVICI ORA» col suo
@@ -691,7 +705,16 @@ p{margin:0}
   vacanze a Roma e sul litorale di Ostia</h1>
 
 <header class="barra">
-  <span class="marchio"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></span>
+  <!-- IL MARCHIO PORTA AL PIEDE DI PAGINA (21/10, chiesto da Alessio).
+       Era uno `<span>` muto. Qui non puo' portare "in cima" come su un
+       sito normale: la cima di questa pagina e' l'inizio del film, e
+       rimandarci chi sta leggendo i contatti sarebbe fargli rifare tutto
+       il cammino. Porta dov'e' utile: i recapiti.
+       Il salto NON e' un'ancora qualunque — c'e' un motore che tiene la
+       pagina agganciata al filmato, e va avvisato: ci pensa il gestore in
+       fondo al file, cercato per `#al-piede`. -->
+  <a class="marchio" id="al-piede" href="#contatti"
+     aria-label="Hadrianus Multiservice, vai ai contatti"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
   <span class="tasti">
     <a class="primario" href="prenota.html">Prenota</a>
     <a class="secondo"  href="#contatti">Contattaci</a>
@@ -1877,7 +1900,72 @@ function atterra() {
 }
 
 /* ---------------- i gesti ---------------- */
-function nelFilm() { return scrollY < (SCHERMATE + 0.4) * UNA; }
+/* ❗ IL PIEDE DI PAGINA E' FUORI DAL FILM, E CI RESTA. (21/10, v70)
+
+   IL DIFETTO, visto da Alessio sul telefono: arrivato in fondo, per
+   rileggere l'inizio del piede bisogna risalire — e risalendo RIPARTIVA IL
+   FILMATO all'indietro.
+
+   Perche' succedeva: `nelFilm()` guardava solo DOVE sta la pagina, con una
+   tolleranza di 0,4 schermate oltre la pista. Dentro quella fascia ogni
+   gesto verso l'alto finiva al motore, e il motore sa fare una cosa sola —
+   rimettere indietro il film. Sul telefono il piede e' alto piu' di una
+   schermata: dentro ci si muove su e giu' parecchio, e bastava rientrare
+   in quella fascia perche' il cammino ricominciasse.
+
+   Adesso c'e' un fermo con DUE soglie diverse, e sono diverse apposta:
+     · si ENTRA nel piede superando l'ultima fermata di 0,25 schermate;
+     · si ESCE solo tornando a 0,08 dall'ultima fermata.
+   Due numeri uguali avrebbero fatto sbattere il fermo avanti e indietro
+   proprio sull'orlo, che e' il punto dove si sta di piu'.
+
+   Fra le due soglie — cioe' dentro il piede — lo scorrimento e' quello del
+   telefono: naturale, in tutte e due le direzioni, con la sua inerzia.
+   Per rientrare nel film si risale fino all'orlo, e li' il motore riprende
+   e il cammino torna indietro come ha sempre fatto. Non si perde niente.
+
+   ⚠️ L'ultima fermata sta a `sch: 7.0` e la pista e' alta 7 schermate:
+   l'orlo del piede e l'ultima fermata sono LO STESSO PUNTO. Per questo la
+   soglia d'ingresso non puo' essere zero — se no il fermo scatterebbe
+   mentre si e' ancora fermi sull'ultima tappa, e non si potrebbe piu'
+   tornare indietro col dito. */
+/* ❗❗ LE SOGLIE SONO IN PIXEL, NON IN SCHERMATE. Misurato il 21/10 e
+   sbagliato al primo tentativo: le avevo scritte in frazioni di schermata
+   (0,25 per entrare) e NON SCATTAVANO MAI.
+   Il conto che mi mancava: oltre l'ultima fermata la pagina puo' scorrere
+   solo di quanto il piede e' piu' alto dello schermo. A 390x844 il piede
+   e' alto 1043 px, lo schermo 844: restano **199 px**, e io ne chiedevo
+   211. La soglia stava oltre il fondo della pagina, quindi il fermo non
+   si chiudeva e il film continuava a ripartire — il difetto che Alessio
+   aveva segnalato, intatto.
+   In pixel il conto non dipende piu' da quanto e' alto lo schermo. */
+const ENTRA_PIEDE = 60, ESCE_PIEDE = 20;   // pixel oltre l'ultima fermata
+let nelPiede = false;
+function nelFilm() {
+  const orlo = SCHERMATE * UNA;            // dove finisce la pista
+  if (scrollY > orlo + ENTRA_PIEDE) nelPiede = true;
+  else if (scrollY < orlo + ESCE_PIEDE) nelPiede = false;
+  return !nelPiede && scrollY < orlo + UNA * 0.4;
+}
+
+/* IL MARCHIO IN ALTO PORTA AI CONTATTI. (21/10, chiesto da Alessio)
+   Non basta l'ancora `#contatti`: il motore tiene la pagina agganciata al
+   filmato, e un salto fatto alle sue spalle lo lascerebbe convinto di
+   stare a meta' del cammino — il primo gesto dopo riporterebbe li'.
+   Quindi non si salta: si porta il motore all'ULTIMA FERMATA con lo stesso
+   codice dell'arrivo normale (`atterra`), che mette il film sull'ultimo
+   fotogramma e la pagina sull'orlo del piede. Da li' in poi e' una pagina
+   come un'altra, e il piede si accende con il suo tempo.
+   Vale anche cliccandolo DAL piede: riporta in cima al piede, che e'
+   esattamente quello che serviva a chi era in fondo. */
+{
+  const alPiede = document.getElementById('al-piede');
+  if (alPiede) alPiede.addEventListener('click', e => {
+    e.preventDefault();
+    bersaglio = ULTIMA;
+    atterra();
+  });
+}
 
 /* LA BARRA DELL'INDIRIZZO NON E' UN CAMBIO DI FINESTRA.
    Su iPhone si ritira e torna a ogni scorrimento, e sposta `innerHeight` di
