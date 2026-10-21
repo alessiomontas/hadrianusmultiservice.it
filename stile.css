@@ -123,12 +123,40 @@ section.inversa{background:var(--fondo-inv);color:var(--inchiostro-inv)}
 .inversa a{color:var(--accento-inv)}
 .inversa .passi li{border-color:var(--riga-inv)}
 .inversa .passi .numero,.inversa th{color:var(--accento-inv)}
+/* ❗❗ LE DESCRIZIONI DEI PASSI, DENTRO LA SEZIONE CHIARA. (21/10)
+   Trovato con una misura di contrasto su tutte le pagine, non a occhio:
+   nella sezione chiara di `gestione.html` le otto descrizioni erano
+   `rgb(195,182,163)` su `rgb(239,233,220)` — **contrasto 1,65**, quando per
+   un testo da leggere ne servono 4,5. Lo STESSO colore sul fondo scuro fa
+   10,54: era giusto li' e sbagliato qui.
+   Perche' `.inversa p` (riga 122) non bastava: `.passi p` pesa uguale e sta
+   PIU' IN BASSO nel foglio, quindi vinceva lui. Non era un errore di
+   colore, era un errore di ORDINE — e di ordine non ci si accorge
+   leggendo, perche' tutte e due le righe sono giuste da sole.
+   Questa pesa di piu' (tre classi) e vince dovunque la si metta.
+   ⚠️ Era la lista «Otto cose, nell'ordine in cui succedono»: il pezzo piu'
+   importante della pagina dei proprietari, illeggibile da giorni. */
+.inversa .passi p{color:var(--morbido-inv)}
 .inversa .voci li::before,.inversa .occhiello::before{background:var(--accento-inv)}
 .inversa .occhiello{color:var(--accento-inv)}
 .inversa th,.inversa td{border-color:var(--riga-inv)}
 .inversa td.num{color:var(--inchiostro-inv)}
 .inversa .monumento b{color:var(--accento-inv)}
 .inversa .monumento i{color:var(--morbido-inv)}
+/* ❗ LA CITAZIONE DENTRO UNA SEZIONE ROVESCIATA. (21/10)
+   Difetto visto da Alessio: «Costruire valore, custodire bellezza» era
+   BIANCA SU BEIGE, cioe' invisibile.
+   Perche': `.citazione p` fissa `var(--inchiostro)`, che e' l'inchiostro del
+   tema NORMALE — e su «chi siamo» il tema normale e' scuro, quindi
+   l'inchiostro e' crema (#F8F2E6). Dentro `.inversa` il fondo diventa crema
+   anche lui. Crema su crema.
+   E' lo stesso inciampo del titolo delle pagine di legge, poche ore prima:
+   un colore scritto a mano per un fondo, usato su quello opposto. Ogni
+   elemento che fissa un colore va elencato anche qui sotto — la riga 121 in
+   poi e' esattamente questa lista, e `.citazione` ci mancava. */
+.inversa .citazione{border-left-color:var(--accento-inv)}
+.inversa .citazione p{color:var(--inchiostro-inv)}
+.inversa .citazione span{color:var(--accento-inv)}
 
 h2{font-family:var(--display);font-weight:500;margin:0 0 1.2rem;color:var(--inchiostro);
   font-size:clamp(2.1rem,1.4rem + 3.2vw,3.9rem);line-height:1.06;
@@ -171,6 +199,25 @@ b{color:var(--inchiostro)}
   font-size:clamp(4.6rem,2.4rem + 13vw,12rem);line-height:.82;letter-spacing:-.025em}
 .monumento i{font-style:normal;font-family:var(--display);color:var(--morbido);
   font-size:clamp(1.4rem,1.05rem + 1.7vw,2.4rem);line-height:1.2;max-width:14ch}
+
+/* ---------------- le tre prove ----------------
+   Tre fatti in fila, il numero grande e la spiegazione sotto. Non sono
+   «riquadri con l'icona in cima» — che `DESIGN.md` chiama il cliche'
+   numero uno: niente icone, niente cornici, niente ombre. Solo il filo
+   sopra, come le tabelle e gli elenchi del resto del sito.
+   Sul telefono vanno in colonna: tre numeri affiancati su 390 px
+   diventerebbero tre numeri illeggibili. */
+.prove{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem 2.4rem;
+  margin-top:3rem;max-width:62rem}
+.prove > div{padding-top:1.1rem;border-top:1px solid var(--riga)}
+.prove b{display:block;font-family:var(--display);font-weight:500;
+  color:var(--accento);font-size:clamp(1.9rem,1.3rem + 2vw,2.9rem);
+  line-height:1.05;letter-spacing:-.01em}
+.prove span{display:block;margin-top:.6rem;color:var(--morbido);
+  font-size:.98rem;line-height:1.4}
+.inversa .prove > div{border-top-color:var(--riga-inv)}
+.inversa .prove b{color:var(--accento-inv)}
+.inversa .prove span{color:var(--morbido-inv)}
 
 /* ---------------- la citazione, per «chi siamo» ---------------- */
 .citazione{margin:2.6rem 0;padding-left:clamp(1.2rem,3vw,2.6rem);
@@ -393,6 +440,7 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
   .monumento b,.p-compenso .monumento b{font-size:clamp(5rem,2rem + 20vw,8rem)}
   .monumento i{font-size:1.5rem}
   .citazione p{font-size:1.6rem}
+  .prove{grid-template-columns:1fr;gap:1.5rem}
   th,td{font-size:1.1rem;padding:.9rem .7rem .9rem 0}
   td.num,.p-compenso td.num{font-size:1.35em}
   .chiamata{padding:1.1em 2.2em;font-size:1.06rem;letter-spacing:.14em}

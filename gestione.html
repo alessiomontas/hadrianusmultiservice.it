@@ -57,7 +57,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <p class="occhiello">Per i proprietari</p>
     <h1>La casa resta tua.<br>Il lavoro no.</h1>
     <p class="sommario">Un appartamento in affitto breve sono quaranta cose da fare ogni mese, e nessuna si pu&ograve; rimandare. Le prendiamo tutte noi.</p>
-    <a class="chiamata" href="#sopralluogo">Chiedi un sopralluogo</a>
+    <a class="chiamata" href="#sopralluogo">Scopri quanto pu&ograve; rendere</a>
   </div>
 </section>
 
@@ -122,18 +122,41 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 <section>
   <div class="dentro">
+    <!-- ⚠️ «Quanto costa» metteva il lettore nella testa di chi sta per
+         spendere. Il 15% su tutto compreso non e' una spesa da giustificare:
+         e' la cosa piu' forte dell'offerta, e chi ha chiesto in giro se ne
+         accorge da solo. Non si nomina nessun concorrente e non si mette in
+         pagina nessuna percentuale di mercato: il framework vieta i
+         confronti, e un numero senza fonte in pagina e' un rischio.
+         Il titolo adesso dice la cosa vera: prima di incassare non paghi
+         niente. -->
     <p class="occhiello">Il compenso</p>
-    <h2>Quanto costa.</h2>
+    <h2>Prima di incassare,<br>non paghi niente.</h2>
     <div class="monumento"><b>15%</b><i>sul lordo.<br>Nessun canone fisso.</i></div>
     <p>Se la casa non lavora, non ci paghi. Guadagniamo quando guadagni tu, ed
       &egrave; l&rsquo;unico modo onesto di far combaciare i due interessi.
       <a href="compenso.html">Cosa c&rsquo;&egrave; dentro quel 15%</a>.</p>
-    <p class="sotto" style="margin-top:2.4rem">Un ordine di grandezza: su
-      <b>Rome Smart Sea</b> a Ostia, nei mesi di picco del 2026, il prezzo medio
-      a notte &egrave; passato da 120 a 186 &euro; e lo status Superhost &egrave;
-      arrivato in due mesi. &Egrave; un appartamento solo, e un appartamento
-      solo non &egrave; una promessa: &egrave; un esempio di cosa cambia quando
-      qualcuno guarda i numeri ogni giorno.</p>
+    <!-- ❗ LA PROVA, RIFATTA COME DICE IL FRAMEWORK DI VENDITA.
+         Qui c'era un paragrafo su Rome Smart Sea: prezzo medio da 120 a 186 €
+         nei mesi di picco. Numeri veri e datati, ma il framework lo vieta a
+         chiare lettere: «Mai fare del singolo immobile il gancio: segnala
+         che l'azienda e' piccola e frena i proprietari nuovi.» E infatti il
+         paragrafo si smentiva da solo — «e' un appartamento solo, e un
+         appartamento solo non e' una promessa». Se devi scusarti di una
+         prova mentre la dai, quella prova non lavora per te.
+         Restano le due prove che il framework autorizza, ed e' la PRIMA
+         volta che compaiono sulla pagina dei proprietari: il badge sugli
+         immobili seguiti e le recensioni pubbliche, che prima stavano in
+         una tabella in fondo a «chi siamo». La ricerca dice che la prova
+         rivolta al proprietario e' il segnale di fiducia piu' forte di
+         tutti — piu' dei loghi, piu' dei premi. -->
+    <div class="prove">
+      <div><b>Superhost</b><span>sugli immobili che seguiamo.
+        Il primo in due mesi</span></div>
+      <div><b>5,0</b><span>su Google, 12 recensioni</span></div>
+      <div><b>Zero</b><span>canoni fissi da pagare
+        prima di incassare</span></div>
+    </div>
   </div>
 </section>
 
@@ -178,7 +201,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <div class="legale ultimo">
       <span>&copy; 2026 Hadrianus Multiservice S.R.L.S.</span>
       <a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a>
-      <span class="prova">prova di lavoro, non &egrave; online</span>
+      <!-- Qui c'era «prova di lavoro, non e' online». Il sito E' online dal
+           21 ottobre: la riga si e' tolta. Lasciata, diceva al visitatore
+           che quello che sta leggendo non vale. -->
     </div>
   </div>
 </footer>
