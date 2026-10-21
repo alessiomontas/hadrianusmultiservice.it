@@ -1831,13 +1831,22 @@ function battito(ora) {
   }
   /* "un attimo..." solo se il dito ha gia' chiesto e il filmato tarda: da
      solo, sulla prima tappa nera, sembrava una pagina rotta per sempre. */
-  /* Sull'ultima tappa a due tempi non si dice "continua a scorrere": li' non
-     si annuncia niente, si scorre e il piede arriva. */
+  /* ❗ ANCHE SULLA TAPPA A DUE TEMPI SI DICE "continua a scorrere". (21/10)
+     Fino a ieri qui c'era `&& !da.poi`, che la spegneva apposta sulla
+     fermata che mostra due pannelli (il sopralluogo e il 15%): l'idea era
+     «li' non si annuncia niente, si scorre e il piede arriva».
+     Alessio l'ha provata e ha detto che manca: arrivi su quella schermata,
+     hai letto tutt'e due i riquadri e non c'e' piu' niente che dica che si
+     va avanti. Su tutte le altre fermate c'e'. Mancava solo li', e sembrava
+     una dimenticatura — infatti lo era, dal punto di vista di chi guarda.
+     Il guardiano che resta e' `coppiaCompleta`: la scritta non compare
+     finche' il SECONDO pannello non e' arrivato, se no inviterebbe ad
+     andare avanti mentre c'e' ancora qualcosa da leggere. */
   /* Il piede si accende quando si e' ARRIVATI sull'ultima tappa, non quando
      si parte: cosi' entra con il suo tempo, come fa un pannello. Tornando
      indietro si spegne, e la volta dopo rientra da capo. */
   chiusa.classList.toggle('viva', indice === ULTIMA && !inViaggio());
-  continua.classList.toggle('acceso', !inViaggio() && !!da.pop && coppiaCompleta && !da.poi);
+  continua.classList.toggle('acceso', !inViaggio() && !!da.pop && coppiaCompleta);
 
   /* La barretta non si riempie: scende. E' alta il 12% del bordo, quindi
      corre da 0 all'88% del percorso. */

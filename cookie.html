@@ -198,6 +198,61 @@ addEventListener('pageshow', function () {
   if (!location.hash) scrollTo(0, 0);
 });
 
+/* ❗ IL MARCHIO: MULTISERVICE LARGO QUANTO HADRIANUS. (21/10)
+   Difetto visto da Alessio: sulla pagina d'ingresso le due righe cominciano
+   e finiscono nello stesso punto, su queste no — MULTISERVICE restava corta
+   e il marchio sembrava storto.
+
+   Perche': sulla landing c'e' uno script che le misura, qui c'era solo una
+   spaziatura scritta a mano (`letter-spacing:.05em`), indovinata una volta
+   e mai piu' vera. Questo e' LO STESSO script della landing, portato qui.
+
+   ⚠️ NON si fa con `text-align-last:justify`: quello distribuisce lo spazio
+   FRA LE PAROLE, e MULTISERVICE e' una parola sola — non c'e' niente da
+   distribuire e le lettere restano dove sono. Si misura e si spalma.
+
+   ⚠️ STA SOPRA IL BLOCCO DEL MOVIMENTO, E NON SI SPOSTA. Piu' in giu' c'e'
+   un `return` per chi ha chiesto «meno movimento»: mettendolo dopo, a quelle
+   persone il marchio resterebbe storto. Allineare due righe non e'
+   un'animazione — e' impaginazione, e vale per tutti. */
+(function () {
+  function larghezzaInchiostro(el) {
+    /* L'inchiostro VERO, dalla prima lettera all'ultima. La scatola
+       dell'elemento e' piu' larga: la spaziatura resta appesa anche dopo
+       l'ultima lettera, e quella coda va tolta, se no le due righe
+       risultano disallineate esattamente di quel tanto. */
+    var t = el.firstChild;
+    if (!t || t.nodeType !== 3) return el.getBoundingClientRect().width;
+    var r = document.createRange();
+    r.setStart(t, 0); r.setEnd(t, t.length);
+    var coda = parseFloat(getComputedStyle(el).letterSpacing) || 0;
+    return r.getBoundingClientRect().width - coda;
+  }
+  function allineaMarchio() {
+    var marchi = document.querySelectorAll('.marchio');
+    for (var i = 0; i < marchi.length; i++) {
+      var nome = marchi[i].querySelector('.nome');
+      var ditta = marchi[i].querySelector('.ditta');
+      if (!nome || !ditta || !ditta.firstChild) continue;
+      var quante = ditta.textContent.trim().length;
+      if (quante < 2) continue;
+      ditta.style.letterSpacing = '0px';
+      ditta.style.marginRight = '0px';
+      var bersaglio = larghezzaInchiostro(nome);
+      var naturale = larghezzaInchiostro(ditta);
+      var passo = (bersaglio - naturale) / (quante - 1);
+      ditta.style.letterSpacing = passo.toFixed(3) + 'px';
+      ditta.style.marginRight = (-passo).toFixed(3) + 'px';
+    }
+  }
+  allineaMarchio();
+  /* Cinzel scende dalla rete: la prima misura e' su un carattere di
+     ripiego, e va rifatta quando arriva quello vero. E a ogni cambio di
+     finestra, perche' la misura del marchio cresce con la larghezza. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(allineaMarchio);
+  addEventListener('resize', allineaMarchio);
+})();
+
 (function () {
   /* CHI HA CHIESTO MENO MOVIMENTO RICEVE MENO MOVIMENTO. Non e' opzionale,
      ed e' la prima riga perche' da qui in giu' non deve succedere nulla.
