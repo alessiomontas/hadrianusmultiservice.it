@@ -502,13 +502,43 @@ p{margin:0}
 .chiamata:hover{background:var(--oro-chiaro)}
 /* Il piede non e' piu' una griglia di riquadri: due righe sole, in fila.
    Prima occupava mezza schermata e sembrava un ammasso. */
-.voci{margin-top:clamp(42px,6vw,70px);padding-top:20px;border-top:1px solid var(--bordo);
-  display:flex;flex-wrap:wrap;gap:.65rem 2rem;align-items:baseline}
-.voci a{font-size:.9rem;letter-spacing:.04em;color:var(--crema);text-decoration:none;
+/* ---- LE VOCI, A TRE COLONNE (21/10) --------------------------------
+   Era una fila unica di otto collegamenti tutti uguali. Alessio ha visto il
+   piede nuovo delle altre pagine e ha chiesto lo stesso qui: sono gli stessi
+   tre gruppi, con lo stesso titolino color oro.
+   Il gruppo non e' ordine per l'ordine: e' un messaggio. «Prima di decidere»
+   raccoglie compenso, domande e notizie — tutto quello che serve a chi sta
+   decidendo se affidarci una casa, ed e' per quello che si arriva in fondo
+   a questa pagina.
+
+   ⚠️ DENTRO `.dentro` I FIGLI RESTANO SETTE, E NON SI TOCCANO.
+   L'ingresso del piede e' a scaglioni e i ritardi sono scritti uno per uno
+   (`nth-child(1)` … `(7)`): titolo, frase, tasto, voci, recapiti, dati di
+   legge, copyright. Qui dentro si e' cambiato SOLO cosa c'e' DENTRO
+   `<nav class="voci">` — un elemento solo, com'era. Aggiungere un fratello
+   (l'insegna, per dire) avrebbe spostato tutti i ritardi di uno e l'ultima
+   riga sarebbe entrata senza il suo tempo.
+
+   `auto-fit` e non tre colonne fisse: sul telefono diventa una da sola,
+   senza una misura scritta a mano. */
+.voci{margin-top:clamp(42px,6vw,70px);padding-top:22px;border-top:1px solid var(--bordo);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+  gap:1.8rem 2.4rem}
+.voci .gruppo{display:flex;flex-direction:column;align-items:flex-start;gap:.55rem}
+/* Il titolino e' un `h3` per chi naviga con un lettore di schermo — che
+   salta di titolo in titolo — ma non deve PESARE come un titolo: piccolo,
+   spaziato, oro. Come gli occhielli delle altre pagine.
+   Due righe di spazio riservate: se un titolo va a capo, le colonne restano
+   allineate invece di partire a tre altezze diverse. */
+.voci .gruppo h3{font-family:var(--testo);font-size:.7rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--dieci);
+  margin:0 0 .25rem;min-height:2.1em;opacity:.85}
+.voci a{font-size:.95rem;letter-spacing:.04em;color:var(--crema);text-decoration:none;
   border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease}
 .voci a:hover{color:var(--dieci);border-bottom-color:rgba(200,162,75,.5)}
-.voci a::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;
-  background:var(--dieci);margin-right:.6rem;vertical-align:.18em}
+/* La pagina in cui si e' gia': non un collegamento, un segnaposto spento.
+   Un collegamento che riporta dove sei gia' e' un vicolo cieco. */
+.voci .qui{font-size:.95rem;color:#8A7F71}
 
 /* I RECAPITI sono il punto in cui si converte: stanno sopra i dati di legge e
    si vedono di piu'. Il numero CHIAMA — sul telefono e' l'unica cosa che uno
@@ -869,13 +899,26 @@ window.__film = (function () {
          pagina, un pubblico. Il proprietario e il collega che cerca un braccio
          operativo non vogliono sentirsi la stessa cosa. -->
     <nav class="voci" aria-label="Sezioni del sito">
-      <!-- Le due pagine nuove del 21/10 entrano anche qui: un collegamento
-           che esiste nel piede delle altre sei e non in questo sarebbe una
-           pagina che si trova solo per caso. -->
-      <a href="gestione.html">Gestione completa</a><a href="pulizie.html">Le pulizie</a>
-      <a href="prenota.html">Prenota un soggiorno</a><a href="chi-siamo.html">Chi siamo</a>
-      <a href="compenso.html">Il compenso</a><a href="domande.html">Domande frequenti</a>
-      <a href="notizie.html">Notizie del settore</a><a href="#contatti">Contattaci</a>
+      <div class="gruppo">
+        <h3>Cosa facciamo</h3>
+        <a href="gestione.html">Gestione completa</a>
+        <a href="pulizie.html">Le pulizie</a>
+        <a href="prenota.html">Prenota un soggiorno</a>
+      </div>
+      <div class="gruppo">
+        <h3>Prima di decidere</h3>
+        <a href="compenso.html">Il compenso</a>
+        <a href="domande.html">Domande frequenti</a>
+        <a href="notizie.html">Notizie del settore</a>
+      </div>
+      <div class="gruppo">
+        <h3>L&rsquo;azienda</h3>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <!-- Questa E' la pagina d'ingresso: non si linka da sola. -->
+        <span class="qui">La pagina d&rsquo;ingresso</span>
+        <a href="privacy.html">Privacy</a>
+        <a href="cookie.html">Cookie</a>
+      </div>
     </nav>
     <!-- I RECAPITI. Il numero e' un collegamento che CHIAMA, non un testo da
          copiare: sta scritto in DESIGN.md e dal telefono arriva quasi tutto. -->
@@ -901,6 +944,42 @@ window.__film = (function () {
            21 ottobre: tolta. Lasciata, diceva a chi legge che non vale. -->
     </div>
   </div>
+
+  <!-- ─────────── LA SCHEDA PER I MOTORI DI RICERCA ───────────
+       Gli stessi dati della visura, nel formato che Google legge per la
+       scheda a lato e la mappa. Sta QUI, figlia di `.chiusa` e non di
+       `.dentro`: dentro sarebbe l'ottavo figlio e sfaserebbe i ritardi
+       dell'ingresso a scaglioni.
+       ⚠️ Niente `aggregateRating` col 5,0: dichiararsi da soli il proprio
+       voto e' contro le regole di Google e si rischia una penalizzazione.
+       Il 5,0 resta scritto dov'e' vero, nelle pagine. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Hadrianus Multiservice S.R.L.S.",
+    "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
+    "url": "https://hadrianusmultiservice.it/prova/",
+    "email": "info@hadrianusmultiservice.it",
+    "telephone": "+39 351 730 5472",
+    "vatID": "IT18302601002",
+    "taxID": "18302601002",
+    "foundingDate": "2025-11-12",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via Francesco Donati 274",
+      "postalCode": "00126",
+      "addressLocality": "Roma",
+      "addressRegion": "RM",
+      "addressCountry": "IT"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Roma"},
+      {"@type": "Place", "name": "Ostia, Lido di Roma"}
+    ],
+    "knowsLanguage": ["it", "en", "fr", "es", "de"]
+  }
+  </script>
 </section>
 
 <script>
