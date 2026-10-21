@@ -1,0 +1,1966 @@
+<!doctype html>
+<!-- LA PRIMA RIGA. Senza, il browser accende la «modalita' compatibilita'»
+     (regole di impaginazione di vent'anni fa) — `document.compatMode` diceva
+     BackCompat. Misurato il 21/10 a 390 px e a 1280 px prima e dopo: 134
+     elementi, NESSUNO si sposta di un pixel, e l'altezza della pista resta
+     6951 px identica. Non cambia niente oggi; cambia il giorno che si
+     aggiunge qualcosa che dipende dai modi antichi, ed e' quel giorno che
+     non si capirebbe piu' perche'.
+     ⚠️ Questa riga NON va nella copia per l'artifact di claude.ai: li' lo
+     scheletro lo mette la piattaforma. La toglie `pagine/pubblica.py`. -->
+<html lang="it">
+<meta charset="utf-8">
+<!-- ============================================================
+     QUESTE DUE RIGHE SONO LE PIU' IMPORTANTI DEL FILE. NON SI TOLGONO.
+
+     Senza `viewport`, Safari su iPhone NON impagina alla larghezza dello
+     schermo: usa una pagina finta larga 980 px e poi la RIMPICCIOLISCE per
+     farcela stare. Su un iPhone 17 Pro da 402 px vuol dire renderizzare
+     tutto al 41%.
+
+     Conseguenze, tutte misurate il 20/10 e tutte reali per giorni:
+       · `@media (max-width:760px)` NON E' MAI ENTRATO IN VIGORE, perche' la
+         pagina si credeva larga 980. Tutto il lavoro sulle misure del
+         telefono era inerte: il marchio a 1,22rem veniva fuori a 8 px;
+       · `matchMedia('(max-width: 760px)')` in JavaScript era FALSO, quindi
+         `telefono` era falso e il telefono si scaricava il filmato del
+         COMPUTER: 9,23 MB invece di 7,07. Nel registro del server: 41
+         richieste di `vicolo-pc-b.mp4` contro 4 dell'altro;
+       · il quarto e il quinto pannello venivano piazzati con la formula del
+         computer, ed e' per questo che non si trovavano mai al loro posto.
+
+     Senza `charset`, le lettere accentate le indovina il browser: qui il
+     testo e' pieno di «è», «à», «più». Deve stare dentro i primi 1024 byte
+     del file, quindi in cima, prima di tutto.
+     ============================================================ -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* LA PAGINA COMINCIA SEMPRE DALL'INIZIO.
+   Il browser di suo RIMETTE la pagina dov'era. Qui e' peggio che altrove:
+   la pista e' alta sette schermate, quindi «dov'era» puo' essere a meta' del
+   film, col motore convinto di stare alla prima fermata. Si apriva in fondo.
+   Va in testa e prima di tutto: piu' avanti il browser ha gia' deciso. */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+</script>
+<!-- IL TITOLO E' LA RIGA PIU' LETTA DEL SITO: e' quello che si vede nella
+     linguetta del browser, nei risultati di Google e quando si incolla il
+     collegamento da qualche parte. Fino al 21/10 diceva «Il cammino · prova
+     completa» — il nome di lavorazione del filmato, rimasto da quando questa
+     pagina era una prova. Scelto da Alessio il 21/10: il nome prima, il
+     mestiere e il posto dopo. -->
+<title>Hadrianus Multiservice &middot; Gestione case vacanza a Roma e Ostia</title>
+<meta name="description" content="Gestione completa di case vacanza a Roma e sul litorale di Ostia. Prenotazioni, ospiti, pulizie, manutenzione e adempimenti: 15% sul lordo, nessun canone fisso.">
+<!-- L'ANTEPRIMA QUANDO SI CONDIVIDE IL COLLEGAMENTO, come sulle altre cinque
+     pagine. L'immagine e' la copertina del filmato: e' gia' li', pesa 30 kB
+     ed e' esattamente il primo fotogramma che si vede aprendo. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Hadrianus Multiservice">
+<meta property="og:title" content="Hadrianus Multiservice &middot; Gestione case vacanza a Roma e Ostia">
+<meta property="og:description" content="Gestione completa di case vacanza a Roma e sul litorale di Ostia. Prenotazioni, ospiti, pulizie, manutenzione e adempimenti: 15% sul lordo, nessun canone fisso.">
+<meta property="og:url" content="https://hadrianusmultiservice.it/prova/">
+<meta property="og:image" content="https://hadrianusmultiservice.it/prova/copertina.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<noscript><style>
+/* SE JAVASCRIPT NON PARTE, NON SI RESTA SUL NERO.
+   Tutta la scena e' nascosta in partenza e la scopre lo script: senza script
+   restavano una pagina nera e basta — niente contatti, niente niente, e per
+   un motore di ricerca una pagina vuota. Qui si butta via la messa in scena
+   e si lascia quello che conta: il marchio in alto e la sezione dei contatti.
+   La pista e' alta zero (l'altezza gliela dava lo script), quindi la chiusura
+   si trova subito sotto il filmato fermo sulla sua copertina. */
+.barra{opacity:1;transform:none}
+#soglia,#insegna,.pop,.invito,.avanzamento,.quadrante{display:none}
+.chiusa.pronta .dentro > *{opacity:1;animation:none}
+</style></noscript>
+<!-- LE ICONE E IL COLORE DELLA BARRA.
+     Le stesse delle altre cinque pagine: le fa `pagine/icone.py` dal marchio
+     vero, non ridisegnato. Qui mancavano del tutto — la linguetta del browser
+     mostrava il foglio bianco di sistema, e su iPhone «Aggiungi a Home» avrebbe
+     preso una fotografia dello schermo al posto dell'icona. -->
+<!-- L'INDIRIZZO BUONO DI QUESTA PAGINA.
+     Finche' il sito vive anche su `alessiomontas.github.io`, le due copie
+     sono identiche e un motore di ricerca le conta come due pagine uguali —
+     e ne sceglie una lui. Questa riga dice qual e' quella vera. Le altre
+     cinque pagine ce l'hanno gia' (gliela mette `pagine/genera.py`): qui
+     mancava perche' questa pagina non passa di li'.
+     ⚠️ Se cambia `SITO` dentro `genera.py`, va cambiata anche QUI. -->
+<link rel="canonical" href="https://hadrianusmultiservice.it/prova/">
+<link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" href="icona-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="icona-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#140F0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- IL CARATTERE NON DEVE FERMARE IL FILMATO.
+     Un foglio di stile normale, messo qui in testa, blocca TUTTI gli script
+     della pagina finche' non e' arrivato. Misurato sulla pagina vera, servita
+     in casa con 3 ms di ritardo:
+         l'HTML arrivava a        420 ms
+         questo foglio finiva a   795 ms
+         il filmato PARTIVA a    1111 ms   <- e il DOM diventava pronto a 1114
+     Sette decimi di secondo di niente, a ogni visita, perche' lo script che
+     attaccava il filmato sta in fondo e aspettava questo foglio. Su rete
+     mobile il giro verso Google costa tre volte tanto: peggio.
+     Cosi' invece scende con la stessa priorita' ma senza bloccare nessuno, e
+     diventa foglio di stile appena c'e'. All'occhio non cambia niente: con
+     `display=swap` il testo partiva comunque col carattere di ripiego, e il
+     marchio si rimisura da solo quando Cinzel arriva (document.fonts.ready). -->
+<link id="caratteri" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Archivo:wght@400;500;600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Archivo:wght@400;500;600&display=swap"></noscript>
+<script>
+/* RETE DI SICUREZZA SUI CARATTERI.
+   Se il browser non conosce `rel=preload` — i Safari vecchi — quel link non
+   scarica niente e `onload` non suona mai: la pagina resterebbe col carattere
+   di ripiego PER SEMPRE, e il marchio non si allineerebbe mai bene. Il
+   `<noscript>` qui sopra non copre questo caso: copre JavaScript spento, non
+   `preload` non sostenuto. Si controlla, e in quel caso si torna a un foglio
+   di stile normale — che blocca, ma almeno arriva. */
+(function () {
+  var l = document.getElementById('caratteri');
+  if (!l) return;
+  var rl = document.createElement('link').relList;
+  if (!rl || !rl.supports || !rl.supports('preload')) l.rel = 'stylesheet';
+})();
+</script>
+<style>
+:root{
+  --notte:#000; --bordo:#2A2119;
+  --crema:#F2EDE3; --soft:#A79C8E; --fioco:#6B6155;
+  --oro:#C8A24B; --oro-chiaro:#E2C47E;
+  /* La regola 60-30-10: il nero regge la pagina, la crema porta il testo,
+     l'oro si accende solo dove deve decidere l'occhio. */
+  --sessanta:#000; --trenta:#C6BCAC; --dieci:#E2C47E;
+  --display:Cinzel,"Hoefler Text",Georgia,serif;
+  --testo:Archivo,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+/* QUESTA RIGA NON SI TOGLIE.
+   L'attributo `hidden` vale `display:none`, ma e' una regola debolissima: un
+   solo selettore con un id e un `display:grid` la scavalca senza dire niente.
+   E' successo davvero: il pannello del consenso restava in mezzo allo schermo
+   anche dopo «Accetta», perche' `#soglia{display:grid}` vinceva su `hidden`.
+   Con `!important` qui, `elemento.hidden = true` nasconde e basta. */
+[hidden]{display:none!important}
+/* Si vede solo con un lettore di schermo o da un motore di ricerca. Il
+   ritaglio a un pixel e' il modo che non rompe niente: `display:none` e
+   `visibility:hidden` lo toglierebbero anche a loro. */
+.solo-a-voce{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+  border:0}
+/* Via la barra di scorrimento del browser: qui lo scorrimento lo comanda il
+   motore, quella striscia bianca sul bordo non serve e si vede, soprattutto
+   sul telefono. */
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+body{margin:0;background:var(--notte);color:var(--crema);
+  font-family:var(--testo);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+p{margin:0}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+
+/* ---------------- barra in alto ---------------- */
+.barra{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;
+  justify-content:space-between;padding:14px clamp(16px,4vw,38px);
+  background:linear-gradient(to bottom,rgba(0,0,0,.74),rgba(0,0,0,0));
+  /* non c'e' dal primo istante: entra dopo il nero voluto */
+  opacity:0;transform:translateY(-10px);
+  transition:opacity .9s ease,transform .9s cubic-bezier(.16,.84,.34,1)}
+.barra.entra{opacity:1;transform:none}
+/* IL MARCHIO E' SEMPRE DUE RIGHE: HADRIANUS, e sotto MULTISERVICE largo
+   uguale. L'impresa si chiama cosi'.
+   La spaziatura che allarga la riga di sotto la calcola lo SCRIPT
+   (`allineaMarchio`), misurando le lettere vere delle due righe.
+   Col CSS non si poteva: `text-align-last:justify` distribuisce gli spazi FRA
+   LE PAROLE, e MULTISERVICE e' una parola sola — non succedeva niente, e la
+   parola restava appoggiata a sinistra sotto una piu' larga. */
+.marchio{display:inline-flex;flex-direction:column;line-height:1}
+/* La spaziatura fra le lettere aggiunge spazio ANCHE DOPO L'ULTIMA, quindi la
+   scatola di HADRIANUS e' piu' larga della parola di .3em. MULTISERVICE si
+   allarga sulla scatola: senza questo margine negativo sporgeva a sinistra
+   esattamente di quel .3em — e' quello che si vedeva storto.
+   Il margine negativo accorcia la scatola fino all'inchiostro: da li' in poi
+   le due righe cominciano e finiscono nello stesso punto. */
+.marchio .nome{font-family:var(--display);letter-spacing:.3em;color:var(--crema);
+  font-size:clamp(.8rem,.72rem + .3vw,1rem);margin-right:-.3em}
+/* NON si allarga con `justify`: quello distribuisce gli spazi FRA LE PAROLE,
+   e MULTISERVICE e' una parola sola — non c'e' niente da distribuire, e le
+   lettere restavano dov'erano. La spaziatura giusta la calcola lo script
+   misurando le due righe, e la rifa' quando arriva il carattere vero e a
+   ogni cambio di misura della finestra. */
+.marchio .ditta{font-family:var(--display);color:var(--soft);
+  font-size:.46em;margin-top:.42em;white-space:nowrap}
+.barra .marchio .ditta{font-size:.52em}
+.barra .tasti{display:flex;align-items:center;gap:.55rem}
+.barra a{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro-chiaro);
+  text-decoration:none;border:1px solid rgba(200,162,75,.45);padding:.55em 1.3em;
+  white-space:nowrap;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.barra a:hover{background:var(--oro);color:#1A1309}
+/* PRENOTA e' l'azione piena: oro pieno, testo scuro. CONTATTACI resta il
+   contorno di prima. Un solo pulsante «acceso» per schermata, come dice
+   DESIGN.md: se si accendono tutti e due non decide piu' niente. */
+.barra a.primario{background:var(--oro);border-color:var(--oro);color:#1A1309;font-weight:600}
+.barra a.primario:hover{background:var(--oro-chiaro);border-color:var(--oro-chiaro)}
+
+/* ---------------- il film ---------------- */
+#film{position:fixed;inset:0;z-index:0;background:#000;overflow:hidden}
+#film video{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000;
+  object-fit:cover;object-position:center 38%;
+  /* LO ZOOM CRESCE DALL'ALTO.
+     Con l'origine in cima, ingrandire spinge FUORI DAL BORDO DI SOTTO: e' li'
+     che sta il basamento del tempio con le incisioni. Lo scalino lo scrive il
+     motore, e SOLO mentre il film cammina — mai su un fermo immagine. */
+  transform-origin:50% 0%;
+  /* LA TRANSIZIONE E' QUI, NON NEL MOTORE.
+     Il motore scrive il bersaglio una volta sola a ogni viaggio; questa riga
+     fa il resto, e lo fa sulla scheda grafica alla cadenza vera dello schermo
+     (120 volte al secondo su un iPhone recente) invece che a 30 come il
+     filmato. La durata la mette lo script, viaggio per viaggio.
+     `will-change` dice al browser di tenersi il filmato su un piano suo,
+     cosi' lo scala senza ridisegnarlo. */
+  transition:transform 1.1s cubic-bezier(.33,0,.2,1);
+  will-change:transform}
+/* NIENTE RESPIRO, NIENTE CARRELLATE FINTE SUL FERMO IMMAGINE.
+   Provato il 19/10 e bocciato: scalando il video di una frazione che cambia a
+   ogni fotogramma, il dettaglio fine — le scanalature delle colonne, i
+   sampietrini — si ricampiona in continuo e LUCCICA. Si legge come uno sfondo
+   che trema. Sul fermo immagine il fotogramma sta fermo, punto. */
+/* NIENTE FILTRI QUI. Incisione, ombre e grado sono cotti dentro il filmato in
+   fase di compressione: il browser di chi guarda non deve fare nessun conto.
+   Prima la catena girava a ogni fotogramma e sui telefoni andava a scatti. */
+/* la vignetta: il bordo si chiude, l'occhio va al centro */
+#ombra{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 125% 95% at 50% 46%,rgba(0,0,0,0) 32%,rgba(0,0,0,.58) 100%)}
+/* il velo che si alza quando un pannello prende la scena */
+#scuro{position:fixed;inset:0;z-index:2;pointer-events:none;background:#000;opacity:0;
+  transition:opacity .55s ease}
+
+/* la grana: la sorgente e' morbida, un velo di pellicola la rimette a fuoco all'occhio */
+.grana{position:fixed;inset:-50%;z-index:3;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='170' height='170' filter='url(%23n)'/></svg>");
+  animation:balla 1.15s steps(3) infinite}
+@keyframes balla{0%{transform:translate(0,0)}33%{transform:translate(-2%,1.4%)}
+  66%{transform:translate(1.4%,-1%)}100%{transform:translate(0,0)}}
+
+/* ---------------- i pannelli, al centro ---------------- */
+.pop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;
+  padding:clamp(20px,6vw,60px);pointer-events:none;visibility:hidden;
+  transition:transform .62s cubic-bezier(.2,.8,.3,1)}
+/* La larghezza si misura sulla SCATOLA (100%), non sulla finestra (vw):
+   con i vw il pannello poteva venire piu' largo dello spazio fra i due
+   margini, e allora il centraggio salta e sfora tutto da un lato. */
+.telaio{width:min(44rem,100%);text-align:center;transform-origin:50% -45%;
+  padding:clamp(22px,3.4vw,40px) clamp(22px,3.6vw,46px);
+  background:rgba(7,5,4,.80);border:1px solid rgba(200,162,75,.32);
+  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.pop.grande .telaio{width:min(52rem,100%)}
+/* Il quarto e il quinto stanno piu' in basso: li' sotto c'e' la fascia incisa
+   del podio. Dal 20/10 il basamento non si vede piu' per niente: a quelle
+   fermate la camera si stringe e lo porta fuori dal bordo di sotto. */
+.pop.basso{align-items:end;padding-bottom:clamp(54px,11vh,130px)}
+.telaio .capo{display:block;font-family:var(--display);font-weight:500;
+  font-size:clamp(1.9rem,1.35rem + 2.4vw,3.2rem);line-height:1.12;color:var(--dieci);
+  margin-bottom:.75rem;text-wrap:balance}
+/* Il primo pannello e' l'insegna: dice cosa facciamo, e lo dice grosso.
+   Sotto, il sottotitolo in crema, piu' piccolo ma non timido. */
+#pop1 .capo{font-size:clamp(2rem,1.3rem + 3vw,3.6rem)}
+#pop1 .corpo{font-size:clamp(1.15rem,1rem + .7vw,1.55rem);color:var(--crema);max-width:30ch}
+/* La tariffa si legge come un'insegna: il numero grosso, la parola accanto. */
+.telaio .tariffa{display:flex;align-items:baseline;justify-content:center;
+  gap:clamp(.5rem,1.6vw,1.1rem);flex-wrap:wrap;margin-bottom:.5rem}
+.telaio .tariffa b{font-family:var(--display);font-weight:500;color:var(--dieci);
+  font-size:clamp(3.4rem,2.2rem + 6vw,7rem);line-height:.92;letter-spacing:-.01em}
+.telaio .tariffa i{font-family:var(--display);font-style:normal;font-weight:500;
+  color:var(--dieci);font-size:clamp(1.4rem,1.05rem + 1.5vw,2.2rem)}
+.telaio .corpo{display:block;font-size:clamp(1.06rem,.98rem + .45vw,1.3rem);line-height:1.58;
+  color:var(--trenta);max-width:44ch;margin-inline:auto;text-wrap:pretty}
+.telaio ul{margin:1.15rem auto 0;padding:0;list-style:none;text-align:left;
+  /* SEMPRE due colonne, anche sul telefono: le voci devono restare in pari,
+     mai una che va a capo da sola. Le righe spaiate si vedono subito. */
+  display:grid;grid-template-columns:repeat(2,auto);justify-content:center;
+  gap:.8rem 2.4rem;font-size:clamp(1.12rem,1rem + .45vw,1.36rem);line-height:1.3;
+  color:var(--crema)}
+.telaio ul.breve{gap:.6rem 2.2rem;font-size:clamp(1.02rem,.94rem + .35vw,1.2rem)}
+.telaio li{padding-left:1.1rem;position:relative}
+.telaio li::before{content:'';position:absolute;left:0;top:.6em;width:6px;height:6px;
+  background:var(--dieci);border-radius:50%}
+
+/* Le voci non arrivano tutte insieme: salgono una dopo l'altra, svelte.
+   E' la stessa classe che apre il pannello a farle partire, quindi non
+   tocca il motore dello scorrimento. */
+.pop.entra .telaio li{animation:voceSale .42s cubic-bezier(.16,.84,.34,1) both}
+.pop.entra .telaio li:nth-child(1){animation-delay:.26s}
+.pop.entra .telaio li:nth-child(2){animation-delay:.37s}
+.pop.entra .telaio li:nth-child(3){animation-delay:.48s}
+.pop.entra .telaio li:nth-child(4){animation-delay:.59s}
+.pop.entra .telaio li:nth-child(5){animation-delay:.70s}
+.pop.entra .telaio li:nth-child(6){animation-delay:.81s}
+.pop.entra .telaio li:nth-child(7){animation-delay:.90s}
+.pop.entra .telaio li:nth-child(8){animation-delay:.98s}
+.pop.entra .telaio li:nth-child(9){animation-delay:1.06s}
+.pop.entra .telaio li:nth-child(10){animation-delay:1.13s}
+.pop.entra .telaio li:nth-child(11){animation-delay:1.20s}
+.pop.entra .telaio li:nth-child(12){animation-delay:1.27s}
+@keyframes voceSale{
+  from{opacity:0;transform:translateY(11px)}
+  to  {opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .pop.entra .telaio li{animation:none}}
+
+.pop.entra{visibility:visible}
+.pop.entra .telaio{animation:dalLampione .85s cubic-bezier(.16,.84,.34,1) both}
+.pop.esce{visibility:visible}
+.pop.esce .telaio{animation:nellaNebbia .70s ease both}
+@keyframes dalLampione{
+  from{opacity:0;transform:scale(.80) translateY(-20px)}
+  to  {opacity:1;transform:none}}
+@keyframes nellaNebbia{
+  from{opacity:1;filter:blur(0);transform:none}
+  to  {opacity:0;filter:blur(18px);transform:scale(1.07)}}
+
+/* ---------------- la sequenza d'ingresso ----------------
+   nero voluto -> la barra in alto -> il consenso -> l'insegna -> il film.
+   A chi guarda non si dice mai che sta aspettando: il tempo che serve al
+   filmato sta nascosto dentro questa sequenza, che da fuori e' semplicemente
+   il modo in cui il sito si apre. Il clic su «Accetta» intanto vale come il
+   gesto che su iPhone sblocca il video. */
+/* TUTTI GLI STATI DELLA SOGLIA STANNO QUI, IN ORDINE: riposo, entrata,
+   uscita. Prima l'uscita stava 180 righe piu' in la' e pesava uguale
+   all'entrata: vinceva l'entrata, e cliccando «Accetta» il pannello RESTAVA
+   in mezzo allo schermo. Se un giorno si aggiunge uno stato, si aggiunge qui
+   sotto, in fondo. */
+#soglia{position:fixed;inset:0;z-index:60;display:grid;place-items:center;
+  padding:clamp(18px,5vw,48px);background:rgba(0,0,0,.92);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
+  opacity:0;transition:opacity .5s ease}
+#soglia.entra{opacity:1}
+#soglia.via{opacity:0;pointer-events:none}
+#soglia .scatola{animation:none;width:min(40rem,100%);text-align:center;
+  padding:clamp(24px,4vw,44px) clamp(22px,4vw,46px);
+  background:rgba(8,6,5,.92);border:1px solid rgba(200,162,75,.34)}
+#soglia h2{font-family:var(--display);font-weight:500;color:var(--dieci);margin:0 0 .7rem;
+  font-size:clamp(1.5rem,1.1rem + 1.7vw,2.2rem);line-height:1.15}
+#soglia p{color:var(--trenta);font-size:clamp(.98rem,.94rem + .3vw,1.1rem);
+  max-width:46ch;margin-inline:auto;line-height:1.6}
+#soglia .tasti{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:1.5rem}
+#soglia button{font-family:var(--testo);font-size:.84rem;letter-spacing:.14em;
+  text-transform:uppercase;padding:.95em 2.1em;border-radius:2px;cursor:pointer;
+  border:1px solid rgba(200,162,75,.5);background:none;color:var(--oro-chiaro)}
+#soglia button.primario{background:var(--oro);border-color:var(--oro);color:#17110A;font-weight:600}
+#soglia button:hover{background:var(--oro-chiaro);color:#17110A}
+#soglia.entra .scatola{animation:dalLampione .85s cubic-bezier(.16,.84,.34,1) both}
+#soglia.via .scatola{animation:none}
+#dettagli{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(200,162,75,.2);
+  text-align:left;max-height:40vh;overflow-y:auto}
+#dettagli h3{font-family:var(--display);font-weight:500;color:var(--crema);
+  font-size:1rem;margin:1.1rem 0 .3rem}
+#dettagli h3:first-child{margin-top:0}
+#dettagli p{color:var(--soft);font-size:.88rem;max-width:none;margin:0;text-align:left}
+/* NIENTE BARRA DI CARICAMENTO, NIENTE PERCENTUALI.
+   A chi guarda non si dice che sta aspettando: il tempo si nasconde dentro la
+   sequenza d'ingresso. Nero voluto, poi la barra in alto, poi il consenso,
+   poi l'insegna — e intanto il filmato arriva, in silenzio, da subito. */
+
+/* L'INSEGNA: la carta di testa fra il consenso e il film. Non e' un'attesa
+   travestita, e' l'apertura del sito. Se il filmato e' gia' arrivato dura il
+   suo tempo e se ne va; se tarda, resta a respirare senza dire niente. */
+#insegna{position:fixed;inset:0;z-index:58;display:grid;place-items:center;
+  background:#000;opacity:0;pointer-events:none;transition:opacity .75s ease}
+#insegna.entra{opacity:1}
+#insegna.via{opacity:0;pointer-events:none}   /* per ultima, come sopra */
+/* L'USCITA DELL'INSEGNA: il nome si INGRANDISCE finche' esce dallo schermo.
+   Si muovono solo `transform` e `opacity` — le due cose che la scheda grafica
+   sa fare da sola, senza rifare il disegno della pagina: e' l'unico modo di
+   stare a 60 quadri al secondo su un telefono. La curva accelera, cosi' il
+   nome sembra passarti accanto invece di gonfiarsi.
+   Il nero NON va via con lui: resta, e sopra ci si scrive «Scorri per andare
+   avanti». Il film si scopre al primo gesto.
+   Queste righe stanno DOPO `.via` ma nessuna tocca l'opacita' di `#insegna`,
+   cosi' `.via` resta l'ultima parola — come dice il cartello qui sopra. */
+#insegna{overflow:hidden}                /* il nome si taglia sul bordo */
+/* IL CENTRAGGIO. Qui mancava `text-align`, e si vedeva: `.marchio` e'
+   `display:inline-flex`, cioe' una scatola IN LINEA, e senza istruzioni si
+   appoggia a SINISTRA. `.sotto` invece e' un blocco centrato e piu' largo
+   («Gestione case vacanze · Roma e il litorale di Ostia» viene 429 px contro
+   i 208 del marchio), quindi la carta era larga quanto la riga di sotto e il
+   nome ci stava dentro spostato a sinistra. Una riga, e tornano in asse. */
+#insegna .carta{text-align:center;
+                transition:transform 1.25s cubic-bezier(.4,0,.75,.35),
+                           opacity   1.1s  ease-in}
+#insegna.ingrandisce .carta{transform:scale(7);opacity:0}
+/* 19, non 20: a PARI livello vince chi viene dopo nel documento, e `#insegna`
+   sta dopo i pannelli — quindi a 20 il velo nero li coprirebbe. A 19 sta sopra
+   tutta la scena (film 0, ombra 1, scuro 2, grana 3, pista 10,
+   chiusura 12) e sotto ogni pannello (20) e ogni invito (25). Il velo esiste
+   solo sulla prima fermata, dove non c'e' nessun pannello, ma se un giorno le
+   due cose si incrociassero non si coprirebbero. */
+#insegna.velo{z-index:19}
+/* Chi nel telefono ha chiesto «meno movimento» non deve subire nemmeno
+   l'ingresso: le cose compaiono e basta, senza salire e senza allungarsi.
+   La sequenza resta (serve a far arrivare il filmato), ma e' ferma. */
+@media (prefers-reduced-motion:reduce){
+  .barra,#soglia,#insegna{transition:none}
+  #soglia.entra .scatola,#insegna .marchio,#insegna .filo,#insegna .sotto{animation:none}
+  #insegna .filo{width:min(18rem,54vw);opacity:1;animation:none}
+  /* Nemmeno lo zoom: il nome sfuma e basta. La sequenza resta (serve a far
+     arrivare il filmato) ma non si muove niente. */
+  #insegna .carta{transition:opacity .6s ease}
+  #insegna.ingrandisce .carta{transform:none;opacity:0}
+}
+#insegna .marchio{animation:insegnaSale 1.6s cubic-bezier(.16,.84,.34,1) both}
+#insegna .marchio .nome{font-weight:500;color:var(--crema);
+  font-size:clamp(1.5rem,1rem + 2.6vw,2.9rem);letter-spacing:.42em;margin-right:-.42em}
+#insegna .marchio .ditta{font-size:.30em;margin-top:.7em;color:var(--oro-chiaro)}
+/* IL FILO D'ORO RESPIRA MENTRE IL FILMATO SCENDE.
+   Prima si allungava e poi restava fermo: sembrava finito, e invece si stava
+   ancora aspettando. Adesso, finito di allungarsi, pulsa piano — si capisce
+   che sta succedendo qualcosa senza doverlo dire con una percentuale.
+   Due animazioni in fila: la seconda parte dove finisce la prima (0,5 + 2,6)
+   e non ha riempimento, cosi' prima di allora comanda `filoCresce`. */
+#insegna .filo{display:block;width:0;height:1px;margin:1.2rem auto 0;
+  background:linear-gradient(to right,transparent,var(--oro),transparent);
+  animation:filoCresce 2.6s cubic-bezier(.16,.84,.34,1) .5s both,
+            filoPulsa  1.7s ease-in-out 3.1s infinite}
+#insegna .sotto{display:block;margin-top:1.1rem;font-size:.6rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--fioco);text-align:center;
+  animation:insegnaSale 1.4s cubic-bezier(.16,.84,.34,1) .75s both}
+@keyframes insegnaSale{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes filoCresce{from{width:0;opacity:0}to{width:min(18rem,54vw);opacity:1}}
+@keyframes filoPulsa{0%,100%{opacity:1}50%{opacity:.26}}
+
+
+/* ---------------- gli inviti a scorrere ---------------- */
+.invito{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:25;
+  font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--fioco);
+  transition:opacity .5s;pointer-events:none;opacity:0;text-align:center}
+.invito::after{content:'';display:block;width:1px;height:20px;margin:9px auto 0;
+  background:linear-gradient(to bottom,var(--oro),transparent)}
+.invito.acceso{opacity:1}
+/* Il lampeggio va messo SOLO sulla scritta accesa: un'animazione che tocca
+   l'opacita' vince su quella della classe, quindi messa qui sopra faceva
+   comparire "continua a scorrere" fin dal primo istante, sopra "Scorri". */
+#continua{color:var(--oro-chiaro)}
+#continua.acceso{animation:respira 2.1s ease-in-out infinite}
+
+/* Alla fine non si dice piu' "continua a scorrere": si fa vedere il piede di
+   pagina che comincia a salire. Una striscia nera col filo d'oro e una
+   freccetta che punta in su. */
+/* LO ZOCCOLO NON C'E' PIU' (20/10, v62).
+   Era una strisciata nera col filo d'oro e una freccetta che saliva sul
+   quarto e quinto pannello, per annunciare il piede di pagina. Alessio l'ha
+   tolta: su quei due pannelli non ci deve stare nessun bordino. Il piede si
+   scopre scorrendo, e basta — non si annuncia da solo.
+   `respira` resta: lo usa ancora «continua a scorrere». */
+@keyframes respira{0%,100%{opacity:.45}50%{opacity:1}}
+
+/* ---------------- l'avanzamento ----------------
+   Niente rotaia e niente palline: resta solo una barretta d'oro che scende
+   lungo il bordo. Le fermate restano nel codice (la tabella TAPPE), ma non
+   si vedono piu': erano un attrezzo da lavoro, non roba da far vedere. */
+.avanzamento{position:fixed;right:6px;top:0;bottom:0;z-index:36;width:3px;
+  pointer-events:none;background:none}
+.rotaia{position:relative;width:100%;height:100%;background:none}
+.rotaia i{position:absolute;left:0;top:0;width:100%;height:12%;border-radius:3px;
+  background:linear-gradient(to bottom,rgba(226,196,126,0),var(--dieci) 26%,
+             var(--dieci) 74%,rgba(226,196,126,0));
+  box-shadow:0 0 9px rgba(226,196,126,.3);
+  transition:top .18s cubic-bezier(.2,.8,.3,1);will-change:top}
+@media (max-width:760px){
+  .avanzamento{right:4px;width:2px}
+  .rotaia i{height:10%}
+}
+
+/* ---------------- la pista ---------------- */
+.pista{position:relative;z-index:10;pointer-events:none}
+
+/* ---------------- la chiusura ---------------- */
+/* LA CHIUSURA STA SOTTO I PANNELLI, NON SOPRA.
+   Era a z-index 30 contro i 20 dei pannelli: appena si affacciava sul bordo
+   dello schermo — e per il difetto delle due unita' di misura si affacciava
+   per 868 px — copriva il quarto e il quinto, che erano al loro posto.
+   A 12 copre tutto quello che deve coprire (il film 0, l'ombra 1, lo scuro 2,
+   la grana 3, la pista 10) e non puo' piu' coprire
+   niente di quello che sta davanti: pannelli 20, inviti 25,
+   barra 40. Anche se un giorno i conti dello scorrimento tornassero a
+   sbagliare, i pannelli si vedrebbero. */
+.chiusa{position:relative;z-index:12;background:var(--notte);
+  padding:clamp(70px,14vh,150px) clamp(16px,5vw,64px) clamp(40px,6vw,70px)}
+.dentro{width:min(100%,900px);margin-inline:auto}
+.chiusa h2{font-family:var(--display);font-weight:500;margin:0 0 .7rem;color:var(--dieci);
+  font-size:clamp(2rem,1.4rem + 3vw,3.5rem);line-height:1.08;text-wrap:balance}
+.chiusa .sotto{color:#C6BCAC;max-width:52ch;font-size:clamp(1.08rem,1rem + .35vw,1.25rem)}
+.chiamata{display:inline-block;margin-top:2rem;padding:1.05em 3.1em;background:var(--oro);color:#17110A;
+  text-decoration:none;font-size:clamp(1.02rem,.95rem + .35vw,1.2rem);letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;border-radius:2px;box-shadow:0 6px 22px rgba(200,162,75,.22)}
+.chiamata:hover{background:var(--oro-chiaro)}
+/* Il piede non e' piu' una griglia di riquadri: due righe sole, in fila.
+   Prima occupava mezza schermata e sembrava un ammasso. */
+.voci{margin-top:clamp(42px,6vw,70px);padding-top:20px;border-top:1px solid var(--bordo);
+  display:flex;flex-wrap:wrap;gap:.65rem 2rem;align-items:baseline}
+.voci a{font-size:.9rem;letter-spacing:.04em;color:var(--crema);text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .2s ease,color .2s ease}
+.voci a:hover{color:var(--dieci);border-bottom-color:rgba(200,162,75,.5)}
+.voci a::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;
+  background:var(--dieci);margin-right:.6rem;vertical-align:.18em}
+
+/* I RECAPITI sono il punto in cui si converte: stanno sopra i dati di legge e
+   si vedono di piu'. Il numero CHIAMA — sul telefono e' l'unica cosa che uno
+   fa davvero, e sta scritto in DESIGN.md. */
+.recapiti{margin-top:22px;display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:baseline;
+  font-size:1rem}
+.recapiti a{color:var(--dieci);text-decoration:none;
+  border-bottom:1px solid rgba(200,162,75,.32);transition:border-color .2s ease}
+.recapiti a:hover{border-bottom-color:var(--oro)}
+.recapiti span{color:var(--soft)}
+
+/* I DATI DI LEGGE: ci devono essere e si devono poter leggere, ma non sono
+   quello che si va a cercare. Piccoli, spaziati, in grigio caldo. */
+.piede{margin-top:20px;display:flex;flex-wrap:wrap;gap:.3rem 1.6rem;
+  font-size:.86rem;color:#8A7F71;font-variant-numeric:tabular-nums}
+.piede.ultimo{margin-top:10px;padding-top:14px;border-top:1px solid var(--bordo);
+  font-size:.8rem;color:#6B6155}
+.piede.ultimo a{color:#8A7F71;text-decoration:none;border-bottom:1px solid transparent}
+.piede.ultimo a:hover{color:var(--crema);border-bottom-color:var(--bordo)}
+.piede .prova{color:var(--oro-chiaro);opacity:.7}
+
+/* IL PIEDE ENTRA COME UN PANNELLO.
+   Stessa animazione (dalLampione), stessa durata (.85s), stessa curva, e lo
+   stesso passo fra una voce e l'altra delle liste dei pannelli (0,11 s).
+   Prima arrivava tutto insieme con una transizione di mezzo secondo: un ritmo
+   estraneo, e si sentiva che era un pezzo di un'altra pagina.
+   La classe 'pronta' la mette lo script: se lo script non gira, il piede si
+   vede comunque — non si nasconde mai qualcosa che poi nessuno riaccende. */
+.chiusa.pronta .dentro > *{opacity:0}
+.chiusa.pronta.viva .dentro > *{animation:dalLampione .85s cubic-bezier(.16,.84,.34,1) both}
+.chiusa.pronta.viva .dentro > *:nth-child(1){animation-delay:0s}
+.chiusa.pronta.viva .dentro > *:nth-child(2){animation-delay:.11s}
+.chiusa.pronta.viva .dentro > *:nth-child(3){animation-delay:.22s}
+.chiusa.pronta.viva .dentro > *:nth-child(4){animation-delay:.33s}
+.chiusa.pronta.viva .dentro > *:nth-child(5){animation-delay:.44s}
+/* Sette figli, non piu' cinque: titolo, sottotitolo, pulsante, voci, recapiti,
+   dati di legge, riga finale. Senza queste due righe gli ultimi due entravano
+   insieme al primo, e si vedeva che il ritmo si rompeva in fondo. */
+.chiusa.pronta.viva .dentro > *:nth-child(6){animation-delay:.55s}
+.chiusa.pronta.viva .dentro > *:nth-child(7){animation-delay:.66s}
+@media (prefers-reduced-motion:reduce){
+  .chiusa.pronta .dentro > *{opacity:1;animation:none}}
+
+/* ---------------- quadrante di regia ---------------- */
+.quadrante{position:fixed;left:12px;bottom:12px;z-index:50;
+  font-family:ui-monospace,Menlo,monospace;font-size:.62rem;letter-spacing:.05em;
+  color:rgba(167,156,142,.62);background:rgba(0,0,0,.62);padding:6px 10px;
+  border:1px solid rgba(242,237,227,.08);font-variant-numeric:tabular-nums;
+  pointer-events:auto;cursor:pointer;user-select:none;max-width:min(92vw,40rem)}
+.quadrante.via{opacity:.2}
+
+@media (max-width:760px){
+  /* Il filmato riempie tutto lo schermo del telefono. E' quadrato, quindi su uno
+     schermo alto si vede tutta l'altezza e si taglia ai lati: resta la striscia
+     centrale, circa il 46% della larghezza su un telefono di oggi. La scena e'
+     costruita al centro, quindi regge; e in piu' sul telefono si vede TUTTA
+     l'altezza, cosa che sul 16:9 non succede. */
+  #film video{object-fit:cover;object-position:center center}
+  #ombra{background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 18%,
+         rgba(0,0,0,0) 60%,rgba(0,0,0,.82) 94%)}
+  /* SUL TELEFONO TUTTO PIU' GRANDE. Misurato su uno schermo da 390 px: le
+     scritte stavano fra i 12,8 e i 17,4 px, cioe' piccole per un telefono
+     tenuto in mano. Qui sotto si sale, e ogni misura e' verificata perche'
+     niente sfori di lato e nessuna voce vada a capo da sola.
+     I margini si stringono apposta: ogni pixel tolto ai bordi e' un pixel in
+     piu' per il testo, ed e' quello che permette agli elenchi di crescere da
+     14,9 a 17 px restando su DUE colonne. */
+  .pop{padding:16px 10px}
+  .telaio{padding:20px 12px}
+  /* Il quarto e il quinto non stanno piu' incollati in basso: li' erano
+     piccoli e spiaccicati. Al centro respirano e si leggono. La fascia incisa
+     del podio ormai esce proprio dall'inquadratura: non serve piu' il
+     pannello a farle da coperchio. */
+  .pop.basso{align-items:center;padding:16px 10px}
+  /* IL QUARTO E IL QUINTO: UNA META' DI SCHERMO PER UNO, E BASTA.
+     Prima li piazzava lo script: misurava l'altezza del secondo MENTRE ERA
+     ANCORA INVISIBILE, e con quella calcolava di quanto spostare tutti e due
+     con due `translateY`. Troppi modi di sbagliare, e sul telefono sbagliava:
+     finivano fuori dallo schermo, ed e' la terza volta che Alessio me lo dice.
+     Qui non si misura niente e non si calcola niente: il quarto prende la
+     META' DI SOPRA e si appoggia al centro, il quinto prende la META' DI
+     SOTTO e parte dal centro. La coppia e' centrata per costruzione, e
+     nessuno dei due puo' uscire dallo schermo, qualunque altezza abbiano.
+     `--coppia-css:1` e' il segnale per lo script: qui decide il foglio di
+     stile, e i translateY non li deve toccare. */
+  #pop4,#pop5{--coppia-css:1}
+  /* I 40 px in alto sono lo spazio della barra: sotto quello il pannello
+     comincerebbe dietro al marchio. Il conto e' verificato sullo schermo piu'
+     piccolo, un iPhone SE da 375x553: il quarto e' alto 225 px e ne ha 230 a
+     disposizione nella sua meta'. Se un giorno si allunga il testo del quarto,
+     e' li' che sfora per primo. */
+  /* IL TAGLIO E' AL 53%, NON A META'. Il quarto e' piu' alto del quinto
+     (248 px contro 202), quindi per avere la COPPIA centrata il divisorio
+     deve stare un po' sotto la meta': il conto dice 53%. Cosi' il blocco dei
+     due e' centrato davvero, non solo spartito.
+     I 30 px in alto sono lo spazio della barra. Verificato sullo schermo piu'
+     piccolo, un iPhone SE da 375x553: il quarto e' alto 245 px e ne ha 256. */
+  #pop4{inset:0 0 47% 0;align-items:end;  padding:30px 10px 7px}
+  #pop5{inset:53% 0 0 0;align-items:start;padding:7px 10px 22px}
+  /* NIENTE colonna singola: le voci restano in pari anche qui. Era una regola
+     di prima a disfare la simmetria sul telefono.
+     Le misure sono tarate perche' la voce piu' lunga stia su UNA riga in uno
+     schermo da 390 px: se una va a capo e le altre no, si vede subito. */
+  /* Gli elenchi: 17 px invece di 14,9. Il tetto vero e' 17,4 — misurato
+     sulla voce piu' lunga di ogni colonna («Assistenza ospiti H24» e «Piu' di
+     un affitto lungo») con questi margini e questo spazio fra le colonne.
+     Si sta sotto di un filo per sicurezza: se un giorno si allunga una voce,
+     non va a capo di colpo. */
+  /* GLI ELENCHI VANNO A COLONNA SINGOLA, E CRESCONO.
+     Il tetto l'ho misurato: con DUE colonne la voce piu' lunga
+     («Assistenza ospiti H24») non passa i 16,6 px su uno schermo da 375 e i
+     18,1 su uno da 402 — cioe' esattamente la misura che Alessio dice di non
+     riuscire a leggere. Il muro non era il corpo, erano le due colonne.
+     A COLONNA SINGOLA lo stesso testo reggerebbe fino a 35 px: lo spazio in
+     larghezza non e' piu' un problema, e il vincolo diventa l'altezza.
+     19 px per il terzo pannello (10 voci: e' l'altezza che comanda, verificato
+     su un iPhone SE da 553 px) e 22 per il secondo, che ne ha solo quattro.
+     `max-content` tiene la colonna larga quanto la voce piu' lunga, e
+     `justify-content:center` la centra: le voci restano in pari, allineate a
+     sinistra dentro un blocco centrato. Nessuna puo' piu' andare a capo da
+     sola — che era la cosa che Alessio non voleva. */
+  .telaio ul{grid-template-columns:max-content;justify-content:center;
+             gap:.31rem;font-size:1.19rem;line-height:1.34}
+  .telaio ul.breve{gap:.5rem;font-size:1.38rem}
+  .telaio li{padding-left:1rem}
+  .telaio li::before{width:6px;height:6px;top:.5em}
+  .telaio li::before{width:5px;height:5px;top:.56em}
+  .telaio .capo{font-size:clamp(2.3rem,1.3rem + 5.6vw,3rem)}
+  .telaio .corpo{font-size:1.38rem;line-height:1.5;max-width:none}
+  #pop1 .capo{font-size:clamp(2.5rem,1.4rem + 6.4vw,3.4rem)}
+  #pop1 .corpo{font-size:1.42rem}
+  .telaio .tariffa b{font-size:clamp(4.2rem,2.2rem + 15vw,6rem)}
+  .telaio .tariffa i{font-size:clamp(1.7rem,1.2rem + 2.6vw,2.2rem)}
+  /* il marchio in alto, e il tasto accanto */
+  /* LA BARRA IN ALTO. Il tetto e' misurato sullo schermo piu' stretto che si
+     incontra oggi (360 px): marchio e tasto insieme possono arrivare a 307 px
+     sui 318 disponibili. Qui si sta sotto — 292 px — per stare larghi anche
+     se il carattere vero misura qualche punto in piu' del previsto.
+     Sono +27% sul marchio e +25% sul tasto. */
+  .barra{padding:12px 14px}
+  .barra .marchio .nome{font-size:1.22rem}
+  .barra a{font-size:1rem;padding:.6em 1.05em;letter-spacing:.18em}
+  /* IN TRE NON CI STANNO, ed e' geometria: misurato su uno schermo da 360 px,
+     marchio + Prenota + Contattaci fanno 409 px sui 314 disponibili. Stringendo
+     le scritte fino a 14,4 px sforano lo stesso — e sarebbe tornare indietro
+     proprio sulla cosa che Alessio ha detto di ingrandire.
+     Quindi sul telefono la barra tiene l'azione piena, PRENOTA. «Contattaci»
+     non si perde: sta nel piede e nella sezione finale, dov'e' gia' un
+     pulsante grande («Scrivici ora»). */
+  .barra .secondo{display:none}
+  /* la chiusura e il piede di pagina */
+  /* IL PIEDE DI PAGINA. Non ha vincoli di altezza — e' una sezione che
+     scorre — quindi qui comanda solo la larghezza. «SCRIVICI ORA» col suo
+     riquadro arriva a 268 px sui 337 disponibili a 375: ci sta. */
+  .chiusa h2{font-size:clamp(2.4rem,1.4rem + 5.6vw,3.1rem)}
+  .chiusa .sotto{font-size:1.28rem}
+  .chiamata{font-size:1.26rem;padding:1.05em 2.4em}
+  .voci a{font-size:1.18rem}
+  .recapiti{font-size:1.2rem;gap:.5rem 1.4rem}
+  .piede{font-size:1.02rem;gap:.25rem 1.1rem}
+  .piede.ultimo{font-size:.95rem}
+  .quadrante{font-size:.56rem;left:8px;bottom:8px;max-width:calc(100vw - 16px)}
+  .invito{bottom:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .grana{animation:none}
+  /* I pannelli della coppia SCIVOLANO (`.pop{transition:transform .62s}`):
+     quello e' movimento vero, e qui va spento. Sul telefono la coppia la
+     piazza il CSS e non si muove; sul computer si muoveva anche con «meno
+     movimento» acceso. */
+  .pop{transition:none}
+  .pop.entra .telaio,.pop.esce .telaio{animation:none}
+  .pop.entra .telaio{opacity:1}
+  #continua{animation:none}
+}
+</style>
+
+<!-- IL TITOLO DELLA PAGINA, PER CHI NON VEDE IL FILM.
+     Questa pagina non aveva nessun <h1>: i titoli grossi stanno dentro i
+     pannelli, che partono nascosti e che un lettore di schermo non legge
+     finche' non si aprono. Per Google e per chi naviga ad ascolto la pagina
+     risultava senza titolo — ed e' la pagina d'ingresso.
+     Si nasconde alla vista col ritaglio, NON con `display:none`: quello lo
+     toglierebbe anche a loro, che e' il contrario di quello che serve. -->
+<h1 class="solo-a-voce">Hadrianus Multiservice &mdash; gestione di case
+  vacanze a Roma e sul litorale di Ostia</h1>
+
+<header class="barra">
+  <span class="marchio"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></span>
+  <span class="tasti">
+    <a class="primario" href="prenota.html">Prenota</a>
+    <a class="secondo"  href="#contatti">Contattaci</a>
+  </span>
+</header>
+
+<div id="film" aria-label="Il vicolo che porta al monumento Hadrianus">
+  <video id="v" muted playsinline preload="auto" poster="copertina.jpg"></video>
+</div>
+<script>
+/* LA DISCESA DEL FILMATO COMINCIA QUI, non in fondo alla pagina.
+   Il filmato e' il pezzo pesante: 7 MB sul telefono. Ogni millesimo che passa
+   prima che cominci a scendere e' attesa in piu' per chi guarda. Prima stava
+   in fondo con tutto il resto e partiva a 1111 ms; qui parte quando il
+   browser legge questa riga, cioe' appena l'HTML e' arrivato. Circa SETTE
+   DECIMI di secondo guadagnati, misurati.
+
+   PERCHE' NON `fetch` E PERCHE' NON `<link rel="preload">`.
+   Perche' farebbero scendere il filmato DUE VOLTE. E' gia' successo su questa
+   pagina e l'ho visto nel registro di rete:
+       GET ...mp4 -> 200           la mia fetch, 7 MB interi
+       GET ...mp4 -> 206 Partial   il <video>, che se lo riprende da capo
+   Il <video> chiede i PEZZI del file, e per il browser e' un'altra richiesta:
+   la copia precaricata non la riusa. Quattordici megabyte invece di sette.
+   La regola generale «precarica con fetch o preload» qui fa danno.
+
+   PERCHE' NON `<source media="...">`.
+   Perche' se `media` viene ignorato il browser prende il PRIMO <source>, e il
+   telefono si scaricherebbe il filmato da 9,23 MB del computer. Su Safari
+   iPhone non si puo' provare. Questa riga di JavaScript non sbaglia mai.
+
+   Una sola discesa, la piu' presto possibile. */
+window.__film = (function () {
+  var telefono = matchMedia('(max-width: 760px)').matches;
+  var via = '' + (telefono ? 'vicolo-telefono-b.mp4'
+                                         : 'vicolo-pc-b.mp4');
+  var v = document.getElementById('v');
+  if (v && !v.getAttribute('src')) v.setAttribute('src', via);
+  return { telefono: telefono, via: via };
+})();
+</script>
+<div id="ombra" aria-hidden="true"></div>
+<div id="scuro" aria-hidden="true"></div>
+<div class="grana" aria-hidden="true"></div>
+
+<div class="pop" id="pop1"><div class="telaio">
+  <span class="capo">Non una semplice gestione di case vacanze.</span>
+  <span class="corpo">La soluzione su misura per il tuo immobile.</span>
+</div></div>
+
+<div class="pop" id="pop2"><div class="telaio">
+  <span class="capo">Quello che cercavi.</span>
+  <ul class="breve">
+    <li>Niente morosit&agrave;</li>
+    <li>Sempre in regola</li>
+    <li>Pi&ugrave; di un affitto lungo</li>
+    <li>Qualcuno di fiducia</li>
+  </ul>
+</div></div>
+
+<div class="pop grande" id="pop3"><div class="telaio">
+  <span class="capo">Le nostre colonne portanti.</span>
+  <span class="corpo">Dalla A alla Z.</span>
+  <!-- In ordine di vita della casa: prima si affitta, poi arrivano gli ospiti,
+       poi si rimette a posto, poi le carte, poi i soldi. Le voci vicine sono
+       quelle che vanno insieme. -->
+  <ul>
+    <li>Annuncio e prezzi</li>
+    <li>Assistenza ospiti H24</li>
+    <li>Arrivi e partenze</li>
+    <li>Manutenzione pronta</li>
+    <li>Pulizia alberghiera</li>
+    <li>Biancheria inclusa</li>
+    <li>CIN e pratiche</li>
+    <li>Alloggiati e tassa</li>
+    <li>Conti e fisco</li>
+    <li>Pagato il 10 del mese</li>
+  </ul>
+</div></div>
+
+<div class="pop basso" id="pop4"><div class="telaio">
+  <span class="capo">Prima un sopralluogo.</span>
+  <span class="corpo">Veniamo a vedere la casa, la analizziamo e ti diamo una stima
+    di quanto pu&ograve; rendere. Senza impegno.</span>
+</div></div>
+
+<div class="pop basso" id="pop5"><div class="telaio">
+  <span class="tariffa"><b>15%</b><i>Nient'altro.</i></span>
+  <span class="corpo">Nessun canone fisso. Guadagniamo se guadagni tu.</span>
+</div></div>
+
+<div id="soglia" role="dialog" aria-modal="true" aria-labelledby="soglia-titolo">
+  <div class="scatola">
+    <h2 id="soglia-titolo">Prima di entrare</h2>
+    <p>Questo sito non ti segue e non vende i tuoi dati.
+      Usa una sola memoria tecnica, sul tuo dispositivo, per ricordare questa scelta.</p>
+    <div class="tasti">
+      <button id="accetta" class="primario" type="button">Accetta</button>
+      <button id="piuinfo" class="secondario" type="button" aria-expanded="false"
+              aria-controls="dettagli">Maggiori informazioni</button>
+    </div>
+    <div id="dettagli" hidden>
+      <h3>Cosa salviamo</h3>
+      <p>Una voce sola nella memoria del browser (<i>hadrianus-consenso</i>) con la data
+        in cui hai accettato. Serve a non richiedertelo a ogni visita. Resta sul tuo
+        dispositivo: non viene mandata a nessuno e si cancella svuotando i dati del sito.</p>
+      <h3>Cosa non facciamo</h3>
+      <p>Nessun cookie di profilazione. Nessuna statistica di terze parti, nessun pixel
+        pubblicitario, nessun social collegato. Non sappiamo chi sei, da dove arrivi,
+        n&eacute; dove vai dopo.</p>
+      <h3>Cosa esce da qui</h3>
+      <p>Il carattere tipografico viene da Google Fonts: il tuo browser lo chiede ai loro
+        server, che vedono l'indirizzo IP, come per qualsiasi immagine esterna. Il filmato
+        e tutto il resto arrivano da questo stesso indirizzo.</p>
+      <h3>Se ci scrivi</h3>
+      <p>Il pulsante «Scrivici ora» apre il tuo programma di posta: il messaggio parte da
+        te e arriva a noi. Usiamo quell'indirizzo solo per risponderti.</p>
+      <h3>I tuoi diritti</h3>
+      <p>Puoi chiederci in ogni momento cosa abbiamo, farlo correggere o cancellare,
+        scrivendo a <b>info@hadrianusmultiservice.it</b>.</p>
+      <p style="margin-top:1rem;color:#6B6155">&#9888; Prova di lavoro. Questo testo va
+        confermato prima di andare online davvero.</p>
+      <p style="margin-top:.6rem;color:#6B6155" id="timbro"></p>
+    </div>
+  </div>
+</div>
+
+<div id="insegna" aria-hidden="true">
+  <div class="carta"><!-- la `carta` e' il pezzo che si ingrandisce e esce -->
+    <span class="marchio"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></span>
+    <span class="filo"></span>
+    <span class="sotto">Gestione case vacanze &middot; Roma e il litorale di Ostia</span>
+    <!-- era «Multiservice · Roma e Ostia»: MULTISERVICE sta nel marchio sopra e
+         non si ripete. Qui ci va il mestiere e il posto: niente promesse. -->
+  </div>
+</div>
+
+<div class="invito" id="scorri">Scorri per andare avanti</div>
+<div class="invito" id="continua">Continua a scorrere</div>
+<div class="avanzamento" aria-hidden="true"><div class="rotaia"><i id="riempi"></i></div></div>
+<div class="quadrante" id="quadrante">&mdash;</div>
+
+<main class="pista" id="pista" aria-hidden="true"></main>
+
+<section class="chiusa" id="contatti">
+  <div class="dentro">
+    <h2>Scrivici. Al resto pensiamo noi.</h2>
+    <p class="sotto">Due righe bastano: dov'&egrave; la casa e quante stanze.
+      Risponde una persona, non un modulo.</p>
+    <a class="chiamata" href="mailto:info@hadrianusmultiservice.it">Scrivici ora</a>
+    <!-- LE DUE STRADE, SEPARATE. La scheda prodotto lo dice chiaro: una
+         pagina, un pubblico. Il proprietario e il collega che cerca un braccio
+         operativo non vogliono sentirsi la stessa cosa. -->
+    <nav class="voci" aria-label="Sezioni del sito">
+      <a href="gestione.html">Gestione completa</a><a href="pulizie.html">Le pulizie</a>
+      <a href="prenota.html">Prenota un soggiorno</a><a href="chi-siamo.html">Chi siamo</a>
+      <a href="compenso.html">Il compenso</a><a href="#contatti">Contattaci</a>
+    </nav>
+    <!-- I RECAPITI. Il numero e' un collegamento che CHIAMA, non un testo da
+         copiare: sta scritto in DESIGN.md e dal telefono arriva quasi tutto. -->
+    <div class="recapiti">
+      <a href="mailto:info@hadrianusmultiservice.it">info@hadrianusmultiservice.it</a>
+      <a href="tel:+393517305472">+39 351 730 5472</a>
+      <span>Roma e il litorale di Ostia</span>
+    </div>
+    <!-- I DATI DI LEGGE. Letti dalla visura camerale del 13/05/2026 e dal
+         certificato di attribuzione della partita IVA: non sono inventati e
+         non sono arrotondati. Per una S.R.L.S. vanno scritti sul sito. -->
+    <div class="piede">
+      <span>Hadrianus Multiservice S.R.L.S.</span>
+      <span>Via Francesco Donati 274, 00126 Roma</span>
+      <span>P.IVA e C.F. 18302601002</span>
+      <span>REA RM&#8209;1775809</span>
+      <span>PEC hadrianus@pec.it</span>
+    </div>
+    <div class="piede ultimo">
+      <span>&copy; 2026 Hadrianus Multiservice S.R.L.S.</span>
+      <a href="#">Privacy</a><a href="#">Cookie</a>
+      <span class="prova">prova di lavoro, non &egrave; online</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+'use strict';
+addEventListener('unhandledrejection', e => {
+  const m = String((e.reason && e.reason.message) || e.reason || '');
+  if (/play\(\)|AbortError|NotAllowedError/.test(m)) e.preventDefault();
+});
+
+/* ==================================================================
+   LE TAPPE
+   Ogni gesto porta alla tappa dopo. Nel mezzo il video SUONA
+   (non viene trascinato): per questo resta fluido e si ferma
+   esattamente sul fotogramma della tappa.
+   t   = il secondo del filmato
+   sch = dove sta la tappa nella pagina, in schermate
+   ================================================================== */
+/* I SECONDI SONO SCELTI SUI FOTOGRAMMI, non a sentimento. Misurato il
+   19/10/2026 su tutti e 580 i fotogrammi (peso del fotogramma = quanto si
+   muove; dettaglio = quanto e' a fuoco):
+
+   E dal 19/10 anche la SIMMETRIA, misurata specchiando ogni fotogramma e
+   confrontandolo con se' stesso. Il film ha solo DUE momenti simmetrici:
+   6,6-7,6 (il tempio in faccia dalla piazza, fino a 0,95) e dal 12,5 in poi
+   (la facciata tornata in asse, 0,82). In mezzo c'e' l'orbita, dove la
+   simmetria crolla a zero e sotto zero.
+
+     4,60  dettaglio 101  il vicolo acceso, la strada al centro
+     6,30  dettaglio  51  IL PIU' MOSSO DELLA ZONA: la macchina corre dentro
+                          la piazza, la sfocatura di movimento e' COTTA nel file
+     7,60  dettaglio 109  la macchina si e' posata, il tempio nella piazza
+     8,10  dettaglio 139  il tempio di tre quarti
+     9,90  dettaglio ~95  il tempio di fianco: una lastra piatta, busto nascosto
+    11,20  dettaglio 147  LA FACCIATA IN ASSE: le colonne si contano
+    12,40  dettaglio 170  il fotogramma piu' nitido del film
+    14,90  dettaglio ~95  dentro i 2,2 s di FERMO IMMAGINE (13,0-15,2)
+    16,30  dettaglio 131  l'ultimo fotogramma ancora a fuoco
+    19,33  dettaglio  <40 poltiglia: la coda del film si sfoca e non torna nera
+
+   Una fermata non si sceglie per "quanto e' bella": si sceglie dove il
+   fotogramma e' FERMO E A FUOCO. Dove la macchina corre, il filmato ha la
+   sfocatura di movimento gia' dentro, e un pannello aperto li' sopra sembra
+   sbagliato anche quando il testo e' giusto. */
+const TAPPE = [
+  { nome: 'nero',     t:  0.00, sch: 0.0, pop: null   },
+  // il primo gesto riaccende la luce, fa tutto il marchio, lo zoom, il varco
+  // e arriva sotto il lampione. Respiro piu' largo: e' la scena d'ingresso.
+  { nome: 'pop1',     t:  4.60, sch: 1.5, pop: 'pop1', respiro: 2.3 },
+  // A 6,30 la macchina stava ancora correndo dentro la piazza e il fotogramma
+  // era il piu' MOSSO della zona (dettaglio 51, contro 120 a 5,00 e 109 a
+  // 7,60): il fondo arrivava sfocato. A 7,60 si e' posata.
+  // respiro corto: da pop1 a qui sono 3 secondi di film, e con il respiro
+  // normale (1,9) la tratta durava 1,9 s e si sentiva lunga. A 1,45 il film
+  // corre a 2,07x e il passaggio dura 1,45 s.
+  // 7,30 e non 7,60: simmetria 0,925 contro 0,859, e il dettaglio e' lo stesso.
+  { nome: 'pop2',     t:  7.30, sch: 3.0, pop: 'pop2', respiro: 1.45, quota: 0.645 },
+  // le colonne portanti, sulla FACCIATA vista in asse: le colonne si contano
+  // RIMESSO DOV'ERA (9,90) finche' Alessio non sceglie: l'avevo spostato di
+  // mia iniziativa e il momento non era quello che voleva.
+  /* IL FIANCO DEL TEMPIO, PRESO DRITTO.
+     Qui va il fianco, non la facciata: la facciata principale e' dei pannelli
+     4-5 e del piede di pagina. Il punto giusto non lo dice la simmetria dello
+     SCHERMO (li' il tempio e' spostato e il conto non torna) ma quella del
+     TEMPIO attorno al suo asse: si cerca l'asse che lo rende piu' speculare e
+     si guarda quanto viene. Su tutta la rotazione il massimo e' a 10,10
+     (0,597, asse centrato): colonne a passo pari, cornice in piano.
+     A 9,90, dov'era, si vedeva ancora dentro l'angolo di fondo: 0,394.
+     Qui il podio mostra il fianco, che NON ha scritte: ed e' per questo che a
+     questa fermata la camera puo' allontanarsi e mostrare il tempio INTERO
+     senza che si legga niente. */
+  { nome: 'pop3',     t: 10.10, sch: 4.5, pop: 'pop3', respiro: 1.5 },
+  // una sola tappa, due tempi: compare il 4, sale, e arriva il 5. Da solo.
+  // Sul fotogramma piu' nitido che il film abbia: qui si chiede il sopralluogo.
+  { nome: 'finale',   t: 13.30, sch: 6.0, pop: 'pop4', poi: 'pop5', anticipo: 0.70, respiro: 1.5, quota: 0.675 },
+  /* STESSO SECONDO DEL 'finale': il filmato NON si muove piu'. Il piede di
+     pagina sale sullo stesso identico sfondo che aveva il quarto pannello,
+     come ha chiesto Alessio. Il motore ha gia' il passaggio a immagine ferma
+     (era nato per il 4->5): mezzo secondo di sola pagina che scorre. */
+  { nome: 'chiusura', t: 13.30, sch: 7.0, pop: null, respiro: 1.35, tetto: 3.0, quota: 0.675 }
+  /* `quota` = sotto questa altezza del fotogramma non si deve vedere piu'
+     niente. E' il bordo di sotto dell'inquadratura, in frazioni del fotogramma.
+     MISURATA sui fotogrammi veri, col righello sopra:
+         pop2   (7,30)  il basamento comincia a 0,655 — incisione 0,68-0,71
+         pop4+5 (13,30) il basamento comincia a 0,685 — incisione 0,74-0,80
+     Si taglia un filo piu' su (0,645 e 0,675) per prendere anche il piede
+     delle colonne, se no resta una strisciolina di gradino.
+     Dove `quota` non c'e', l'inquadratura e' quella piena: pop1 il vicolo, e
+     pop3 il tempio INTERO visto di lato, che e' il momento in cui la camera si
+     allontana. Da `chiusura` in poi resta ferma come al pop4. */
+];
+const ATTESA_COPPIA = 1200;   // quanto resta solo il primo prima che arrivi il secondo
+const STACCO = 16;            // lo spazio fra i due pannelli
+const ULTIMA    = TAPPE.length - 1;
+const SCHERMATE = TAPPE[ULTIMA].sch;
+
+/* UNA SCHERMATA, UNA SOLA MISURA.
+   Qui stava il difetto che ha tenuto NASCOSTI il quarto e il quinto pannello
+   sul telefono, per giorni, mentre io misuravo che erano al loro posto.
+   Erano al loro posto. Ci stava sopra un pannello nero.
+
+   L'altezza della pista era in `svh`: la schermata PICCOLA, quella con la
+   barra dell'indirizzo visibile, che non cambia mai. Il motore invece scorreva
+   con `innerHeight`, che su iPhone CRESCE di circa 120 px appena la barra
+   dell'indirizzo si ritira. Due unita' diverse per la stessa cosa.
+   Misurato su uno schermo da 402x750:
+       la pista era alta            7 x 750 = 5250 px
+       la fermata 'finale' chiedeva  6 x 874 = 5244 px   <- SEI pixel dalla fine
+   Lo schermo si riempiva per 868 px della sezione di chiusura, che e' nera,
+   opaca, e stava a z-index 30 contro i 20 dei pannelli: li copriva tutti e due.
+   Sul computer non succedeva mai, perche' li' `innerHeight` non cambia. E
+   dipendeva da se la barra era ritirata o no, percio' «a volte si a volte no»
+   e percio' sembrava lag.
+
+   Adesso la pista e il motore usano LA STESSA misura, presa una volta sola:
+   non possono piu' andare in disaccordo, per costruzione. */
+let UNA = innerHeight || 1;
+
+/* IL RITMO. Ogni tappa porta il suo "respiro": quanto deve durare il
+   passaggio per ARRIVARE a lei. Da qui esce la velocita' del filmato
+   (strada / respiro), non il contrario.
+   Pareggiato il 19/10: le tratte duravano 2,3 · 1,45 · 1,9 · 1,9 · 1,35 e si
+   sentivano sbilanciate — quella dopo il primo pannello sembrava lunga.
+   Adesso: 2,3 (l'ingresso, che deve respirare) e poi 1,45-1,5 fisse fino alla
+   chiusura a 1,35. Un passo solo, per tutta la pagina. */
+const RESPIRO   = 1.9;    // quello di scorta, per una tappa che non lo dichiara
+const MIN_V     = 1.00;   // mai sotto la velocità naturale
+const MAX_V     = 2.60;   // oltre, la decodifica fatica sui portatili vecchi
+/* All'indietro il film si vede davvero scorrere a ritroso, da una tappa a
+   quella prima, e si ferma su ognuna. Va piu' svelto dell'andata di un terzo. */
+/* La durata di UN fotogramma. Il filmato va a 30, quindi 33 millesimi. Serve
+   per ragionare a fotogrammi invece che a decimali: all'indietro si arretra di
+   fotogrammi interi, e una correzione piu' piccola di due fotogrammi non si fa
+   proprio, perche' si vedrebbe come uno scatto. */
+const FOTOGRAMMA = 1 / 30;
+const INDIETRO_PIU = 1.38;
+const INDIETRO_MIN = 0.45, INDIETRO_MAX = 2.00;
+const RIPOSO    = 430;    // un gesto = una tappa: la rotella spara 30 eventi per colpo
+/* IL RITMO LO DETTA CHI SCORRE — NON UN CRONOMETRO. (20/10, v60)
+
+   Com'era fino a ieri: due soste a tempo, mezzo secondo per chi correva e
+   1,1 secondi per chi andava piano. Erano tutte e due un MURO: dato il
+   comando, non succedeva niente finche' il cronometro non finiva. Chi andava
+   piano lo sentiva di piu', ed e' il contrario di quello che serve — chi va
+   piano sta guardando, e quando decide di andare avanti vuole andare avanti.
+
+   Com'e' adesso: l'unica condizione e' che il pannello sia DAVVERO APERTO.
+   Una sosta sola e cortissima, e il resto lo decide chi scorre:
+
+     chi CORRE    -> da' il comando mentre il pannello si apre, il comando si
+                     tiene da parte e parte appena il pannello c'e': il
+                     pannello si vede una frazione e si va avanti;
+     chi va PIANO -> fra un gesto e l'altro ci mette comunque piu' di questo,
+                     quindi la sosta NON LA INCONTRA MAI: il sito risponde
+                     subito, in sincro col suo comando.
+
+   Perche' 320 e non zero: il pannello si apre 0,5 s PRIMA della fermata e ci
+   mette 0,85 s ad aprirsi, quindi quando si atterra gli restano 0,35 s di
+   animazione. Questo e' il tempo perche' finisca di aprirsi, non un'attesa
+   messa li' per far leggere. Sotto questo numero il pannello verrebbe tagliato
+   a meta' e sembrerebbe un lampo. */
+const SOSTA = 320;
+/* Il tempo si conta da quando il pannello e' COMPLETO, non da quando il film
+   si ferma: sulla scena a due tempi il secondo pannello arriva dopo, e il
+   conto parte da li'. Cosi' basta un numero solo. */
+const ANTICIPO  = 0.50;   // il pannello si apre mezzo secondo PRIMA che il film si fermi
+const VELO_DA = 3.30, VELO_A = 3.95, VELO = 0.86;
+
+/* IL TIMBRO DELLA VERSIONE.
+   Si vede in fondo al quadrante di regia e nel pannello d'ingresso. Serve a
+   una cosa sola ma importante: quando Alessio dice «non funziona», deve poter
+   dire anche QUALE versione sta guardando. Senza, si corregge al buio — e'
+   gia' successo di inseguire difetti gia' corretti. */
+const VERSIONE = 'v71 · 21/10 15:05';
+
+const morsa = (x, a, b) => x < a ? a : x > b ? b : x;
+const dolce = u => u * u * (3 - 2 * u);
+
+/* La scelta del filmato e la sua discesa sono GIA' partite: le fa lo scripino
+   subito sotto il <video>, in cima alla pagina. Qui si RILEGGE soltanto.
+   Rifare la scelta e riassegnare `src` farebbe ripartire il download da zero,
+   e si tornerebbe a scaricare tutto due volte. Le righe di riserva servono se
+   un giorno quello scripino sparisce. */
+const scelta   = window.__film || null;
+const telefono = scelta ? scelta.telefono : matchMedia('(max-width: 760px)').matches;
+const v        = document.getElementById('v');
+const FILMATO  = scelta ? scelta.via
+               : '' + (telefono ? 'vicolo-telefono-b.mp4'
+                                              : 'vicolo-pc-b.mp4');
+
+/* Si guarda in streaming, come un filmato qualunque. Niente piu' scaricamento
+   in memoria: Safari su iPhone non sa leggere un filmato da un blocco, e
+   soprattutto non serve piu'. I filmati hanno un fotogramma chiave ogni mezzo
+   secondo invece che ogni due, quindi un salto costa al massimo 11 fotogrammi
+   da rileggere invece di 47: si puo' saltare dove si vuole senza fatica.
+   Cosi' parte subito, non si aspetta nessun download, e va uguale ovunque. */
+/* Serviva a sapere se il filmato era arrivato, per la scritta «un attimo...».
+   Adesso l'attesa la copre la sequenza d'ingresso, e quella scritta non c'e'
+   piu': restava solo a girare a vuoto sessanta volte al secondo. */
+if (!v.getAttribute('src')) v.src = FILMATO;   // solo se la cima non l'ha fatto:
+                                               // riassegnarlo farebbe RIPARTIRE il download
+
+/* LO SBLOCCO DELL'iPHONE.
+   Su iPhone il video non scarica NIENTE finche' non glielo chiede un gesto
+   vero dell'utente — e un dito che scorre non basta, ci vuole un tocco che
+   finisce. Quindi: al primo tocco gli si dice di suonare. Da quel momento il
+   motore puo' comandarlo da solo.
+   E soprattutto: i gesti NON si aspettano piu' che il filmato sia pronto. Se
+   si aspetta, non parte mai: lui aspetta il tocco, noi aspettiamo lui, e si
+   resta sul nero con "un attimo..." all'infinito. */
+let sbloccato = false;
+function sblocca() {
+  if (sbloccato) return;
+  sbloccato = true;
+  const p = v.play();
+  if (p && p.catch) p.catch(() => { sbloccato = false; });
+}
+['touchend', 'click', 'keydown', 'wheel', 'pointerup'].forEach(e =>
+  addEventListener(e, sblocca, { capture: true, passive: true }));
+
+/* E intanto si prova da soli, senza aspettare nessuno: muto e dentro la
+   pagina, i telefoni lo permettono. Non serve per far vedere qualcosa —
+   il filmato e' nero pesto fino al secondo 1,2, l'ho misurato — serve per
+   far entrare in memoria i primi fotogrammi. Mezzo secondo e si rimette al
+   buio, fermo. Se il telefono dice no, pazienza: ci pensa il primo tocco.
+   Questo e' anche il posto dove si resta sul nero del primo fotogramma:
+   niente parte da solo, l'accensione della luce sta dentro il primo gesto. */
+function aiPrimiDati() {
+  v.currentTime = 0;
+  const buio = () => { if (indice === 0 && bersaglio === 0) { v.pause(); v.currentTime = 0; } };
+  const p = v.play();
+  if (p && p.then) p.then(() => setTimeout(buio, 500), buio);
+  else setTimeout(buio, 500);
+}
+/* ATTENZIONE, QUESTA RIGA NON SI TOGLIE.
+   Adesso il filmato parte sette decimi PRIMA di questo punto, quindi i primi
+   dati possono essere GIA' arrivati quando si arriva qui. Un ascoltatore
+   messo e basta non suonerebbe mai: il filmato non verrebbe riportato al
+   fotogramma zero e il nero d'apertura non si preparerebbe. Si guarda se e'
+   gia' pronto, e in quel caso si fa subito. */
+if (v.readyState >= 1) aiPrimiDati();
+else v.addEventListener('loadedmetadata', aiPrimiDati, { once: true });
+
+/* ==================================================================
+   LA SEQUENZA D'INGRESSO.
+   Il filmato comincia ad arrivare al primo istante, in silenzio, prima di
+   qualunque clic. Intanto la pagina si apre con i suoi tempi: nero voluto,
+   la barra, il consenso, l'insegna. Nessuno vede una percentuale e nessuno
+   sta fermo a guardare un indicatore: quando il film parte, e' gia' tutto
+   in memoria. Il clic su «Accetta» serve anche da gesto per l'iPhone.
+   ================================================================== */
+const soglia      = document.getElementById('soglia');
+const insegna     = document.getElementById('insegna');
+const barraAlta   = document.querySelector('.barra');
+const bottoneSi   = document.getElementById('accetta');
+const bottonePiu  = document.getElementById('piuinfo');
+const dettagli    = document.getElementById('dettagli');
+const CHIAVE = 'hadrianus-consenso';
+let viaLibera = false;          // finche' e' falso il motore non accetta gesti
+
+/* I TEMPI DELL'INGRESSO. Sono scelti, non subiti: il nero di apertura e'
+   voluto, non e' un'attesa. */
+/* Il consenso si apre SUBITO, al primo istante: e' la prima cosa che si vede.
+   I 60 millesimi sono solo un giro di respiro, perche' la dissolvenza abbia da
+   dove partire e il pannello non sbatta in faccia a pagina ancora vuota.
+   La barra in alto sale dopo, dietro al pannello.
+   (Prima il nero d'apertura stava QUI, davanti al consenso. Adesso l'attesa la
+   copre la coda della sequenza: lo zoom del nome e il nero con l'invito.) */
+const APRE_SOGLIA = 60;     // praticamente subito
+const APRE_NERO   = 1300;   // se il consenso e' gia' dato, l'insegna parte qui
+const APRE_BARRA  = 900;    // la barra sale dietro il pannello
+const ZOOM        = 1250;   // quanto dura l'ingrandimento: uguale al CSS
+const INSEGNA_MIN = 2400;   // l'insegna sta su almeno questo, anche se tutto e' pronto
+const INSEGNA_MAX = 20000;  // e non oltre questo, qualunque cosa succeda
+
+function gia(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function segna(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+/* IL MARCHIO: MULTISERVICE LARGO QUANTO HADRIANUS.
+   Si misura l'inchiostro vero delle due righe — dalla prima lettera
+   all'ultima, togliendo la spaziatura che resta appesa dopo l'ultima — e si
+   spalma la differenza fra le lettere di sotto. Il margine negativo finale
+   toglie la coda che la spaziatura aggiunge anche all'ultima lettera, se no
+   la riga risulterebbe spostata a sinistra di quel tanto.
+   Si rifa' quando il carattere vero e' arrivato (Cinzel scende dalla rete, e
+   prima si misura un carattere di ripiego) e a ogni cambio di finestra. */
+function larghezzaInchiostro(el) {
+  const t = el.firstChild;
+  if (!t || t.nodeType !== 3) return el.getBoundingClientRect().width;
+  const r = document.createRange();
+  r.setStart(t, 0); r.setEnd(t, t.length);
+  const coda = parseFloat(getComputedStyle(el).letterSpacing) || 0;
+  return r.getBoundingClientRect().width - coda;
+}
+function allineaMarchio() {
+  document.querySelectorAll('.marchio').forEach(m => {
+    const nome = m.querySelector('.nome'), ditta = m.querySelector('.ditta');
+    if (!nome || !ditta || !ditta.firstChild) return;
+    const quante = ditta.textContent.trim().length;
+    if (quante < 2) return;
+    ditta.style.letterSpacing = '0px';
+    ditta.style.marginRight = '0px';
+    const bersaglio = larghezzaInchiostro(nome);
+    const naturale  = larghezzaInchiostro(ditta);
+    const passo = (bersaglio - naturale) / (quante - 1);
+    ditta.style.letterSpacing = passo.toFixed(3) + 'px';
+    ditta.style.marginRight = (-passo).toFixed(3) + 'px';
+  });
+}
+allineaMarchio();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(allineaMarchio);
+addEventListener('resize', allineaMarchio);
+
+const timbro = document.getElementById('timbro');
+if (timbro) timbro.textContent = 'versione ' + VERSIONE;
+
+bottonePiu.addEventListener('click', () => {
+  const aperto = !dettagli.hidden;
+  dettagli.hidden = aperto;
+  bottonePiu.setAttribute('aria-expanded', String(!aperto));
+  bottonePiu.textContent = aperto ? 'Maggiori informazioni' : 'Chiudi';
+});
+
+/* COME SI ASPETTA IL FILMATO — misurato, non immaginato.
+   Prima qui c'era una `fetch` che tirava giu' il file per intero, per
+   scaldare la cache. NON FUNZIONAVA, e faceva danno: misurato con il
+   registro di rete, il filmato partiva DUE VOLTE —
+       GET ...mp4 -> 200           la mia fetch, 7 MB
+       GET ...mp4 -> 206 Partial   il video, che se lo riscarica da capo
+   perche' il video chiede i pezzi con una richiesta a intervalli, che per il
+   browser e' un'altra cosa dalla richiesta intera. Quattordici megabyte
+   invece di sette, e il doppio dell'attesa: ero io a rendere lento il sito.
+
+   Adesso: UNA sola discesa, quella del video, che parte da sola con
+   `preload="auto"`. Si guarda quanto ha in pancia e si parte quando basta.
+   Quanto basta NON si sceglie a sentimento: e' l'ultima fermata piu' un
+   margine. L'ultima e' a 13.30 s su 19,33, cioe' il 69%. Con mezzo
+   secondo di margine fa il 72%. Oltre non serve a niente: sarebbe solo
+   attesa regalata. Da 13.30 in poi il filmato non si muove piu'.
+   (Un video in pausa comunque si ferma attorno all'89% e non va oltre.) */
+const BASTA_COSI = 0.72;
+
+function quantoInPancia() {
+  const d = v.duration;
+  if (!d || !isFinite(d) || !v.buffered || !v.buffered.length) return 0;
+  let fine = 0;
+  for (let i = 0; i < v.buffered.length; i++) {
+    if (v.buffered.start(i) <= 0.25) fine = Math.max(fine, v.buffered.end(i));
+  }
+  return morsa(fine / d, 0, 1);
+}
+
+function apriLaStrada() {
+  if (viaLibera) return;
+  viaLibera = true;
+}
+
+/* L'INSEGNA. Fra il consenso e il film ci sta la carta di testa: il marchio
+   che sale, il filo d'oro che si allunga. Dura il suo tempo (INSEGNA_MIN) e
+   se il filmato non e' ancora arrivato aspetta li', senza dire niente a
+   nessuno. Da fuori e' l'apertura del sito, non una clessidra. */
+let zoomFinito     = false;   // l'invito aspetta che il nome sia uscito
+let neroDaScostare = false;   // il nero d'apertura aspetta il primo gesto
+
+function cartaDiTesta() {
+  insegna.classList.add('entra');
+  const t0 = performance.now();
+  (function aspetta() {
+    const passati = performance.now() - t0;
+    if (passati >= INSEGNA_MIN && (quantoInPancia() >= BASTA_COSI || passati > INSEGNA_MAX)) {
+      insegna.classList.add('ingrandisce');   // il nome cresce ed esce
+      neroDaScostare = true;
+      /* LA STRADA SI APRE ADESSO, non alla fine dello zoom.
+         Perche' in `avanti()` c'e' `if (!viaLibera) return;` PRIMA della riga
+         che mette il gesto da parte: un gesto dato a strada chiusa si BUTTA,
+         non si accoda. Se aspettassi la fine dello zoom, chi scorre impaziente
+         non andrebbe da nessuna parte e direbbe che il sito e' morto. */
+      apriLaStrada();
+      setTimeout(() => {
+        zoomFinito = true;
+        if (neroDaScostare) insegna.classList.add('velo');
+        /* E SI PARTE DA SOLI. Prima qui ci si fermava sul nero ad aspettare
+           un gesto: ma a questo punto il filmato e' gia' in memoria (si e'
+           aspettato apposta) e restare fermi sembrava un sito che non si e'
+           caricato. Adesso il viaggio verso il primo pannello comincia da se'.
+           I 300 millesimi sono solo perche' la coda dello zoom non si accavalli
+           con la partenza del film: non e' un'attesa, e' un respiro.
+           `ultimoGesto` si segna lo stesso, se no un dito impaziente in questo
+           istante farebbe fare DUE tappe invece di una.
+           Il permesso di suonare ce l'abbiamo: l'ha dato il clic su «Accetta».
+           Chi era gia' stato qui non clicca niente, e li' il filmato puo'
+           rifiutarsi: in quel caso `chiediIlGesto()` lo riprende al primo
+           tocco, e intanto il pannello si vede lo stesso. */
+        setTimeout(() => {
+          if (indice === 0 && bersaglio === 0) {
+            ultimoGesto = performance.now();
+            punta(1);
+          }
+        }, 300);
+      }, ZOOM);
+      return;
+    }
+    setTimeout(aspetta, 140);
+  })();
+}
+
+function accetta() {
+  segna(CHIAVE, new Date().toISOString().slice(0, 10));
+  sblocca();                      // il tocco vero: da qui l'iPhone puo' suonare
+  sogliaAlzata = false;           // la gabbia del fuoco si apre
+  soglia.classList.add('via');
+  setTimeout(() => { soglia.hidden = true; cartaDiTesta(); }, 520);
+}
+bottoneSi.addEventListener('click', accetta);
+
+/* LA SEQUENZA D'APERTURA.
+   nero voluto -> la barra in alto -> il consenso. Chi e' gia' stato qui salta
+   il consenso e va dritto all'insegna: il tempo glielo prende quella. */
+/* Il fuoco della tastiera va sul pannello appena entra: chi naviga da
+   tastiera o con un lettore di schermo si ritrova gia' sul tasto giusto,
+   invece che in cima a una pagina coperta da qualcosa che non vede. */
+/* LA GABBIA DEL FUOCO.
+   Finche' il pannello sta in mezzo allo schermo, il tasto Tab non deve portare
+   il fuoco DIETRO, su cose che non si vedono: chi naviga da tastiera o con un
+   lettore di schermo si ritroverebbe a parlare con una pagina coperta da
+   qualcosa che non sa di avere davanti. Il giro si chiude dentro il pannello.
+   Esc non chiude: una scelta non si salta, si fa. */
+let sogliaAlzata = false;
+addEventListener('keydown', e => {
+  if (!sogliaAlzata || e.key !== 'Tab') return;
+  const presi = Array.from(soglia.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+    .filter(x => !x.disabled && x.offsetParent !== null);
+  if (!presi.length) return;
+  const primo = presi[0], ultimo = presi[presi.length - 1];
+  if (e.shiftKey && document.activeElement === primo) { e.preventDefault(); ultimo.focus(); }
+  else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primo.focus(); }
+}, true);
+
+function entraIlConsenso() {
+  sogliaAlzata = true;
+  soglia.classList.add('entra');
+  try { bottoneSi.focus({ preventScroll: true }); } catch (e) {}
+}
+
+setTimeout(() => barraAlta.classList.add('entra'), APRE_BARRA);
+if (gia(CHIAVE)) {
+  soglia.hidden = true;
+  setTimeout(cartaDiTesta, APRE_NERO);      // chi e' gia' stato qui: dritto all'insegna
+} else {
+  setTimeout(entraIlConsenso, APRE_SOGLIA); // subito, come chiesto
+}
+
+const pista     = document.getElementById('pista');
+const film      = document.getElementById('film');
+const scuro     = document.getElementById('scuro');
+const scorri    = document.getElementById('scorri');
+const continua  = document.getElementById('continua');
+const chiusa    = document.getElementById('contatti');
+/* IL QUADRANTE DI REGIA E' UN ATTREZZO MIO, NON UNA COSA DA FAR VEDERE.
+   Alessio: «in basso ci sta un piccolo rettangolo... vorrei togliessi e non
+   si vede». Tolto dalla vista. NON tolto dal codice: ci sta dentro il timbro
+   della versione, che serve a sapere quale pagina si sta guardando — e senza
+   quello abbiamo gia' perso mezza giornata a inseguire difetti di un'altra
+   pagina. Torna aggiungendo `?regia` all'indirizzo. */
+const quadrante = document.getElementById('quadrante');
+const regiaAccesa = /[?&]regia\b/.test(location.search);
+if (!regiaAccesa) quadrante.style.display = 'none';
+const riempi    = document.getElementById('riempi');
+// la pista finisce dove comincia la chiusura: l'ultima tappa ci porta dentro
+pista.style.height = (SCHERMATE * UNA) + 'px';   // in pixel, e con la STESSA
+                                                 // misura che usa il motore
+
+const pannelli = {};
+TAPPE.forEach(x => { [x.pop, x.poi].forEach(n => { if (n) pannelli[n] = document.getElementById(n); }); });
+
+/* Le fermate restano qui dentro, nella tabella TAPPE: servono al motore.
+   Non si disegnano piu' sulla barra. */
+
+/* ==================================================================
+}
+
+
+/* quando il fotogramma chiesto e' comparso, si puo' chiedere il prossimo */
+/* Il ritorno non chiede piu' fotogrammi uno a uno, quindi non c'e' piu'
+   niente da aspettare: l'ascoltatore di `seeked` e le quattro variabili che
+   contavano le ricerche (`cercando`, `cercaDaQuando`, `metaInd`, `passoInd`,
+   `tentativiInd`) sono spariti insieme a lui. Era il pezzo piu' fragile della
+   pagina: bastava che `seeked` non suonasse una volta e il sito si impiantava. */
+
+/* ---------------- lo stato ---------------- */
+let indice = 0, bersaglio = 0;      // dove sono, dove sto andando
+let partenzaT = TAPPE[0].t;         // il secondo da cui è cominciato il viaggio
+let versoAvanti = true;
+let t0Indietro = 0;                 // quando è cominciato il ritorno
+let durataInd = 0.5;                // e quanto deve durare, secondo la distanza
+let tornando = false;               // si sta tornando indietro: il velo lo comanda la dissolvenza
+/* L'ultimo valore scritto, per non riscriverlo uguale sessanta volte al
+   secondo: ogni scrittura passa per il ricalcolo degli stili, e questo giro
+   sta sullo stesso filo che decodifica il filmato. */
+let veloOra = '', scuroOra = '', riempiOra = '', quadranteIl = 0;
+let t0Fermo = 0;                    // il cronometro per i passaggi a immagine ferma
+let visto = -1, vistoIl = 0;        // il cane da guardia: dov'era il film e quando
+let ultimoGesto = 0;                // per il riposo fra un gesto e l'altro
+let arrivatoIl = 0;                 // quando sono atterrato sulla tappa
+let completoIl = 0;                 // quando il pannello e' arrivato per intero
+let fretta = 0;                     // quanto sta spingendo chi scorre
+let inCoda = 0;                     // il gesto tenuto da parte: -1 indietro, +1 avanti
+let acceso = false;                 // il video ha avuto il permesso di suonare
+
+/* ==================================================================
+   LA CAMERA — quanto si sta addosso al tempio
+   Il basamento del tempio ha una fascia incisa con del finto latino. Prima
+   c'era un riquadro che la SFUOCAVA: un `backdrop-filter` grande quanto la
+   fascia, rifatto a ogni fotogramma, l'effetto piu' caro della pagina — ed era
+   esattamente il punto in cui l'iPhone strisciava e si piantava mezzo secondo.
+   Adesso non si sfuoca piu' niente: ci si avvicina, e il basamento esce dal
+   bordo di sotto. Il problema non si nasconde, si inquadra fuori.
+
+   Quanto bisogna ingrandire NON e' un numero scelto a occhio: si calcola dalla
+   geometria vera, perche' `object-fit:cover` ritaglia in modo diverso su un
+   telefono in piedi e su uno schermo largo, e un numero solo sbaglierebbe su
+   uno dei due.
+   ================================================================== */
+function zoomDi(x) {
+  if (!x || !x.quota) return 1;
+  const lato = Math.max(innerWidth || 1, UNA);   // cover su un filmato quadrato
+  const altoVisibile = UNA / lato;               // quanta altezza del video si vede
+  const inizio = (1 - altoVisibile) / 2;         // cover centra: quanto taglia sopra
+  return Math.max(1, altoVisibile / Math.max(0.05, x.quota - inizio));
+}
+
+/* LA REGOLA CHE NON SI TOCCA: SUL FERMO IMMAGINE LA CAMERA STA FERMA.
+   Il 19/10 ho provato a far respirare le fermate, scalando il video di una
+   frazione che cambiava a ogni fotogramma. Il dettaglio fine — le scanalature
+   delle colonne, i sampietrini — si ricampiona in continuo e LUCCICA: Alessio
+   l'ha vista subito e l'ha bocciata, con ragione. Lo zoom di adesso e' un'altra
+   cosa: cambia SOLO mentre il film cammina, e appena si arriva si ferma su un
+   valore esatto che non si riscrive piu'. Il margine sotto cui non si scrive
+   niente serve proprio a quello: a non far tremare un'immagine ferma.
+   Vale ancora: da fermi non si scrive niente e la transizione e' gia' finita.
+
+   LO ZOOM LO FA IL BROWSER, NON IL MOTORE (corretto il 20/10, v59).
+   Prima lo scrivevo io a ogni giro, prendendo l'avanzamento dal filmato
+   (`u`, che viene da `v.currentTime`). Era sbagliato, e si vedeva:
+
+     · il filmato e' a 30 fotogrammi al secondo, quindi `v.currentTime` cambia
+       30 volte al secondo, mentre lo schermo dell'iPhone si ridisegna 120
+       volte al secondo. Lo zoom si muoveva a SCATTI: tre ridisegni fermo, poi
+       un salto. E a passi disuguali, perche' la velocita' del filmato cambia
+       durante il viaggio;
+     · scrivere `transform` fino a sessanta volte al secondo tiene occupato il
+       filo principale PROPRIO MENTRE il browser decodifica il video. E' lag,
+       ed e' anche il modo piu' facile per far comparire un fotogramma vecchio
+       o mezzo decodificato — i «flash di altre immagini».
+
+   Adesso il bersaglio si scrive UNA VOLTA SOLA, quando il viaggio comincia, e
+   la transizione la interpola il browser sulla scheda grafica, alla cadenza
+   vera dello schermo, senza passare dal filo principale. */
+function puntaLaCamera(tappa, quantoDura) {
+  const z = zoomDi(tappa);
+  const fermo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  v.style.transitionDuration = fermo ? '0s'
+                                     : Math.max(0.25, quantoDura).toFixed(2) + 's';
+  v.style.transform = z > 1.0005 ? 'scale(' + z.toFixed(4) + ')' : 'none';
+}
+/* Se cambia la finestra il conto dello zoom cambia: si rimette senza
+   transizione, perche' li' non si sta raccontando niente. */
+addEventListener('resize', () => {
+  if (indice !== bersaglio) return;
+  v.style.transitionDuration = '0s';
+  const z = zoomDi(TAPPE[indice]);
+  v.style.transform = z > 1.0005 ? 'scale(' + z.toFixed(4) + ')' : 'none';
+});
+
+function inViaggio() { return indice !== bersaglio; }
+function respiroDi(x) { return (x.respiro || RESPIRO) / (1 + fretta * 0.24); }
+function tettoDi(x)   { return fretta ? 3.0 : (x.tetto || MAX_V); }
+
+function punta(i) {
+  i = morsa(Math.round(i), 0, ULTIMA);
+  if (i === bersaglio) return;
+  /* Fermi, il secondo giusto e' quello della tappa, non quello che dice il
+     video: se una ricerca non e' andata a buon fine il video mente. */
+  if (!inViaggio()) partenzaT = TAPPE[indice].t;
+  else if ((i > bersaglio) !== versoAvanti) partenzaT = v.currentTime;
+  versoAvanti = i > indice;
+  bersaglio = i;
+  /* Si cambia rotta: la dissolvenza del ritorno, se era in corso, non deve
+     piu' far saltare il filmato. */
+  if (cronoDissolvenza) { clearTimeout(cronoDissolvenza); cronoDissolvenza = null; }
+  chiudiTutto();
+  tappaMostrata = -1;
+  if (versoAvanti) {
+    t0Fermo = 0;
+    const b = TAPPE[bersaglio];
+    // prima di suonare ci si mette al punto di partenza, se il video se n'e' andato
+    if (Math.abs(v.currentTime - partenzaT) > 0.15) v.currentTime = partenzaT;
+    const resta = Math.max(0.05, b.t - partenzaT);
+    v.playbackRate = morsa(resta / respiroDi(b), MIN_V, tettoDi(b));
+    /* La camera parte adesso e dura quanto il viaggio: una scrittura sola, poi
+       se la vede il browser. Se il filmato non si muove (4->5, stessa
+       immagine) il viaggio dura mezzo secondo, e la camera pure. */
+    puntaLaCamera(b, resta > 0.05 ? resta / Math.max(0.1, v.playbackRate) : 0.52);
+    suona();
+  } else {
+    t0Fermo = 0;
+    t0Indietro = performance.now();
+    durataInd = indietroQuanto(partenzaT, TAPPE[bersaglio].t, TAPPE[bersaglio]);
+    /* Il passo: quanti fotogrammi si arretra per ogni ricerca. Si vorrebbero
+       30 fotogrammi al secondo, quindi i passi sono durataInd x 30; se la
+       strada e' piu' lunga di cosi', ogni passo vale piu' di un fotogramma.
+       Si arrotonda SEMPRE a fotogrammi interi: chiedere mezzo fotogramma vuol
+       dire due ricerche che danno la stessa immagine, cioe' lavoro buttato e
+       meno immagini viste. */
+    /* ============================================================
+       IL RITORNO: UN SALTO SOLO, DENTRO UNA DISSOLVENZA. (20/10, v61)
+
+       Com'era: si tornava indietro CHIEDENDO FOTOGRAMMI UNO A UNO, 13 al
+       secondo sul telefono. Un video non si puo' suonare al contrario, quindi
+       ogni fotogramma costava una ricerca, e ogni ricerca costa la rilettura
+       dal fotogramma chiave precedente — ce n'e' uno ogni mezzo secondo,
+       cioe' fino a 15 fotogrammi da ridecodificare OGNI VOLTA. Su un iPhone
+       sono fino a 195 decodifiche al secondo per far vedere un movimento
+       all'indietro.
+       Non reggeva, e si vedeva: strisciava, mostrava fotogrammi intermedi
+       («flash di altre immagini») e ogni tanto si impiantava del tutto,
+       perche' bastava che `seeked` non suonasse una volta e il viaggio
+       restava appeso — e a viaggio appeso ogni gesto viene buttato.
+       Alessio me l'ha segnalato tre volte. Tre volte ho ricucito; non era
+       ricucibile, era l'impianto sbagliato.
+
+       Com'e': UNA ricerca sola, fatta a schermo nero. Il velo scuro sale,
+       sotto si cambia fotogramma, il velo riscende. La pagina intanto scorre
+       con un orologio suo, non con i fotogrammi, quindi e' morbida comunque.
+       Non c'e' niente che possa incepparsi: anche se la ricerca tardasse, il
+       velo e' gia' nero e il viaggio finisce lo stesso a tempo.
+
+       Si perde il «riavvolgimento» vero. Per riaverlo serve un filmato girato
+       al contrario (si puo' fare con AVFoundation, senza ffmpeg) al prezzo di
+       raddoppiare lo scaricamento. Da decidere con Alessio.
+       ============================================================ */
+    tornando = true;
+    puntaLaCamera(TAPPE[bersaglio], durataInd);
+    if (!v.paused) v.pause();
+    dissolviIndietro(TAPPE[bersaglio].t, durataInd);
+  }
+}
+
+/* Il velo nero sale, sotto si salta, il velo riscende. Due sole scritture,
+   e la dissolvenza la fa il browser: come per lo zoom, non passa dal filo
+   principale e non puo' scattare. */
+let cronoDissolvenza = null;
+function dissolviIndietro(aT, quanto) {
+  /* IL CRONOMETRO SI TIENE, PERCHE' VA FERMATO.
+     Prima si lanciava e basta. Se uno cominciava a tornare indietro e poi
+     cambiava idea andando avanti, questo cronometro scattava lo stesso A META'
+     DEL VIAGGIO IN AVANTI e faceva `v.currentTime = aT`: il filmato tornava
+     indietro di colpo in mezzo a una corsa in avanti. Un salto visibile, e
+     `u` — che si legge dal filmato — andava fuori di testa.
+     Adesso `punta()` lo spegne a ogni cambio di rotta. */
+  if (cronoDissolvenza) clearTimeout(cronoDissolvenza);
+  const fermo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const meta = fermo ? 0.08 : Math.max(0.18, quanto * 0.45);
+  scuro.style.transition = 'opacity ' + meta.toFixed(2) + 's ease';
+  scuro.style.opacity = '1';
+  cronoDissolvenza = setTimeout(() => {
+    cronoDissolvenza = null;
+    v.currentTime = aT;                    // il salto, a schermo nero
+    scuro.style.opacity = '0';
+  }, meta * 1000);
+}
+/* IL COMANDO VALE SOLO A PANNELLO APERTO.
+   Un gesto dato mentre il film cammina non si butta: si tiene da parte (uno
+   solo) e parte appena il pannello c'e'. Chi scrolla cinque volte durante
+   l'animazione non va avanti di cinque tappe: ne fa una in piu', e basta. */
+function sostaDovuta() { return SOSTA; }   // una sola, uguale per tutti
+function gestoValido(ora) {
+  if (!viaLibera) return false;             // la soglia non e' ancora passata
+  if (inViaggio() || !coppiaCompleta) return false;
+  return ora - Math.max(arrivatoIl, completoIl) >= sostaDovuta();
+}
+
+/* Quanto dura il ritorno: come l'andata, ma di un terzo piu' svelto. Cosi' un
+   tratto lungo non diventa uno sfarfallio e uno corto non diventa lento. */
+function indietroQuanto(da_t, a_t, tappa) {
+  const strada = Math.abs(da_t - a_t);
+  if (strada < 0.05) return INDIETRO_MIN;
+  const vel = morsa(strada / respiroDi(tappa), MIN_V, tettoDi(tappa)) * INDIETRO_PIU;
+  return morsa(strada / vel, INDIETRO_MIN, INDIETRO_MAX);
+}
+
+function avanti() {
+  const ora = performance.now();
+  if (ora - ultimoGesto < RIPOSO) return;
+  fretta = (ora - ultimoGesto < 1000) ? Math.min(fretta + 1, 4) : 0;
+  ultimoGesto = ora;
+  if (!viaLibera) return;
+  if (!gestoValido(ora)) { inCoda = 1; return; }   // si tiene da parte, non si butta
+  inCoda = 0;
+  punta(indice + 1);
+}
+
+function indietroDi() {
+  const ora = performance.now();
+  if (ora - ultimoGesto < RIPOSO) return;
+  fretta = (ora - ultimoGesto < 1000) ? Math.min(fretta + 1, 4) : 0;
+  ultimoGesto = ora;
+  if (!viaLibera) return;
+  if (!gestoValido(ora)) { inCoda = -1; return; }  // stessa regola all'indietro
+  inCoda = 0;
+  punta(indice - 1);
+}
+
+function suona() {
+  const p = v.play();
+  // se il permesso arriva, lo si registra: cosi' un eventuale stallo
+  // a metà viaggio si riprende da solo al giro dopo.
+  if (p && p.then) p.then(() => { acceso = true; }, () => { acceso = false; chiediIlGesto(); });
+  else acceso = true;
+}
+let inAttesaDelGesto = false;
+function chiediIlGesto() {
+  if (inAttesaDelGesto) return;
+  inAttesaDelGesto = true;
+  const via = () => {
+    inAttesaDelGesto = false; acceso = true;
+    const p = v.play(); if (p && p.catch) p.catch(() => {});
+    ['pointerdown','touchstart','keydown','wheel'].forEach(e => removeEventListener(e, via, true));
+  };
+  ['pointerdown','touchstart','keydown','wheel']
+    .forEach(e => addEventListener(e, via, { capture: true, passive: true }));
+}
+
+/* ---------------- i pannelli ---------------- */
+let suOra = [];
+function mostraLista(lista) {
+  suOra.filter(n => !lista.includes(n)).forEach(n => {
+    const el = pannelli[n]; el.classList.remove('entra'); void el.offsetWidth; el.classList.add('esce');
+  });
+  lista.filter(n => !suOra.includes(n)).forEach(n => {
+    const el = pannelli[n]; el.classList.remove('esce'); void el.offsetWidth; el.classList.add('entra');
+  });
+  suOra = lista.slice();
+}
+
+/* la scena a due tempi dell'ultima tappa */
+let crono = null, tappaMostrata = -1, coppiaCompleta = false;
+/* Il foglio di stile dice «qui comando io»: sul telefono il quarto e il
+   quinto prendono mezza schermata per uno e non c'e' niente da calcolare. */
+function cssPiazzaLaCoppia(el) {
+  return getComputedStyle(el).getPropertyValue('--coppia-css').trim() === '1';
+}
+
+function apriCoppia(x) {
+  const a = pannelli[x.pop], b = pannelli[x.poi];
+  const cssComanda = cssPiazzaLaCoppia(a);
+  /* Si puliscono SEMPRE: se si arriva qui dopo essere stati su una finestra
+     larga, un translateY vecchio resterebbe appiccicato. */
+  a.style.transform = cssComanda ? '' : 'translateY(0)';
+  b.style.transform = cssComanda ? '' : 'translateY(0)';
+  coppiaCompleta = false;
+  mostraLista([x.pop]);
+  crono = setTimeout(() => {
+    if (cssComanda) {
+      /* Niente misure, niente formule: ci pensa il CSS. Questo e' il ramo del
+         telefono, dove misurare l'altezza di un pannello ancora invisibile ha
+         sbagliato tre volte. */
+      mostraLista([x.pop, x.poi]);
+      coppiaCompleta = true; completoIl = performance.now();
+      return;
+    }
+    const ha = a.querySelector('.telaio').offsetHeight;
+    const hb = b.querySelector('.telaio').offsetHeight;
+    /* DOVE STANNO LO DECIDE IL FOGLIO DI STILE, NON LA CLASSE.
+       Qui c'era `a.classList.contains('basso')`. Sul telefono i pannelli sono
+       stati centrati nel CSS ma la classe e' rimasta: il motore continuava a
+       piazzarli con la formula di quelli ancorati in basso, e il quarto e il
+       quinto finivano fuori posto. Adesso si chiede al browser dove stanno
+       davvero: se il CSS li centra, si usa la formula del centro. Cosi' le due
+       cose non possono piu' andare in disaccordo. */
+    if (getComputedStyle(a).alignItems === 'end') {
+      /* Ancorati in basso: il primo sale di tutta l'altezza del secondo e il
+         secondo resta dov'e'. Spartendo lo spostamento a meta', come si fa
+         quando sono centrati, il secondo finirebbe sotto il bordo. */
+      a.style.transform = 'translateY(' + (-(hb + STACCO)).toFixed(1) + 'px)';
+      b.style.transform = 'translateY(0)';
+    } else {
+      a.style.transform = 'translateY(' + (-(hb + STACCO) / 2).toFixed(1) + 'px)';
+      b.style.transform = 'translateY(' + ((ha + STACCO) / 2).toFixed(1) + 'px)';
+    }
+    mostraLista([x.pop, x.poi]);
+    coppiaCompleta = true; completoIl = performance.now();
+  }, ATTESA_COPPIA);
+}
+function apriTappa(x) {
+  if (crono) { clearTimeout(crono); crono = null; }
+  if (x.poi) apriCoppia(x);
+  else { coppiaCompleta = true; completoIl = performance.now();
+         mostraLista(x.pop ? [x.pop] : []); }
+}
+function chiudiTutto() {
+  if (crono) { clearTimeout(crono); crono = null; }
+  coppiaCompleta = false;
+  mostraLista([]);
+}
+
+/* ---------------- il battito ---------------- */
+function battito(ora) {
+ try {
+  const alto  = UNA;        // NON innerHeight: su iPhone cambia a ogni scorrimento
+  /* ANCHE QUESTA, non solo quella sopra. Era rimasta con `innerHeight`:
+     appena la barra dell'indirizzo si ritirava, `corsa` cambiava da sola di
+     120 px e il cursore di lato SI SPOSTAVA SENZA CHE NESSUNO AVESSE
+     SCROLLATO — «si muove anche se la grafica non e' cambiata». Stesso
+     difetto di stamattina, che avevo corretto solo a meta'. */
+  const corsa = document.documentElement.scrollHeight - UNA;
+  const da = TAPPE[indice], a = TAPPE[bersaglio];
+  let u = 1;
+
+  if (inViaggio()) {
+    if (versoAvanti) {
+      const salto = a.t - partenzaT;
+      if (salto > 0.05) {
+        u = morsa((v.currentTime - partenzaT) / salto, 0, 1);
+        if (v.currentTime >= a.t - 0.03) atterra();
+      } else {                                   // stessa immagine (pop4 → pop5)
+        if (!t0Fermo) t0Fermo = ora;
+        u = morsa((ora - t0Fermo) / 520, 0, 1);
+        if (u >= 1) { t0Fermo = 0; atterra(); }
+      }
+      /* IL CANE DA GUARDIA. Se il film non si muove di un capello per sei
+         secondi — rete lenta, telefono che non vuole suonare, scheda in
+         secondo piano — il viaggio resterebbe appeso e da li' in poi ogni
+         gesto verrebbe buttato, perche' si e' "in viaggio" per sempre.
+         Allora si arriva a mano: brutto da vedere una volta, meglio di una
+         pagina morta. */
+      if (Math.abs(v.currentTime - visto) > 0.01) { visto = v.currentTime; vistoIl = ora; }
+      /* Sei secondi erano un'eternita': se il film si impianta, il pannello
+         arriva cosi' tardi che sembra non arrivare per niente — ed e' quello
+         che vedeva Alessio sul terzo e sul quarto. Due secondi e mezzo se il
+         filmato e' li' ma non si muove; un secondo e mezzo se e' proprio a
+         secco (readyState sotto 3), perche' li' aspettare non serve. */
+      else if (vistoIl && ora - vistoIl > (v.readyState < 3 ? 1500 : 2500)) {
+        visto = -1; vistoIl = 0; atterra(); return;
+      }
+      if (!v.paused) {
+        const resta = Math.max(0.03, a.t - v.currentTime);
+        const resp = respiroDi(a);
+        const vuole = morsa(resta / Math.max(0.30, resp * (1 - u) + 0.30), MIN_V, tettoDi(a));
+        /* La velocita' si cambia solo se cambia davvero. Scriverla sessanta
+           volte al secondo fa ri-cadenzare il decodificatore a ogni giro, e su
+           qualche macchina si sente come un singhiozzo. Il 3% e' sotto la
+           soglia di quello che l'occhio nota. */
+        if (Math.abs(vuole - v.playbackRate) > v.playbackRate * 0.03) v.playbackRate = vuole;
+      } else if (acceso !== false) { suona(); }
+    } else {
+      /* IL RITORNO VA A OROLOGIO, E NON PUO' INCEPPARSI. (20/10, v61)
+         Il salto del fotogramma e la dissolvenza li ha gia' fatti partire
+         `punta()`: qui non si chiede niente al filmato e non si aspetta
+         niente da lui. Si scorre la pagina a tempo, e si atterra a tempo.
+         Prima qui c'erano tredici ricerche al secondo e un ciclo che poteva
+         restare appeso per sempre se `seeked` non suonava. Non c'e' piu'
+         niente da appendere. */
+      u = morsa((ora - t0Indietro) / Math.max(120, durataInd * 1000), 0, 1);
+      if (u >= 1) atterra();
+    }
+    // la pagina segue il film, non il contrario
+    const sch = da.sch + (a.sch - da.sch) * dolce(u);
+    scrollTo(0, sch * alto);
+    // il pannello non aspetta la fermata: entra mezzo secondo prima
+    if (tappaMostrata !== bersaglio) {
+      const quasi = versoAvanti
+        ? (a.t - v.currentTime) / Math.max(0.1, v.playbackRate || 1) <= (a.anticipo || ANTICIPO)
+        : (1 - u) * durataInd <= (a.anticipo || ANTICIPO);
+      if (quasi) { tappaMostrata = bersaglio; apriTappa(a); }
+    }
+  } else {
+    if (!v.paused && Math.abs(v.currentTime - da.t) < 0.25) v.pause();
+    // stessa tolleranza di atterra(): se no lo strappo tornava un giro dopo
+    if (Math.abs(v.currentTime - da.t) > FOTOGRAMMA * 1.5 && v.paused) v.currentTime = da.t;
+    // ...e solo se la coda non ha gia' fatto ripartire il viaggio in questo stesso giro
+    if (!inViaggio() && tappaMostrata !== indice) { tappaMostrata = indice; apriTappa(da); }
+    /* Il gesto tenuto da parte riparte qui, appena il pannello e' completo e
+       la sosta dovuta e' passata. Un solo posto in coda: chi scorre cinque
+       volte non fa cinque tappe, ne fa una in piu'. */
+    if (inCoda && !inViaggio() && coppiaCompleta &&
+        ora - Math.max(arrivatoIl, completoIl) >= sostaDovuta()) {
+      const dove = inCoda; inCoda = 0;
+      const meta = morsa(indice + dove, 0, ULTIMA);
+      if (meta !== indice) punta(meta);
+    }
+  }
+
+  /* QUI NON SI TOCCA PIU' L'INQUADRATURA.
+     C'era `regolaCamera(da, a, u)`, che riscriveva lo zoom a ogni giro: e' la
+     riga che faceva scattare gli zoom e occupava il filo principale mentre il
+     video decodificava. Adesso la camera la punta `punta()`, una volta per
+     viaggio, e il resto lo fa il browser. */
+
+  /* SI SCRIVE SOLO QUANDO CAMBIA.
+     Queste righe giravano sessanta volte al secondo anche quando il valore
+     era identico a prima: il velo del filmato cambia solo fra il secondo 3,30
+     e il 3,95, il velo scuro solo quando si arriva o si riparte. Ogni
+     scrittura, anche uguale, passa comunque per il ricalcolo degli stili — e
+     questo giro sta sullo STESSO FILO che decodifica il video. Su un telefono
+     si sente, e si somma a tutto il resto. */
+  const g = morsa((v.currentTime - VELO_DA) / (VELO_A - VELO_DA), 0, 1);
+  const velo = (1 - (1 - VELO) * g).toFixed(3);
+  if (velo !== veloOra) { veloOra = velo; film.style.opacity = velo; }
+  /* Mentre si torna indietro il velo NON lo comanda il motore: lo sta
+     facendo salire e riscendere la dissolvenza, e due padroni sullo stesso
+     valore vuol dire sfarfallio. */
+  if (!tornando) {
+    const buio = (!inViaggio() && da.pop) ? '0.3' : '0';
+    if (buio !== scuroOra) { scuroOra = buio; scuro.style.opacity = buio; }
+  }
+  /* L'invito si vede SEMPRE sulla prima tappa, anche se il filmato non e'
+     ancora arrivato: e' il gesto che lo fa partire, quindi nasconderlo
+     significa non far partire niente. */
+  /* `arrivatoIl > 0` vuol dire «ci siamo gia' fermati almeno una volta».
+     Serve perche' adesso dalla prima tappa si riparte DA SOLI dopo 300 ms:
+     senza questa condizione l'invito lampeggerebbe per quei 300 ms e poi
+     sparirebbe. Chi invece TORNA sulla prima tappa lo vede, ed e' giusto. */
+  scorri.classList.toggle('acceso',
+    viaLibera && zoomFinito && arrivatoIl > 0 && indice === 0 && !inViaggio());
+  /* IL VARCO: il nero d'apertura si scosta appena il viaggio comincia, e non
+     torna piu'. Da li' in poi comanda il film. */
+  if (neroDaScostare && (indice !== 0 || inViaggio())) {
+    neroDaScostare = false;
+    insegna.classList.add('via');
+    setTimeout(() => { insegna.hidden = true; }, 800);
+  }
+  /* "un attimo..." solo se il dito ha gia' chiesto e il filmato tarda: da
+     solo, sulla prima tappa nera, sembrava una pagina rotta per sempre. */
+  /* Sull'ultima tappa a due tempi non si dice "continua a scorrere": li' non
+     si annuncia niente, si scorre e il piede arriva. */
+  /* Il piede si accende quando si e' ARRIVATI sull'ultima tappa, non quando
+     si parte: cosi' entra con il suo tempo, come fa un pannello. Tornando
+     indietro si spegne, e la volta dopo rientra da capo. */
+  chiusa.classList.toggle('viva', indice === ULTIMA && !inViaggio());
+  continua.classList.toggle('acceso', !inViaggio() && !!da.pop && coppiaCompleta && !da.poi);
+
+  /* La barretta non si riempie: scende. E' alta il 12% del bordo, quindi
+     corre da 0 all'88% del percorso. */
+  const avanti_ = corsa > 0 ? morsa(scrollY / corsa, 0, 1) : 0;
+  const alta = (avanti_ * 88).toFixed(2) + '%';
+  if (alta !== riempiOra) { riempiOra = alta; riempi.style.top = alta; }
+
+  /* IL QUADRANTE DI REGIA SI RISCRIVE SEI VOLTE AL SECONDO, NON SESSANTA.
+     E' testo: riscriverlo obbliga il browser a rifare il conto di come sta in
+     pagina, e lo faceva a ogni giro mentre il filmato decodificava. A sei
+     volte al secondo si legge uguale e costa dieci volte meno. E' un attrezzo
+     di servizio: non deve rubare niente a quello che si guarda. */
+  if (regiaAccesa && ora - quadranteIl > 160) {   // se non si vede, non si scrive
+    quadranteIl = ora;
+    quadrante.textContent =
+      'secondo ' + v.currentTime.toFixed(2) + ' / 19,33  ·  tappa ' +
+      (inViaggio() ? da.nome + ' → ' + a.nome : da.nome) +
+      '  ·  ' + (v.paused ? 'ferma' : v.playbackRate.toFixed(2) + '×') +
+      '  ·  video ' + Math.round(veloOra * 100) + '%' +
+      '  ·  ' + VERSIONE;
+  }
+
+ } catch (e) {
+  /* IL MOTORE NON PUO' MORIRE.
+     Qui dentro ci sono una decina di tocchi al DOM e al filmato. Se uno solo
+     tira un errore — un elemento sparito, una misura impossibile, un ritocco
+     che non riesce — senza questa rete il giro si interrompe e la pagina si
+     CONGELA: niente piu' movimento, niente piu' gesti, e nessuno capisce
+     perche'. Si segna l'errore sul quadrante di regia e si tira dritto. */
+  if (quadrante) { quadrante.textContent = 'inciampo: ' + (e && e.message || e); }
+ } finally {
+  // il prossimo giro si chiede SEMPRE, qualunque cosa sia successa
+  requestAnimationFrame(battito);
+ }
+}
+
+function atterra() {
+  visto = -1; vistoIl = 0;
+  /* Fine del ritorno: il velo torna in mano al motore, con la sua transizione
+     di sempre. Si azzera anche l'ultimo valore scritto, se no il motore crede
+     di averlo gia' messo e non lo rimette. */
+  if (tornando) {
+    tornando = false;
+    scuro.style.transition = '';
+    scuro.style.opacity = '0';
+    scuroOra = '0';
+  }
+  arrivatoIl = performance.now();
+  indice = bersaglio;
+  partenzaT = TAPPE[indice].t;
+  if (!v.paused) v.pause();
+  /* NIENTE STRAPPO SE SI E' GIA' LI'. A 2x il film avanza di 66 millesimi per
+     fotogramma mostrato, quindi la tappa la supera sempre di un pelo. Rimetterlo
+     indietro di un fotogramma si vede: e' lo scatto all'arrivo.
+     Il viaggio dopo riparte comunque dal secondo della TABELLA, non da qui,
+     quindi non si accumula niente. */
+  if (Math.abs(v.currentTime - TAPPE[indice].t) > FOTOGRAMMA * 1.5)
+    v.currentTime = TAPPE[indice].t;
+  scrollTo(0, TAPPE[indice].sch * UNA);
+}
+
+/* ---------------- i gesti ---------------- */
+function nelFilm() { return scrollY < (SCHERMATE + 0.4) * UNA; }
+
+/* LA BARRA DELL'INDIRIZZO NON E' UN CAMBIO DI FINESTRA.
+   Su iPhone si ritira e torna a ogni scorrimento, e sposta `innerHeight` di
+   120 px: se si rimisurasse a ogni soffio, la pista cambierebbe altezza sotto
+   i piedi di chi sta scorrendo. Si rimisura solo per un cambio VERO — una
+   rotazione dello schermo — e mai a meta' di un viaggio. */
+addEventListener('resize', () => {
+  const adesso = innerHeight || 1;
+  if (Math.abs(adesso - UNA) < UNA * 0.18) return;   // e' solo la barra
+  if (indice !== bersaglio) return;                  // non a meta' di un viaggio
+  UNA = adesso;
+  pista.style.height = (SCHERMATE * UNA) + 'px';
+  scrollTo(0, TAPPE[indice].sch * UNA);
+});
+
+addEventListener('wheel', e => {
+  if (!nelFilm()) return;
+  /* Oltre l'ultima tappa si scorre normale, ed e' cosi' che si arriva al
+     piede di pagina. Ma solo quando ci si e' ARRIVATI: con `bersaglio` si
+     lasciava passare lo scorrimento nativo anche MENTRE si viaggiava verso
+     l'ultima, e li' il dito e il motore si contendevano la pagina. */
+  if (e.deltaY > 0 && indice >= ULTIMA && !inViaggio()) return;
+  e.preventDefault();
+  if (e.deltaY > 0) avanti(); else indietroDi();
+}, { passive: false });
+
+addEventListener('keydown', e => {
+  if (!nelFilm()) return;
+  if (e.key === 'Home') { e.preventDefault(); punta(0); }
+  else if (e.key === 'End') { e.preventDefault(); punta(ULTIMA); }
+  else if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+    if (bersaglio >= ULTIMA) return; e.preventDefault(); avanti();
+  } else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); indietroDi(); }
+});
+
+let dito = 0;
+addEventListener('touchstart', e => { dito = e.touches[0].clientY; }, { passive: true });
+addEventListener('touchmove', e => {
+  if (!nelFilm()) return;
+  const y = e.touches[0].clientY;
+  /* OLTRE L'ULTIMA TAPPA SI SCORRE NORMALE: e' cosi' che si arriva al piede
+     di pagina. Stessa regola della rotella, e solo da ARRIVATI: durante il
+     viaggio verso l'ultima comanda il motore. */
+  if (dito - y > 0 && indice >= ULTIMA && !inViaggio()) return;
+  /* QUI SI FERMA SEMPRE, non solo quando il dito ha gia' fatto 70 px.
+     Prima il `preventDefault` stava DENTRO i due rami, quindi scattava solo a
+     scorrimento compiuto: tutti i movimenti piu' piccoli — che sono la gran
+     parte, il dito manda un evento ogni pochi pixel — passavano, e il dito
+     TRASCINAVA LA PAGINA da solo. `scrollY` si muoveva e la barretta di lato
+     lo seguiva: sembrava di andare avanti mentre il filmato era ancora fermo.
+     Poi il motore rimetteva la pagina al suo posto e la barretta tornava
+     indietro — un tremolio, e nessuno dei due movimenti era vero.
+     Dentro il film lo scorrimento lo comanda il motore, nessun altro. Sulla
+     rotella era gia' cosi': ecco perche' sul computer non si vedeva. */
+  e.preventDefault();
+  if (dito - y > 70) { dito = y; avanti(); }
+  else if (y - dito > 70) { dito = y; indietroDi(); }
+}, { passive: false });
+
+/* ---------------- si parte ---------------- */
+/* ❗ IL MOTORE PARTE SEMPRE. NON SI RIMETTE UN `if` QUI SOPRA.
+   Fino al 20/10 c'era: se il sistema diceva «meno movimento», invece di
+   accendere il motore si mettevano TUTTI E CINQUE i pannelli addosso l'uno
+   all'altro e `requestAnimationFrame(battito)` non veniva mai chiamato. Chi
+   ha «Riduci movimento» acceso nelle impostazioni — e non e' raro, serve a chi
+   soffre il movimento — trovava uno schermo nero con cinque riquadri
+   sovrapposti, il filmato fermo e lo scorrimento che non faceva niente.
+   Il sito non era «meno mosso»: era rotto.
+   Il movimento lo toglie gia' tutto il foglio di stile, nei quattro blocchi
+   `prefers-reduced-motion` — ingresso dei pannelli, insegna, grana, piede.
+   Al motore non serve saperne niente. */
+{
+  /* IL MOTORE SI ALLINEA ALLA SUA FERMATA, SUBITO.
+     Prima la pagina veniva spostata solo durante un viaggio: all'accensione
+     nessuno diceva niente, e se il browser aveva lasciato la pagina a meta'
+     il motore credeva di stare alla prima fermata mentre lo schermo mostrava
+     tutt'altro. Una riga, e le due cose partono d'accordo. */
+  scrollTo(0, TAPPE[indice].sch * UNA);
+  chiusa.classList.add('pronta');
+  // Il nero di partenza lo tiene l'avvio silenzioso, qui sopra: un secondo
+  // 'loadedmetadata' che facesse pause() subito gli toglieva la memoria da
+  // sotto i piedi, e sull'iPhone restava senza fotogrammi.
+  requestAnimationFrame(battito);
+}
+})();
+</script>

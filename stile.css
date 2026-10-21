@@ -1,0 +1,387 @@
+/* ==================================================================
+   HADRIANUS MULTISERVICE — il sistema visivo delle pagine interne
+
+   Un sistema solo, cinque caratteri. I colori di ogni pagina stanno in
+   `tavolozze.css`; qui c'e' la forma. Le regole non cambiano mai, da
+   DESIGN.md: crema, marrone, oro, Cinzel e Archivo. NIENTE BLU.
+   60/30/10 — il fondo regge, l'inchiostro porta il testo, l'accento si
+   accende solo dove deve decidere l'occhio.
+
+   I nomi dei colori sono SEMANTICI (`--fondo`, non `--notte`): su
+   «pulizie» il fondo e' sabbia, e un nome che descrive avrebbe mentito.
+   ================================================================== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--fondo)}
+body{margin:0;background:var(--fondo);color:var(--inchiostro);
+  font-family:var(--testo);font-size:clamp(1.14rem,1.04rem + .42vw,1.38rem);
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+:root{
+  --display:Cinzel,"Hoefler Text",Georgia,serif;
+  --testo:Archivo,"Helvetica Neue",Arial,sans-serif;
+  --lato:clamp(20px,5.5vw,76px);
+  --dentro:min(100%,1160px);
+}
+img{max-width:100%;display:block}
+::selection{background:var(--accento);color:var(--fondo)}
+
+/* LA GRANA: lo stesso velo di pellicola dell'ingresso. Tiene insieme
+   pagine e filmato, e rimette a fuoco all'occhio una sorgente morbida.
+   Sulle pagine chiare pesa meno, se no sporca il beige. */
+body::after{content:'';position:fixed;inset:-50%;z-index:60;pointer-events:none;
+  opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='170' height='170'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='170' height='170' filter='url(%23n)'/></svg>")}
+.p-pulizie body::after,body.chiaro::after{opacity:.028}
+
+/* ---------------- la barra ---------------- */
+.barra{position:sticky;top:0;z-index:50;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;padding:16px var(--lato);
+  background:var(--fondo);                                   /* ripiego */
+  background:color-mix(in srgb,var(--fondo) 90%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--riga)}
+.marchio{display:inline-flex;flex-direction:column;line-height:1;text-decoration:none}
+.marchio .nome{font-family:var(--display);font-weight:500;letter-spacing:.3em;
+  color:var(--inchiostro);font-size:clamp(.92rem,.78rem + .4vw,1.14rem);margin-right:-.3em}
+.marchio .ditta{font-family:var(--display);color:var(--morbido);font-size:.52em;
+  margin-top:.45em;white-space:nowrap;letter-spacing:.05em}
+.tasti{display:flex;align-items:center;gap:.55rem}
+.tasti a{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accento);text-decoration:none;white-space:nowrap;
+  border:1px solid var(--riga);                              /* ripiego */
+  border-color:color-mix(in srgb,var(--accento) 45%,transparent);
+  padding:.62em 1.35em;border-radius:2px;
+  transition:background .2s ease,color .2s ease,border-color .2s ease}
+.tasti a:hover{background:var(--accento);color:var(--fondo)}
+.tasti a.primario{background:var(--accento);border-color:var(--accento);
+  color:var(--fondo);font-weight:600}
+.tasti a.primario:hover{background:var(--accento-2);border-color:var(--accento-2)}
+
+/* ==================================================================
+   LA TESTA — un fotogramma del film a tutta pagina, titolo in basso
+   come su un manifesto. E' il momento in cui la pagina deve fermare
+   chi guarda: qui lo spazio si spende tutto.
+   La testa resta SEMPRE notturna, anche sulle pagine chiare: e' la
+   soglia. Si entra dalla notte del film e si arriva alla pagina.
+   ================================================================== */
+.eroe{position:relative;min-height:min(84vh,780px);display:flex;align-items:flex-end;
+  background:#000;overflow:hidden;isolation:isolate;color:#F6F0E3}
+/* `<picture>` e' una scatola in piu' fra la sezione e l'immagine: senza
+   queste due righe l'altezza al 100% si misurerebbe su di lei, che e' alta
+   quanto il contenuto, e l'immagine collasserebbe. */
+.eroe picture{display:contents}
+.fascia picture{display:block;width:100%;height:100%}
+.eroe img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 42%;z-index:-2}
+.eroe::before{content:'';position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to top,
+    var(--fondo) 1%, rgba(10,8,6,.93) 24%, rgba(10,8,6,.44) 54%, rgba(10,8,6,.16) 100%)}
+.eroe .dentro{width:var(--dentro);margin-inline:auto;
+  padding:0 var(--lato) clamp(42px,6.5vw,96px)}
+.occhiello{display:flex;align-items:center;gap:.9rem;font-size:.76rem;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--accento-2);margin:0 0 1.3rem}
+/* IL FILO D'ORO: lo stesso dell'insegna d'ingresso. Non e' un trattino
+   qualunque, e' il segno che lega le pagine al film. */
+.occhiello::before{content:'';width:clamp(28px,6vw,64px);height:1px;flex:none;
+  background:linear-gradient(to right,transparent,var(--accento-2))}
+h1{font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
+  font-size:clamp(2.9rem,1.5rem + 6.4vw,7rem);line-height:.98;
+  letter-spacing:-.012em;text-wrap:balance;text-shadow:0 2px 44px rgba(0,0,0,.65)}
+.eroe .sommario{margin:1.6rem 0 0;max-width:50ch;color:#EFE8DA;
+  font-size:clamp(1.24rem,1.08rem + .8vw,1.74rem);line-height:1.45;
+  text-wrap:pretty;text-shadow:0 1px 26px rgba(0,0,0,.7)}
+.eroe .chiamata{background:var(--accento-2);color:#17110A}
+
+/* ---- LA TESTA CHIARA, solo per «pulizie» ----------------------
+   Una foto di asciugamani bianchi sotto un velo scuro diventa una
+   poltiglia grigia: il velo e' fatto per il marmo notturno, non per
+   questa. Qui si rovescia tutto — velo CHIARO che sfuma nella sabbia
+   della pagina, testo scuro — e la testa diventa l'unica luminosa
+   delle cinque. Non e' una variante per caso: e' il carattere della
+   pagina che comincia gia' dalla prima schermata. */
+.eroe.chiara{color:var(--inchiostro);background:var(--fondo)}
+.eroe.chiara::before{
+  background:linear-gradient(to top,
+    var(--fondo) 2%, rgba(237,230,214,.92) 26%, rgba(237,230,214,.40) 58%,
+    rgba(237,230,214,.06) 100%)}
+.eroe.chiara h1{color:var(--inchiostro);text-shadow:0 1px 30px rgba(255,252,246,.8)}
+.eroe.chiara .sommario{color:var(--morbido);text-shadow:0 1px 20px rgba(255,252,246,.9)}
+.eroe.chiara .occhiello{color:var(--accento)}
+.eroe.chiara .occhiello::before{background:linear-gradient(to right,transparent,var(--accento))}
+.eroe.chiara .chiamata{background:var(--accento);color:#FFFDF8}
+
+/* ---------------- le sezioni ---------------- */
+section{padding:clamp(56px,8vw,130px) var(--lato);position:relative}
+section > .dentro{width:var(--dentro);margin-inline:auto}
+section.alt{background:var(--fondo-2)}
+section.calma{background:var(--fondo-3)}
+/* L'INVERSA e' la polarita' opposta della pagina: su una pagina scura
+   e' un blocco chiaro, su «pulizie» — che e' chiara — e' un blocco
+   scuro. Un solo nome, due effetti, e ogni pagina resta coerente. */
+section.inversa{background:var(--fondo-inv);color:var(--inchiostro-inv)}
+.inversa h2,.inversa h3,.inversa b{color:var(--inchiostro-inv)}
+.inversa p,.inversa .sotto{color:var(--morbido-inv)}
+.inversa a{color:var(--accento-inv)}
+.inversa .passi li{border-color:var(--riga-inv)}
+.inversa .passi .numero,.inversa th{color:var(--accento-inv)}
+.inversa .voci li::before,.inversa .occhiello::before{background:var(--accento-inv)}
+.inversa .occhiello{color:var(--accento-inv)}
+.inversa th,.inversa td{border-color:var(--riga-inv)}
+.inversa td.num{color:var(--inchiostro-inv)}
+.inversa .monumento b{color:var(--accento-inv)}
+.inversa .monumento i{color:var(--morbido-inv)}
+
+h2{font-family:var(--display);font-weight:500;margin:0 0 1.2rem;color:var(--inchiostro);
+  font-size:clamp(2.1rem,1.4rem + 3.2vw,3.9rem);line-height:1.06;
+  letter-spacing:-.008em;text-wrap:balance;max-width:20ch}
+h3{font-family:var(--display);font-weight:500;margin:0 0 .45rem;color:var(--inchiostro);
+  font-size:clamp(1.34rem,1.1rem + 1.1vw,1.92rem);line-height:1.15}
+p{margin:0 0 1.15rem;max-width:62ch}
+.sotto{color:var(--morbido);font-size:clamp(1.18rem,1.06rem + .6vw,1.5rem);
+  line-height:1.5;max-width:54ch}
+a{color:var(--accento-2)}
+b{color:var(--inchiostro)}
+
+/* ==================================================================
+   I PASSI — i numeri sono INCISI: Cinzel a corpo grande, in accento,
+   appesi nel margine come su una lapide. L'ordine conta davvero (e' la
+   vita della casa, dalla prenotazione al conto) e i romani i numeri li
+   scrivevano cosi'. Non e' un ornamento preso da un modello.
+   ================================================================== */
+.passi{list-style:none;margin:2rem 0 0;padding:0}
+.passi li{display:grid;grid-template-columns:minmax(3.8rem,auto) 1fr;
+  gap:1rem clamp(1.4rem,3vw,3.4rem);align-items:start;
+  padding:clamp(1.5rem,2.6vw,2.4rem) 0;border-top:1px solid var(--riga)}
+.passi li:last-child{border-bottom:1px solid var(--riga)}
+.passi .numero{font-family:var(--display);font-weight:400;color:var(--accento);
+  font-size:clamp(1.9rem,1.2rem + 2.4vw,3.1rem);line-height:.9;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.passi p{margin:.5rem 0 0;color:var(--morbido);max-width:58ch}
+
+/* ---------------- l'elenco ---------------- */
+.voci{list-style:none;margin:1.8rem 0 0;padding:0;display:grid;
+  gap:.95rem 3rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr))}
+.voci li{position:relative;padding-left:1.5rem;line-height:1.4}
+.voci li::before{content:'';position:absolute;left:0;top:.56em;width:7px;height:7px;
+  border-radius:50%;background:var(--accento)}
+
+/* ---------------- il numero monumentale ---------------- */
+.monumento{display:flex;align-items:baseline;gap:clamp(.7rem,2.4vw,1.8rem);
+  flex-wrap:wrap;margin:1.4rem 0 1.2rem}
+.monumento b{font-family:var(--display);font-weight:500;color:var(--accento);
+  font-size:clamp(4.6rem,2.4rem + 13vw,12rem);line-height:.82;letter-spacing:-.025em}
+.monumento i{font-style:normal;font-family:var(--display);color:var(--morbido);
+  font-size:clamp(1.4rem,1.05rem + 1.7vw,2.4rem);line-height:1.2;max-width:14ch}
+
+/* ---------------- la citazione, per «chi siamo» ---------------- */
+.citazione{margin:2.6rem 0;padding-left:clamp(1.2rem,3vw,2.6rem);
+  border-left:2px solid var(--accento);max-width:34ch}
+.citazione p{font-family:var(--display);font-size:clamp(1.5rem,1.1rem + 2vw,2.5rem);
+  line-height:1.24;color:var(--inchiostro);margin:0;text-wrap:balance}
+.citazione span{display:block;margin-top:1rem;font-family:var(--testo);
+  font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accento)}
+
+/* ---------------- la fascia di marmo ---------------- */
+.fascia{position:relative;height:clamp(220px,34vw,460px);overflow:hidden;background:#000}
+.fascia img{width:100%;height:100%;object-fit:cover;object-position:center 44%}
+.fascia::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,var(--fondo),transparent 20%,transparent 80%,var(--fondo))}
+.fascia.verso-inversa::after{
+  background:linear-gradient(to bottom,var(--fondo),transparent 20%,transparent 78%,var(--fondo-inv))}
+.fascia.da-inversa::after{
+  background:linear-gradient(to bottom,var(--fondo-inv),transparent 20%,transparent 80%,var(--fondo))}
+
+/* ---------------- la tavola ---------------- */
+.tavola{width:100%;overflow-x:auto;margin:2rem 0 0}
+table{border-collapse:collapse;width:100%;min-width:32rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:1.05rem 1.2rem 1.05rem 0;border-bottom:1px solid var(--riga)}
+th{font-family:var(--display);font-weight:500;color:var(--accento);
+  font-size:.98rem;letter-spacing:.1em;text-transform:uppercase}
+td.num{font-family:var(--display);color:var(--inchiostro);font-size:1.5em;line-height:1.2}
+
+/* ---------------- la chiamata ---------------- */
+.chiamata{display:inline-block;margin-top:1.9rem;padding:1.1em 3em;
+  background:var(--accento);color:var(--fondo);text-decoration:none;font-weight:600;
+  font-size:clamp(1.02rem,.96rem + .34vw,1.2rem);letter-spacing:.18em;
+  text-transform:uppercase;border-radius:2px;
+  transition:background .2s ease,transform .2s ease}
+.chiamata:hover{background:var(--accento-2);transform:translateY(-2px)}
+.chiamata.vuota{background:none;color:var(--accento);
+  border:1px solid var(--riga);                              /* ripiego */
+  border-color:color-mix(in srgb,var(--accento) 50%,transparent)}
+.chiamata.vuota:hover{background:var(--accento);color:var(--fondo)}
+.inversa .chiamata{background:var(--accento-inv);color:var(--fondo-inv)}
+.inversa .chiamata.vuota{background:none;color:var(--accento-inv);
+  border-color:var(--riga-inv);                              /* ripiego */
+  border-color:color-mix(in srgb,var(--accento-inv) 50%,transparent)}
+
+/* ---------------- entrano salendo ---------------- */
+.sale{opacity:0;transform:translateY(22px);
+  transition:opacity .7s cubic-bezier(.16,.84,.34,1),transform .7s cubic-bezier(.16,.84,.34,1)}
+.sale.dentro-schermo{opacity:1;transform:none}
+
+/* ---------------- il piede ---------------- */
+.piede-pagina{background:var(--fondo-3);border-top:1px solid var(--riga);
+  color:var(--inchiostro);
+  padding:clamp(48px,7vw,86px) var(--lato) clamp(30px,4vw,48px);font-size:1rem}
+.piede-pagina .dentro{width:var(--dentro);margin-inline:auto}
+.menu{display:flex;flex-wrap:wrap;gap:.8rem 2.4rem;align-items:baseline;
+  padding-bottom:26px;border-bottom:1px solid var(--riga)}
+.menu a{color:var(--inchiostro);text-decoration:none;font-size:1.04rem;
+  border-bottom:1px solid transparent;transition:color .2s ease,border-color .2s ease}
+.menu a:hover{color:var(--accento)}
+.menu a::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--accento);margin-right:.65rem;vertical-align:.2em}
+.recapiti{margin-top:26px;display:flex;flex-wrap:wrap;gap:.5rem 2.4rem;
+  align-items:baseline;font-size:1.1rem}
+.recapiti a{color:var(--accento);text-decoration:none;
+  border-bottom:1px solid var(--riga);                       /* ripiego */
+  border-bottom-color:color-mix(in srgb,var(--accento) 35%,transparent)}
+.recapiti span{color:var(--morbido)}
+.legale{margin-top:24px;display:flex;flex-wrap:wrap;gap:.35rem 1.8rem;
+  font-size:.92rem;color:var(--morbido);font-variant-numeric:tabular-nums}
+.legale.ultimo{margin-top:12px;padding-top:16px;border-top:1px solid var(--riga);
+  font-size:.86rem;opacity:.8}
+.legale a{color:var(--morbido);text-decoration:none}
+.legale a:hover{color:var(--inchiostro)}
+.legale .prova{color:var(--accento);opacity:.75}
+
+/* ==================================================================
+   I CINQUE CARATTERI — non basta il colore: cambia anche la forma.
+   ================================================================== */
+
+/* PULIZIE · la pagina chiara. La testa e' piu' corta: qui il marmo
+   notturno e' una soglia, non il protagonista — il protagonista e' la
+   luce che viene dopo. Le righe dei passi sono piu' sottili e l'aria
+   e' di piu': deve sembrare una stanza appena fatta. */
+.p-pulizie .eroe{min-height:min(66vh,580px)}
+.p-pulizie section{padding-block:clamp(64px,9vw,150px)}
+.p-pulizie .passi li{padding-block:clamp(1.7rem,3vw,2.8rem)}
+.p-pulizie .passi .numero{font-size:clamp(1.7rem,1.1rem + 2vw,2.6rem);opacity:.85}
+
+/* GESTIONE · ordine e misura. I numeri sono i piu' grandi di tutti e
+   stanno in colonna fissa: la pagina si legge come una tabella di
+   marcia, perche' e' quello che e'. */
+.p-gestione .passi li{grid-template-columns:minmax(4.6rem,auto) 1fr}
+.p-gestione .passi .numero{font-size:clamp(2.2rem,1.3rem + 3vw,3.8rem)}
+.p-gestione h2{max-width:16ch}
+
+/* COMPENSO · incisione. Lo spazio vuoto e' il contenuto: le sezioni
+   respirano di piu' e i numeri sono monumenti. Una pagina di prezzi
+   non dev'essere accogliente, dev'essere CHIARA. */
+.p-compenso section{padding-block:clamp(70px,11vw,170px)}
+.p-compenso .monumento b{font-size:clamp(5.4rem,2.6rem + 16vw,15rem)}
+.p-compenso td.num{font-size:1.9em}
+.p-compenso h2{max-width:14ch}
+
+/* CHI SIAMO · articolo. Il testo e' piu' largo e piu' lungo da leggere,
+   perche' qui si racconta invece di elencare. I numeri dei passi
+   spariscono: le persone non si numerano. */
+.p-chisiamo p{max-width:68ch}
+.p-chisiamo .passi .numero{font-size:1.6rem;opacity:.6}
+.p-chisiamo .passi li{grid-template-columns:minmax(2.4rem,auto) 1fr}
+
+/* PRENOTA · sera calda. Le fasce di marmo sono piu' alte: qui si
+   vende un posto dove dormire, e un posto si fa vedere. */
+.p-prenota .fascia{height:clamp(280px,42vw,560px)}
+.p-prenota .eroe{min-height:min(90vh,860px)}
+
+/* ---------------- solo telefono ---------------- */
+@media (max-width:760px){
+  /* Dal telefono arriva quasi tutto il traffico, e li' le scritte devono
+     leggersi tenendolo in mano. Ogni misura sale, nessuna scende. */
+  body{font-size:1.24rem;line-height:1.56}
+  .tasti a{font-size:.95rem;padding:.62em 1.1em;letter-spacing:.14em}
+  .tasti .secondo{display:none}   /* in tre non ci stanno: misurato */
+  .marchio .nome{font-size:1.16rem}
+  .eroe,.p-prenota .eroe{min-height:min(76vh,640px)}
+  .p-pulizie .eroe{min-height:min(60vh,500px)}
+  h1{font-size:clamp(2.9rem,1.4rem + 9vw,4.4rem);line-height:1.02}
+  .eroe .sommario{font-size:1.36rem}
+  h2,.p-gestione h2,.p-compenso h2{font-size:clamp(2.1rem,1.4rem + 5.4vw,2.9rem);max-width:none}
+  h3{font-size:1.46rem}
+  p,.passi p,.p-chisiamo p{font-size:1.2rem;max-width:none}
+  .sotto{font-size:1.3rem;max-width:none}
+  .passi li,.p-gestione .passi li,.p-chisiamo .passi li{grid-template-columns:1fr;gap:.35rem}
+  .passi .numero,.p-gestione .passi .numero,.p-pulizie .passi .numero{font-size:1.7rem}
+  .voci{grid-template-columns:max-content;justify-content:start;gap:.72rem}
+  .voci li{font-size:1.2rem;padding-left:1.35rem}
+  .monumento b,.p-compenso .monumento b{font-size:clamp(5rem,2rem + 20vw,8rem)}
+  .monumento i{font-size:1.5rem}
+  .citazione p{font-size:1.6rem}
+  th,td{font-size:1.1rem;padding:.9rem .7rem .9rem 0}
+  td.num,.p-compenso td.num{font-size:1.35em}
+  .chiamata{padding:1.1em 2.2em;font-size:1.06rem;letter-spacing:.14em}
+  .menu a{font-size:1.16rem}
+  .recapiti{font-size:1.2rem;gap:.5rem 1.4rem}
+  .legale{font-size:1.04rem;gap:.3rem 1.2rem}
+  .legale.ultimo{font-size:.98rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sale{opacity:1;transform:none;transition:none}
+  .chiamata:hover{transform:none}
+  body::after{display:none}
+}
+
+/* ==================================================================
+   LA PAGINA DELL'APPARTAMENTO — impianto da annuncio.
+   Alessio: «deve sembrare la pagina di Airbnb». Il modo di quelle
+   pagine e' preciso e la gente lo riconosce: galleria in alto, i
+   fatti a sinistra, il riquadro del prezzo che resta appeso a
+   destra mentre si scorre. Qui si prende quell'IMPIANTO e lo si
+   veste coi nostri colori — non si copia nessun pixel.
+   ================================================================== */
+.annuncio{padding-top:clamp(28px,4vw,54px)}
+.annuncio h1{font-size:clamp(2.1rem,1.5rem + 2.6vw,3.4rem);line-height:1.08;
+  color:var(--inchiostro);text-shadow:none;margin-bottom:.7rem}
+.riga-fatti{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;
+  color:var(--morbido);font-size:1.02rem;margin-bottom:1.8rem}
+.riga-fatti b{color:var(--accento);font-weight:500}
+.riga-fatti .punto::before{content:'·';margin-right:1.4rem;color:var(--morbido)}
+
+/* La galleria: una grande e quattro tessere, come negli annunci. */
+.galleria{display:grid;gap:10px;grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:1fr 1fr;border-radius:4px;overflow:hidden}
+.galleria picture{display:block;width:100%;height:100%}
+.galleria img{width:100%;height:100%;object-fit:cover;display:block}
+.galleria > *:first-child{grid-row:span 2}
+@media (max-width:900px){
+  .galleria{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .galleria > *:first-child{grid-row:span 1;grid-column:span 2}
+}
+
+/* I due blocchi: i fatti, e il riquadro che resta appeso. */
+.due-colonne{display:grid;gap:clamp(28px,5vw,70px);
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start;
+  margin-top:clamp(34px,5vw,64px)}
+@media (max-width:900px){.due-colonne{grid-template-columns:1fr}}
+.scheda{position:sticky;top:96px;background:var(--fondo-2);
+  border:1px solid var(--riga);border-radius:4px;
+  padding:clamp(22px,3vw,34px)}
+.scheda .da{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;
+  margin-bottom:.4rem}
+.scheda .da b{font-family:var(--display);font-size:clamp(1.6rem,1.2rem + 1.4vw,2.2rem);
+  color:var(--accento);line-height:1.14;font-weight:500}
+.scheda .da i{font-style:normal;color:var(--morbido);font-size:1.02rem}
+.scheda ul{list-style:none;margin:1.4rem 0 0;padding:1.4rem 0 0;
+  border-top:1px solid var(--riga)}
+.scheda li{display:flex;justify-content:space-between;gap:1rem;
+  padding:.45rem 0;color:var(--morbido);font-size:1rem}
+.scheda li b{color:var(--inchiostro);font-weight:500}
+.scheda .chiamata{width:100%;text-align:center;margin-top:1.6rem;padding-inline:1em}
+
+/* La dotazione: due colonne di cose vere, niente riquadri con l'icona. */
+.dotazione{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;
+  gap:.85rem 2.6rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.dotazione li{position:relative;padding-left:1.5rem;line-height:1.4}
+.dotazione li::before{content:'';position:absolute;left:0;top:.52em;width:7px;height:7px;
+  border-radius:1px;background:var(--accento);transform:rotate(45deg)}
+
+@media (max-width:760px){
+  .annuncio h1{font-size:clamp(2rem,1.4rem + 4vw,2.6rem)}
+  .riga-fatti{font-size:1.1rem}
+  .galleria{gap:6px}
+  .scheda{position:static}
+  .scheda li,.dotazione li{font-size:1.14rem}
+}

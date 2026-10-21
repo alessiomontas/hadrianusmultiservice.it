@@ -1,0 +1,85 @@
+/* ==================================================================
+   LE CINQUE TAVOLOZZE — una per pagina.
+
+   Alessio: «non farle tutte uguali, a ognuna dagli un carattere unico
+   sempre in linea con il brand». Il sistema resta uno — crema, marrone,
+   oro, Cinzel e Archivo, NIENTE BLU — ma ogni pagina sceglie dove sta
+   dentro quel sistema. Non sono cinque stili: e' una famiglia.
+
+   I nomi sono SEMANTICI apposta (`--fondo`, `--inchiostro`), non
+   descrittivi: su «pulizie» il fondo e' chiaro, e un nome come
+   `--notte` avrebbe mentito. E' lo stesso errore dei nomi che
+   raccontano com'e' fatta una cosa invece di cosa fa.
+   ================================================================== */
+
+/* ---- PULIZIE · SABBIA ------------------------------------------
+   Dominante chiara, come ha chiesto Alessio: beige e sabbia. Ha anche
+   senso da solo — una pagina sul pulito non puo' essere scura. Il
+   marmo della testa resta notturno, e il contrasto fa da soglia:
+   si entra dalla notte e si arriva alla luce. */
+.p-pulizie{
+  /* I valori sono PRESI dalle due immagini scelte da Alessio: il fondo
+     sabbia del rendering del busto, il marmo chiaro dell'interno, l'oro
+     dei dettagli, e il marrone caldo della cucina al posto del nero.
+     Niente nero puro da nessuna parte: in quelle due foto non c'e'. */
+  --fondo:#EDE6D6;        /* la sabbia del fondo del rendering */
+  --fondo-2:#DED3BB;      /* la stessa, piu' carica */
+  --fondo-3:#F6F2E9;      /* il marmo chiaro del pavimento */
+  --inchiostro:#2A2219;   /* il marrone caldo della cucina, non nero */
+  --morbido:#6E6252;      /* la scritta incisa HADRIANUS */
+  --riga:rgba(42,34,25,.15);
+  --accento:#A5833A;      /* l'oro dei dettagli, scurito perche' si legga
+                             sulla sabbia: quello delle foto, #C9A253, su
+                             questo fondo non avrebbe contrasto a sufficienza */
+  --accento-2:#8A6C2E;
+  --fondo-inv:#272019;    /* il blocco scuro: marrone caldo, mai nero */
+  --inchiostro-inv:#F4EEE1; --morbido-inv:#C4B7A2;
+  --accento-inv:#D9B65F; --riga-inv:rgba(244,238,225,.16);
+}
+
+/* ---- GESTIONE · PIETRA DI NOTTE --------------------------------
+   La pagina dei proprietari: ordine e misura. Scura, severa, le righe
+   sottili al posto dei blocchi di colore. E' quella che deve dare
+   l'impressione che i conti tornino. */
+.p-gestione{
+  --fondo:#14100B; --fondo-2:#1E1813; --fondo-3:#0D0A07;
+  --inchiostro:#F4EFE6; --morbido:#C3B6A3; --riga:rgba(244,239,230,.14);
+  --accento:#C8A24B; --accento-2:#E8CE8A;
+  --fondo-inv:#EFE9DC; --inchiostro-inv:#1B1510; --morbido-inv:#5A4C3C;
+  --accento-inv:#9B7A32; --riga-inv:rgba(27,21,16,.16);
+}
+
+/* ---- COMPENSO · INCISIONE --------------------------------------
+   Quasi nero, pochissime immagini, i numeri enormi. Una pagina di
+   prezzi non deve essere accogliente: deve essere chiara. Lo spazio
+   vuoto qui e' il contenuto. */
+.p-compenso{
+  --fondo:#0A0806; --fondo-2:#14100A; --fondo-3:#050403;
+  --inchiostro:#F6F2EA; --morbido:#B6A890; --riga:rgba(246,242,234,.13);
+  --accento:#C8A24B; --accento-2:#EAD39A;
+  --fondo-inv:#F2EDE1; --inchiostro-inv:#14100A; --morbido-inv:#5A4C3C;
+  --accento-inv:#8E6F2B; --riga-inv:rgba(20,16,10,.16);
+}
+
+/* ---- CHI SIAMO · TERRA -----------------------------------------
+   Marrone caldo invece del nero: e' la pagina delle persone, e il nero
+   e' freddo. Testo piu' largo, respiro da articolo. */
+.p-chisiamo{
+  --fondo:#241A12; --fondo-2:#2F2218; --fondo-3:#1B130D;
+  --inchiostro:#F8F2E6; --morbido:#CDBDA5; --riga:rgba(248,242,230,.16);
+  --accento:#D8B463; --accento-2:#EFD79B;
+  --fondo-inv:#F4EDDF; --inchiostro-inv:#241A12; --morbido-inv:#61513E;
+  --accento-inv:#9B7A32; --riga-inv:rgba(36,26,18,.17);
+}
+
+/* ---- PRENOTA · SERA CALDA --------------------------------------
+   La piu' calda e la piu' fotografica: qui non si vende un servizio,
+   si invita qualcuno a dormire da noi. L'oro e' piu' chiaro, le
+   immagini piu' grandi. */
+.p-prenota{
+  --fondo:#191208; --fondo-2:#241A0D; --fondo-3:#110C06;
+  --inchiostro:#F9F3E5; --morbido:#D2C2A4; --riga:rgba(249,243,229,.16);
+  --accento:#E0BE6C; --accento-2:#F2DCA8;
+  --fondo-inv:#F6EEDC; --inchiostro-inv:#191208; --morbido-inv:#6A5940;
+  --accento-inv:#9B7A32; --riga-inv:rgba(25,18,8,.17);
+}

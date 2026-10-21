@@ -1,0 +1,6 @@
+# Hadrianus Multiservice
+# Tutto aperto: non c'e' nessuna pagina da tenere fuori.
+User-agent: *
+Disallow:
+
+Sitemap: https://hadrianusmultiservice.it/prova/sitemap.xml
