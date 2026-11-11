@@ -46,15 +46,15 @@ body::after{content:'';position:fixed;inset:-50%;z-index:60;pointer-events:none;
   margin-top:.45em;white-space:nowrap;letter-spacing:.05em}
 .tasti{display:flex;align-items:center;gap:.55rem}
 .tasti a{font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accento);text-decoration:none;white-space:nowrap;
+  color:var(--oro-testo);text-decoration:none;white-space:nowrap;
   border:1px solid var(--riga);                              /* ripiego */
   border-color:color-mix(in srgb,var(--accento) 45%,transparent);
   padding:.62em 1.35em;border-radius:2px;
   transition:background .2s ease,color .2s ease,border-color .2s ease}
-.tasti a:hover{background:var(--accento);color:var(--fondo)}
-.tasti a.primario{background:var(--accento);border-color:var(--accento);
-  color:var(--fondo);font-weight:600}
-.tasti a.primario:hover{background:var(--accento-2);border-color:var(--accento-2)}
+.tasti a:hover{background:var(--oro-pieno);color:var(--su-oro)}
+.tasti a.primario{background:var(--oro-pieno);border-color:var(--oro-pieno);
+  color:var(--su-oro);font-weight:600}
+.tasti a.primario:hover{filter:brightness(1.08)}
 
 /* ==================================================================
    LA TESTA — un fotogramma del film a tutta pagina, titolo in basso
@@ -78,11 +78,12 @@ body::after{content:'';position:fixed;inset:-50%;z-index:60;pointer-events:none;
 .eroe .dentro{width:var(--dentro);margin-inline:auto;
   padding:0 var(--lato) clamp(42px,6.5vw,96px)}
 .occhiello{display:flex;align-items:center;gap:.9rem;font-size:.76rem;
-  letter-spacing:.34em;text-transform:uppercase;color:var(--accento-2);margin:0 0 1.3rem}
+  letter-spacing:.34em;text-transform:uppercase;color:var(--oro-testo);margin:0 0 1.3rem}
 /* IL FILO D'ORO: lo stesso dell'insegna d'ingresso. Non e' un trattino
    qualunque, e' il segno che lega le pagine al film. */
 .occhiello::before{content:'';width:clamp(28px,6vw,64px);height:1px;flex:none;
-  background:linear-gradient(to right,transparent,var(--accento-2))}
+  background:linear-gradient(to right,transparent,var(--oro-testo))}
+h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
 h1{font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
   font-size:clamp(2.9rem,1.5rem + 6.4vw,7rem);line-height:.98;
   letter-spacing:-.012em;text-wrap:balance;text-shadow:0 2px 44px rgba(0,0,0,.65)}
@@ -98,6 +99,18 @@ h1{font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
    della pagina, testo scuro — e la testa diventa l'unica luminosa
    delle cinque. Non e' una variante per caso: e' il carattere della
    pagina che comincia gia' dalla prima schermata. */
+/* ❗ UNA PAROLA LUNGA NEL TITOLO ESCE DALLO SCHERMO DEL TELEFONO.
+   Misurato l'11/11 su `contatti.html` a 375 px: «RACCONTACI» in Cinzel a
+   56 px vuole 358 px e la colonna ne ha 293 — ventiquattro pixel fuori
+   dallo schermo, e la pagina non scorre di lato, quindi la lettera finale
+   e' semplicemente tagliata. Non si vede provando sul computer, e non si
+   vede nemmeno sulle altre pagine: i loro titoli hanno parole corte.
+   Questa classe si mette sulla testa quando la parola piu' lunga del
+   titolo supera le otto lettere. Vale solo sotto i 700 px: sul computer
+   il titolo resta grande come l'ha approvato Alessio. */
+@media (max-width:700px){
+  .eroe.titolo-lungo h1{font-size:clamp(2.3rem,1.1rem + 7vw,3.4rem)}
+}
 .eroe.chiara{color:var(--inchiostro);background:var(--fondo)}
 .eroe.chiara::before{
   background:linear-gradient(to top,
@@ -105,9 +118,9 @@ h1{font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
     rgba(237,230,214,.06) 100%)}
 .eroe.chiara h1{color:var(--inchiostro);text-shadow:0 1px 30px rgba(255,252,246,.8)}
 .eroe.chiara .sommario{color:var(--morbido);text-shadow:0 1px 20px rgba(255,252,246,.9)}
-.eroe.chiara .occhiello{color:var(--accento)}
-.eroe.chiara .occhiello::before{background:linear-gradient(to right,transparent,var(--accento))}
-.eroe.chiara .chiamata{background:var(--accento);color:#FFFDF8}
+.eroe.chiara .occhiello{color:var(--oro-testo)}
+.eroe.chiara .occhiello::before{background:linear-gradient(to right,transparent,var(--oro-testo))}
+.eroe.chiara .chiamata{background:var(--oro-pieno);color:var(--su-oro)}
 
 /* ---------------- le sezioni ---------------- */
 section{padding:clamp(56px,8vw,130px) var(--lato);position:relative}
@@ -120,9 +133,9 @@ section.calma{background:var(--fondo-3)}
 section.inversa{background:var(--fondo-inv);color:var(--inchiostro-inv)}
 .inversa h2,.inversa h3,.inversa b{color:var(--inchiostro-inv)}
 .inversa p,.inversa .sotto{color:var(--morbido-inv)}
-.inversa a{color:var(--accento-inv)}
+.inversa a{color:var(--oro-testo-inv)}
 .inversa .passi li{border-color:var(--riga-inv)}
-.inversa .passi .numero,.inversa th{color:var(--accento-inv)}
+.inversa .passi .numero,.inversa th{color:var(--oro-testo-inv)}
 /* ❗❗ LE DESCRIZIONI DEI PASSI, DENTRO LA SEZIONE CHIARA. (21/10)
    Trovato con una misura di contrasto su tutte le pagine, non a occhio:
    nella sezione chiara di `gestione.html` le otto descrizioni erano
@@ -138,7 +151,7 @@ section.inversa{background:var(--fondo-inv);color:var(--inchiostro-inv)}
    importante della pagina dei proprietari, illeggibile da giorni. */
 .inversa .passi p{color:var(--morbido-inv)}
 .inversa .voci li::before,.inversa .occhiello::before{background:var(--accento-inv)}
-.inversa .occhiello{color:var(--accento-inv)}
+.inversa .occhiello{color:var(--oro-testo-inv)}
 .inversa th,.inversa td{border-color:var(--riga-inv)}
 .inversa td.num{color:var(--inchiostro-inv)}
 .inversa .monumento b{color:var(--accento-inv)}
@@ -156,7 +169,7 @@ section.inversa{background:var(--fondo-inv);color:var(--inchiostro-inv)}
    poi e' esattamente questa lista, e `.citazione` ci mancava. */
 .inversa .citazione{border-left-color:var(--accento-inv)}
 .inversa .citazione p{color:var(--inchiostro-inv)}
-.inversa .citazione span{color:var(--accento-inv)}
+.inversa .citazione span{color:var(--oro-testo-inv)}
 
 h2{font-family:var(--display);font-weight:500;margin:0 0 1.2rem;color:var(--inchiostro);
   font-size:clamp(2.1rem,1.4rem + 3.2vw,3.9rem);line-height:1.06;
@@ -166,7 +179,7 @@ h3{font-family:var(--display);font-weight:500;margin:0 0 .45rem;color:var(--inch
 p{margin:0 0 1.15rem;max-width:62ch}
 .sotto{color:var(--morbido);font-size:clamp(1.18rem,1.06rem + .6vw,1.5rem);
   line-height:1.5;max-width:54ch}
-a{color:var(--accento-2)}
+a{color:var(--oro-testo)}
 b{color:var(--inchiostro)}
 
 /* ==================================================================
@@ -180,7 +193,7 @@ b{color:var(--inchiostro)}
   gap:1rem clamp(1.4rem,3vw,3.4rem);align-items:start;
   padding:clamp(1.5rem,2.6vw,2.4rem) 0;border-top:1px solid var(--riga)}
 .passi li:last-child{border-bottom:1px solid var(--riga)}
-.passi .numero{font-family:var(--display);font-weight:400;color:var(--accento);
+.passi .numero{font-family:var(--display);font-weight:400;color:var(--oro-testo);
   font-size:clamp(1.9rem,1.2rem + 2.4vw,3.1rem);line-height:.9;
   font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .passi p{margin:.5rem 0 0;color:var(--morbido);max-width:58ch}
@@ -276,22 +289,22 @@ b{color:var(--inchiostro)}
 .tavola{width:100%;overflow-x:auto;margin:2rem 0 0}
 table{border-collapse:collapse;width:100%;min-width:32rem;font-variant-numeric:tabular-nums}
 th,td{text-align:left;padding:1.05rem 1.2rem 1.05rem 0;border-bottom:1px solid var(--riga)}
-th{font-family:var(--display);font-weight:500;color:var(--accento);
+th{font-family:var(--display);font-weight:500;color:var(--oro-testo);
   font-size:.98rem;letter-spacing:.1em;text-transform:uppercase}
 td.num{font-family:var(--display);color:var(--inchiostro);font-size:1.5em;line-height:1.2}
 
 /* ---------------- la chiamata ---------------- */
 .chiamata{display:inline-block;margin-top:1.9rem;padding:1.1em 3em;
-  background:var(--accento);color:var(--fondo);text-decoration:none;font-weight:600;
+  background:var(--oro-pieno);color:var(--su-oro);text-decoration:none;font-weight:600;
   font-size:clamp(1.02rem,.96rem + .34vw,1.2rem);letter-spacing:.18em;
   text-transform:uppercase;border-radius:2px;
   transition:background .2s ease,transform .2s ease}
-.chiamata:hover{background:var(--accento-2);transform:translateY(-2px)}
+.chiamata:hover{filter:brightness(1.08);transform:translateY(-2px)}
 .chiamata.vuota{background:none;color:var(--accento);
   border:1px solid var(--riga);                              /* ripiego */
   border-color:color-mix(in srgb,var(--accento) 50%,transparent)}
 .chiamata.vuota:hover{background:var(--accento);color:var(--fondo)}
-.inversa .chiamata{background:var(--accento-inv);color:var(--fondo-inv)}
+.inversa .chiamata{background:var(--oro-pieno-inv);color:var(--su-oro-inv)}
 .inversa .chiamata.vuota{background:none;color:var(--accento-inv);
   border-color:var(--riga-inv);                              /* ripiego */
   border-color:color-mix(in srgb,var(--accento-inv) 50%,transparent)}
@@ -399,7 +412,7 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
    naviga per titoli — ma non deve PESARE come un titolo di sezione:
    piccolo, spaziato, color accento. Come gli occhielli del resto del sito. */
 .gruppo h2{font-family:var(--testo);font-size:.74rem;font-weight:600;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--accento);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--oro-testo);
   margin:0 0 .3rem;
   /* due righe di spazio riservate: se un titolo va a capo, le colonne
      restano allineate invece di partire a tre altezze diverse */
@@ -412,7 +425,7 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
 
 .recapiti{margin-top:26px;display:flex;flex-wrap:wrap;gap:.5rem 2.4rem;
   align-items:baseline;font-size:1.1rem}
-.recapiti a{color:var(--accento);text-decoration:none;
+.recapiti a{color:var(--oro-testo);text-decoration:none;
   border-bottom:1px solid var(--riga);                       /* ripiego */
   border-bottom-color:color-mix(in srgb,var(--accento) 35%,transparent)}
 .recapiti span{color:var(--morbido)}
@@ -478,8 +491,8 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
      Il tasto rimasto prende il vestito pieno: da solo in una barra, un
      riquadro vuoto sembra spento. */
   .tasti .primario{display:none}
-  .tasti .secondo{background:var(--accento);border-color:var(--accento);
-    color:var(--fondo);font-weight:600}
+  .tasti .secondo{background:var(--oro-pieno);border-color:var(--oro-pieno);
+    color:var(--su-oro);font-weight:600}
   .marchio .nome{font-size:1.16rem}
   .eroe,.p-prenota .eroe{min-height:min(76vh,640px)}
   .p-pulizie .eroe{min-height:min(60vh,500px)}
@@ -582,3 +595,116 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
   .scheda{position:static}
   .scheda li,.dotazione li{font-size:1.14rem}
 }
+
+/* ==================================================================
+   IL MODULO DEI CONTATTI — 11 novembre 2026
+
+   Prima il sito non ne aveva nessuno: si scriveva solo col pulsante
+   che apre il programma di posta, e dal telefono di chi la posta non
+   ce l'ha configurata quel pulsante non apre niente. Un contatto
+   perso senza che nessuno lo sappia mai.
+
+   Le regole che tengono in piedi questo blocco:
+   · I CAMPI SONO GRANDI. 48 px di altezza minima: e' la misura sotto
+     la quale un dito sbaglia. Chi compila lo fa quasi sempre in piedi,
+     col telefono in una mano.
+   · NIENTE ETICHETTE DENTRO IL CAMPO. Il segnaposto sparisce appena
+     si scrive e chi si distrae non sa piu' cosa stava scrivendo.
+     L'etichetta sta sopra e resta.
+   · IL FUOCO SI VEDE. Chi gira col tasto di tabulazione deve sapere
+     dov'e': due pixel d'oro, non il contorno azzurro del browser —
+     che oltretutto sarebbe blu, e il blu qui e' vietato.
+   · IL CAMPO SBAGLIATO SI SEGNA SOLO DOPO. `:user-invalid` e non
+     `:invalid`: altrimenti il modulo e' tutto rosso prima ancora che
+     uno cominci a scrivere.
+   ================================================================== */
+.stretto{max-width:46rem}
+.modulo{margin-top:2.2rem;display:flex;flex-direction:column;gap:1.15rem}
+.modulo .riga{display:flex;flex-direction:column;gap:.42rem}
+.modulo .due{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem}
+@media (max-width:640px){.modulo .due{grid-template-columns:1fr}}
+.modulo label{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--morbido);font-weight:600}
+.modulo .serve{color:var(--oro-testo);letter-spacing:0}
+.modulo input,.modulo select,.modulo textarea{
+  font-family:var(--testo);font-size:1.05rem;color:var(--inchiostro);
+  background:var(--fondo-2);min-height:48px;padding:.78em .95em;
+  border:1px solid var(--riga);border-radius:2px;width:100%;
+  transition:border-color .18s ease,box-shadow .18s ease}
+.modulo textarea{min-height:120px;resize:vertical;line-height:1.5}
+.modulo input::placeholder,.modulo textarea::placeholder{color:var(--morbido);opacity:.75}
+.modulo input:focus,.modulo select:focus,.modulo textarea:focus{
+  outline:none;border-color:var(--oro-pieno);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--oro-pieno) 45%,transparent)}
+.modulo input:user-invalid,.modulo select:user-invalid{border-color:#A33A2A}
+/* La freccia della tendina disegnata a mano: quella di sistema su
+   fondo scuro resta nera e sparisce. */
+.modulo select{appearance:none;-webkit-appearance:none;padding-right:2.6em;
+  background-image:linear-gradient(45deg,transparent 50%,var(--oro-testo) 50%),
+    linear-gradient(135deg,var(--oro-testo) 50%,transparent 50%);
+  background-position:calc(100% - 1.25em) 1.35em,calc(100% - .95em) 1.35em;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+.modulo .spunta{display:flex;align-items:flex-start;gap:.75rem;
+  text-transform:none;letter-spacing:0;font-size:.98rem;font-weight:400;
+  color:var(--morbido);line-height:1.5;cursor:pointer}
+.modulo .spunta input{width:22px;height:22px;min-height:0;flex:none;margin-top:.15rem;
+  accent-color:var(--oro-pieno)}
+.modulo .spunta a{color:var(--oro-testo)}
+.modulo .chiamata{margin-top:.6rem;align-self:flex-start;border:0;cursor:pointer;
+  font-family:var(--testo)}
+.modulo .chiamata:disabled{opacity:.55;cursor:progress;transform:none;filter:none}
+/* IL CAMPO TRAPPOLA non si nasconde con `display:none`: i programmi
+   che riempiono i moduli lo saltano, ed e' proprio quello che non
+   deve succedere. Si porta fuori dallo schermo e si toglie dal giro
+   del tasto di tabulazione, cosi' una persona non lo incontra mai e
+   una macchina lo riempie. */
+.trappola{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.esito{margin-top:1rem;font-size:1.02rem;line-height:1.55;color:var(--morbido)}
+.esito.bene{color:var(--inchiostro)}
+.esito.bene b{color:var(--oro-testo)}
+.esito.male{color:#E0A294}
+.esito a{color:var(--oro-testo)}
+
+/* ---- IL CALENDARIO NELLA SCHEDA (11/11/2026) -------------------
+   Le date si mettono sulla nostra pagina e il motore si apre con
+   quelle gia' dentro. Prima il pulsante portava al motore vuoto: tre
+   passi per sapere un prezzo, e due si perdevano per strada.
+   `type="date"` apre il calendario DEL TELEFONO: tradotto da solo,
+   gia' noto a chi lo usa, e zero peso da scaricare. */
+.scheda .date{margin-top:1.4rem;display:flex;flex-direction:column;gap:.85rem}
+.scheda .coppia{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.scheda .coppia>*,.scheda .riga,.scheda .date input,.scheda .date select{min-width:0}
+@media (max-width:400px){.scheda .coppia{grid-template-columns:1fr}}
+.due-colonne>*{min-width:0}
+.scheda .riga{display:flex;flex-direction:column;gap:.35rem}
+.scheda .date label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--morbido);font-weight:600}
+.scheda .date input,.scheda .date select{
+  font-family:var(--testo);font-size:1.02rem;color:var(--inchiostro);
+  background:var(--fondo-3);min-height:48px;padding:.6em .75em;width:100%;
+  border:1px solid var(--riga);border-radius:2px}
+.scheda .date input:focus,.scheda .date select:focus{
+  outline:none;border-color:var(--oro-pieno);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--oro-pieno) 45%,transparent)}
+/* Su iPhone il campo data non si allarga da solo e resta minuscolo. */
+.scheda .date input[type=date]{-webkit-appearance:none;appearance:none;display:block}
+.scheda .date select{appearance:none;-webkit-appearance:none;padding-right:2.4em;
+  background-image:linear-gradient(45deg,transparent 50%,var(--oro-testo) 50%),
+    linear-gradient(135deg,var(--oro-testo) 50%,transparent 50%);
+  background-position:calc(100% - 1.15em) 1.35em,calc(100% - .85em) 1.35em;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+.scheda .date .chiamata{margin-top:.3rem;width:100%;text-align:center;
+  border:0;cursor:pointer;font-family:var(--testo);padding:1.05em 1.5em}
+.nota-date{margin:.2rem 0 0;font-size:.9rem;line-height:1.45;color:var(--morbido)}
+.nota-date.avviso{color:var(--oro-testo);font-weight:600}
+
+/* ---- IL SEGNO DI INSTAGRAM NEL PIEDE (11/11/2026) --------------
+   Un'icona sola non basta: la riconosce chi gia' sa cos'e', e chi non
+   la riconosce non ci clicca. Accanto c'e' la parola, e il bersaglio
+   e' tutto il blocco — 44 px di altezza, la misura sotto la quale un
+   dito sbaglia. Il segno prende il colore del testo che ha intorno,
+   quindi funziona su tutte e cinque le tavolozze senza una riga in piu'. */
+.recapiti .social{display:inline-flex;align-items:center;gap:.5rem;
+  min-height:44px;border-bottom:0}
+.recapiti .social svg{flex:none;display:block}
+.recapiti .social:hover{color:var(--oro-pieno)}

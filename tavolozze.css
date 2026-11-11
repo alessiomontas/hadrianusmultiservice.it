@@ -12,6 +12,36 @@
    raccontano com'e' fatta una cosa invece di cosa fa.
    ================================================================== */
 
+
+/* ==================================================================
+   L'ORO QUANDO FA DA TESTO — aggiunto l'11 novembre 2026.
+
+   Misurato con un contrasto su tutte le pagine, non a occhio: l'oro
+   del marchio su fondo crema sta a **2,06 contro 1**, dove ne servono
+   4,5. Toccava gli occhielli, i titoli del piede, i recapiti, i numeri
+   romani — e soprattutto i PULSANTI, scritta crema su fondo oro: 2,86.
+   Il pulsante che deve raccogliere i contatti era la cosa meno
+   leggibile del sito.
+
+   La causa non e' l'oro: e' l'oro usato come inchiostro. Un metallo
+   chiaro su carta chiara non si legge, e nessuna sfumatura lo salva.
+   Quindi si separano i mestieri, invece di cambiare il marchio:
+
+     --oro-testo      l'oro QUANDO E' UNA SCRITTA su questo fondo.
+                      Scurito finche' non passa 4,5. Sulle pagine scure
+                      e' l'oro di sempre, che li' si legge benissimo.
+     --oro-pieno      l'oro QUANDO E' UNA SUPERFICIE: il pulsante.
+                      Resta l'oro pieno, acceso.
+     --su-oro         l'inchiostro che ci va sopra. Scuro, non crema:
+                      inchiostro su oro pieno fa da 7,5 a 10,4 contro 1.
+
+   I `-inv` sono gli stessi per le sezioni a polarita' rovesciata.
+   `--accento` e `--accento-2` NON si toccano: restano per i filetti,
+   i bordi e le sfumature, dove il contrasto non e' in gioco. E' anche
+   la regola 60-30-10 rimessa in riga — l'oro torna a essere l'accento
+   invece di essere il colore di mezzo testo.
+   ================================================================== */
+
 /* ---- PULIZIE · SABBIA ------------------------------------------
    Dominante chiara, come ha chiesto Alessio: beige e sabbia. Ha anche
    senso da solo — una pagina sul pulito non puo' essere scura. Il
@@ -35,6 +65,11 @@
   --fondo-inv:#272019;    /* il blocco scuro: marrone caldo, mai nero */
   --inchiostro-inv:#F4EEE1; --morbido-inv:#C4B7A2;
   --accento-inv:#D9B65F; --riga-inv:rgba(244,238,225,.16);
+  /* 4,70 sul fondo piu' carico (#DED3BB), che e' il caso peggiore */
+  --oro-testo:#6D5626;   --oro-pieno:#C9A253; --su-oro:#2A2219;
+  --oro-testo-inv:#D9B65F; --oro-pieno-inv:#D9B65F; --su-oro-inv:#272019;
+  /* 4,00 contro 4,5 sulla sabbia: scurito quel tanto che basta */
+  --morbido:#655A4A;
 }
 
 /* ---- GESTIONE · PIETRA DI NOTTE --------------------------------
@@ -47,6 +82,8 @@
   --accento:#C8A24B; --accento-2:#E8CE8A;
   --fondo-inv:#EFE9DC; --inchiostro-inv:#1B1510; --morbido-inv:#5A4C3C;
   --accento-inv:#9B7A32; --riga-inv:rgba(27,21,16,.16);
+  --oro-testo:#C8A24B;   --oro-pieno:#C8A24B; --su-oro:#14100B;
+  --oro-testo-inv:#7F6429; --oro-pieno-inv:#C8A24B; --su-oro-inv:#1B1510;
 }
 
 /* ---- COMPENSO · INCISIONE --------------------------------------
@@ -59,6 +96,8 @@
   --accento:#C8A24B; --accento-2:#EAD39A;
   --fondo-inv:#F2EDE1; --inchiostro-inv:#14100A; --morbido-inv:#5A4C3C;
   --accento-inv:#8E6F2B; --riga-inv:rgba(20,16,10,.16);
+  --oro-testo:#C8A24B;   --oro-pieno:#C8A24B; --su-oro:#0A0806;
+  --oro-testo-inv:#836628; --oro-pieno-inv:#C8A24B; --su-oro-inv:#14100A;
 }
 
 /* ---- CHI SIAMO · TERRA -----------------------------------------
@@ -70,6 +109,8 @@
   --accento:#D8B463; --accento-2:#EFD79B;
   --fondo-inv:#F4EDDF; --inchiostro-inv:#241A12; --morbido-inv:#61513E;
   --accento-inv:#9B7A32; --riga-inv:rgba(36,26,18,.17);
+  --oro-testo:#D8B463;   --oro-pieno:#D8B463; --su-oro:#241A12;
+  --oro-testo-inv:#82662A; --oro-pieno-inv:#D8B463; --su-oro-inv:#241A12;
 }
 
 /* ---- PRENOTA · SERA CALDA --------------------------------------
@@ -82,4 +123,6 @@
   --accento:#E0BE6C; --accento-2:#F2DCA8;
   --fondo-inv:#F6EEDC; --inchiostro-inv:#191208; --morbido-inv:#6A5940;
   --accento-inv:#9B7A32; --riga-inv:rgba(25,18,8,.17);
+  --oro-testo:#E0BE6C;   --oro-pieno:#E0BE6C; --su-oro:#191208;
+  --oro-testo-inv:#82662A; --oro-pieno-inv:#E0BE6C; --su-oro-inv:#191208;
 }

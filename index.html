@@ -58,8 +58,8 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 <meta property="og:site_name" content="Hadrianus Multiservice">
 <meta property="og:title" content="Hadrianus Multiservice &middot; Gestione case vacanza a Roma e Ostia">
 <meta property="og:description" content="Gestione completa di case vacanza a Roma e sul litorale di Ostia. Prenotazioni, ospiti, pulizie, manutenzione e adempimenti: 15% sul lordo, nessun canone fisso.">
-<meta property="og:url" content="https://hadrianusmultiservice.it/prova/">
-<meta property="og:image" content="https://hadrianusmultiservice.it/prova/copertina.jpg">
+<meta property="og:url" content="https://hadrianusmultiservice.it/">
+<meta property="og:image" content="https://hadrianusmultiservice.it/copertina.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <noscript><style>
 /* SE JAVASCRIPT NON PARTE, NON SI RESTA SUL NERO.
@@ -85,14 +85,17 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
      cinque pagine ce l'hanno gia' (gliela mette `pagine/genera.py`): qui
      mancava perche' questa pagina non passa di li'.
      ⚠️ Se cambia `SITO` dentro `genera.py`, va cambiata anche QUI. -->
-<link rel="canonical" href="https://hadrianusmultiservice.it/prova/">
+<link rel="canonical" href="https://hadrianusmultiservice.it/">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="icona-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="icona-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#140F0B">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- I caratteri stanno su questo sito (`caratteri/`): niente conversazione
+     con un server di Google prima di disegnare il testo, e l'indirizzo IP di
+     chi guarda non esce piu' di qui. Il `preload` li fa partire subito. -->
+<link rel="preload" href="caratteri/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="caratteri/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <!-- IL CARATTERE NON DEVE FERMARE IL FILMATO.
      Un foglio di stile normale, messo qui in testa, blocca TUTTI gli script
      della pagina finche' non e' arrivato. Misurato sulla pagina vera, servita
@@ -107,9 +110,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
      diventa foglio di stile appena c'e'. All'occhio non cambia niente: con
      `display=swap` il testo partiva comunque col carattere di ripiego, e il
      marchio si rimisura da solo quando Cinzel arriva (document.fonts.ready). -->
-<link id="caratteri" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Archivo:wght@400;500;600&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Archivo:wght@400;500;600&display=swap"></noscript>
+<link rel="stylesheet" href="caratteri.css">
 <script>
 /* RETE DI SICUREZZA SUI CARATTERI.
    Se il browser non conosce `rel=preload` — i Safari vecchi — quel link non
@@ -363,6 +364,9 @@ p{margin:0}
   font-size:1rem;margin:1.1rem 0 .3rem}
 #dettagli h3:first-child{margin-top:0}
 #dettagli p{color:var(--soft);font-size:.88rem;max-width:none;margin:0;text-align:left}
+#dettagli a{color:var(--oro-chiaro);text-decoration:underline;
+  text-underline-offset:.2em;text-decoration-color:rgba(226,196,126,.45)}
+#dettagli a:hover{text-decoration-color:var(--oro-chiaro)}
 /* NIENTE BARRA DI CARICAMENTO, NIENTE PERCENTUALI.
    A chi guarda non si dice che sta aspettando: il tempo si nasconde dentro la
    sequenza d'ingresso. Nero voluto, poi la barra in alto, poi il consenso,
@@ -549,13 +553,17 @@ p{margin:0}
   border-bottom:1px solid rgba(200,162,75,.32);transition:border-color .2s ease}
 .recapiti a:hover{border-bottom-color:var(--oro)}
 .recapiti span{color:var(--soft)}
+.recapiti .social{display:inline-flex;align-items:center;gap:.5rem;
+  min-height:44px;color:var(--oro-chiaro);text-decoration:none}
+.recapiti .social svg{flex:none;display:block}
+.recapiti .social:hover{color:var(--crema)}
 
 /* I DATI DI LEGGE: ci devono essere e si devono poter leggere, ma non sono
    quello che si va a cercare. Piccoli, spaziati, in grigio caldo. */
 .piede{margin-top:20px;display:flex;flex-wrap:wrap;gap:.3rem 1.6rem;
   font-size:.86rem;color:#8A7F71;font-variant-numeric:tabular-nums}
 .piede.ultimo{margin-top:10px;padding-top:14px;border-top:1px solid var(--bordo);
-  font-size:.8rem;color:#6B6155}
+  font-size:.8rem;color:#8A7F71}
 .piede.ultimo a{color:#8A7F71;text-decoration:none;border-bottom:1px solid transparent}
 .piede.ultimo a:hover{color:var(--crema);border-bottom-color:var(--bordo)}
 .piede .prova{color:var(--oro-chiaro);opacity:.7}
@@ -746,7 +754,7 @@ p{margin:0}
   <a class="marchio" id="al-piede" href="#contatti"
      aria-label="Hadrianus Multiservice, vai ai contatti"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
   <span class="tasti">
-    <a class="primario" href="prenota.html">Prenota</a>
+    <a class="primario" href="/appartamenti">Prenota</a>
     <a class="secondo"  href="#contatti">Contattaci</a>
   </span>
 </header>
@@ -856,18 +864,16 @@ window.__film = (function () {
         pubblicitario, nessun social collegato. Non sappiamo chi sei, da dove arrivi,
         n&eacute; dove vai dopo.</p>
       <h3>Cosa esce da qui</h3>
-      <p>Il carattere tipografico viene da Google Fonts: il tuo browser lo chiede ai loro
-        server, che vedono l'indirizzo IP, come per qualsiasi immagine esterna. Il filmato
-        e tutto il resto arrivano da questo stesso indirizzo.</p>
+      <p>Niente. I caratteri, il filmato, le fotografie: tutto arriva da questo stesso
+        indirizzo. Nemmeno le scritture vengono da Google, come succede quasi ovunque.</p>
       <h3>Se ci scrivi</h3>
-      <p>Il pulsante «Scrivici ora» apre il tuo programma di posta: il messaggio parte da
-        te e arriva a noi. Usiamo quell'indirizzo solo per risponderti.</p>
+      <p>Nel <a href="/contatti">modulo dei contatti</a> lasci quello che scrivi tu, e lo
+        usiamo solo per risponderti. Com'è fatto per esteso sta nella
+        <a href="/privacy">pagina della privacy</a>.</p>
       <h3>I tuoi diritti</h3>
       <p>Puoi chiederci in ogni momento cosa abbiamo, farlo correggere o cancellare,
         scrivendo a <b>info@hadrianusmultiservice.it</b>.</p>
-      <p style="margin-top:1rem;color:#6B6155">&#9888; Prova di lavoro. Questo testo va
-        confermato prima di andare online davvero.</p>
-      <p style="margin-top:.6rem;color:#6B6155" id="timbro"></p>
+      <p style="margin-top:.6rem;color:#8A7F71" id="timbro"></p>
     </div>
   </div>
 </div>
@@ -901,23 +907,27 @@ window.__film = (function () {
     <nav class="voci" aria-label="Sezioni del sito">
       <div class="gruppo">
         <h3>Cosa facciamo</h3>
-        <a href="gestione.html">Gestione completa</a>
-        <a href="pulizie.html">Le pulizie</a>
-        <a href="prenota.html">Prenota un soggiorno</a>
+        <a href="/gestione">Gestione completa</a>
+        <a href="/pulizie">Le pulizie</a>
+        <a href="/appartamenti">Gli appartamenti</a>
       </div>
       <div class="gruppo">
         <h3>Prima di decidere</h3>
-        <a href="compenso.html">Il compenso</a>
-        <a href="domande.html">Domande frequenti</a>
-        <a href="notizie.html">Notizie del settore</a>
+        <a href="/compenso">Il compenso</a>
+        <a href="/domande">Domande frequenti</a>
+        <a href="/notizie">Notizie del settore</a>
       </div>
       <div class="gruppo">
         <h3>L&rsquo;azienda</h3>
-        <a href="chi-siamo.html">Chi siamo</a>
-        <!-- Questa E' la pagina d'ingresso: non si linka da sola. -->
-        <span class="qui">La pagina d&rsquo;ingresso</span>
-        <a href="privacy.html">Privacy</a>
-        <a href="cookie.html">Cookie</a>
+        <a href="/chi-siamo">Chi siamo</a>
+        <!-- Il collegamento che prima mancava: chi arriva in fondo
+             scorrendo tutto il filmato ha finito di guardare e sta
+             decidendo. «La pagina d'ingresso» stava qui e riportava
+             dove si e' gia'. -->
+        <a href="/contatti">Contatti</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookie">Cookie</a>
+        <a href="/termini">Termini</a>
       </div>
     </nav>
     <!-- I RECAPITI. Il numero e' un collegamento che CHIAMA, non un testo da
@@ -925,6 +935,13 @@ window.__film = (function () {
     <div class="recapiti">
       <a href="mailto:info@hadrianusmultiservice.it">info@hadrianusmultiservice.it</a>
       <a href="tel:+393517305472">+39 351 730 5472</a>
+      <!-- Il segno di Instagram e' disegnato qui, non scaricato: tre
+           forme geometriche che prendono il colore del testo intorno.
+           Accanto c'e' la parola, perche' un'icona sola la riconosce
+           solo chi gia' sa cos'e'. -->
+      <a class="social" href="https://www.instagram.com/hadrianus_multiservice/"
+         rel="me noopener" target="_blank"
+         aria-label="Il profilo Instagram di Hadrianus Multiservice"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
       <span>Roma e il litorale di Ostia</span>
     </div>
     <!-- I DATI DI LEGGE. Letti dalla visura camerale del 13/05/2026 e dal
@@ -939,7 +956,7 @@ window.__film = (function () {
     </div>
     <div class="piede ultimo">
       <span>&copy; 2026 Hadrianus Multiservice S.R.L.S.</span>
-      <a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a>
+      <a href="/privacy">Privacy</a><a href="/cookie">Cookie</a>
       <!-- Qui c'era «prova di lavoro, non e' online». Il sito E' online dal
            21 ottobre: tolta. Lasciata, diceva a chi legge che non vale. -->
     </div>
@@ -959,7 +976,7 @@ window.__film = (function () {
     "@type": "LocalBusiness",
     "name": "Hadrianus Multiservice S.R.L.S.",
     "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
-    "url": "https://hadrianusmultiservice.it/prova/",
+    "url": "https://hadrianusmultiservice.it/",
     "email": "info@hadrianusmultiservice.it",
     "telephone": "+39 351 730 5472",
     "vatID": "IT18302601002",

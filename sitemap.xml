@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/gestione.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/gestione</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/prenota.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/appartamenti</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/pulizie.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/pulizie</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/compenso.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/compenso</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/chi-siamo.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/chi-siamo</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/domande.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/domande</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/notizie.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/notizie</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/privacy.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/contatti</loc>
+    <lastmod>2026-11-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/privacy</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/prova/cookie.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <loc>https://hadrianusmultiservice.it/cookie</loc>
+    <lastmod>2026-11-11</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/termini</loc>
+    <lastmod>2026-11-11</lastmod>
     <priority>0.3</priority>
   </url>
 </urlset>

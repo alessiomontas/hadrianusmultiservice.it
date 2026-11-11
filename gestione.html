@@ -2,9 +2,9 @@
 <html lang="it" class="p-gestione">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gestione completa &middot; Hadrianus Multiservice</title>
+<title>Gestione case vacanza a Roma e Ostia &middot; Hadrianus Multiservice</title>
 <meta name="description" content="Gestione completa di case vacanza a Roma e Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti. 15% sul lordo, nessun canone fisso.">
-<link rel="canonical" href="https://hadrianusmultiservice.it/prova/gestione.html">
+<link rel="canonical" href="https://hadrianusmultiservice.it/gestione">
 <!-- L'ANTEPRIMA QUANDO SI CONDIVIDE IL COLLEGAMENTO.
      Senza queste righe, un collegamento incollato su WhatsApp o LinkedIn
      esce come una riga di testo nuda. Con queste esce col titolo, la frase
@@ -12,10 +12,10 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="Hadrianus Multiservice">
-<meta property="og:title" content="Gestione completa &middot; Hadrianus Multiservice">
+<meta property="og:title" content="Gestione case vacanza a Roma e Ostia &middot; Hadrianus Multiservice">
 <meta property="og:description" content="Gestione completa di case vacanza a Roma e Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti. 15% sul lordo, nessun canone fisso.">
-<meta property="og:url" content="https://hadrianusmultiservice.it/prova/gestione.html">
-<meta property="og:image" content="https://hadrianusmultiservice.it/prova/immagini/gestione-testa.webp">
+<meta property="og:url" content="https://hadrianusmultiservice.it/gestione">
+<meta property="og:image" content="https://hadrianusmultiservice.it/immagini/gestione-testa.webp">
 <meta name="twitter:card" content="summary_large_image">
 <!-- LE ICONE. Non c'e' nessun `favicon.svg`: il marchio e' una fotografia di
      marmo, e per farne un SVG lo si sarebbe dovuto RIDISEGNARE — che e'
@@ -27,9 +27,14 @@
 <link rel="apple-touch-icon" href="icona-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#140F0B">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Archivo:wght@400;500;600&display=swap">
+<!-- I CARATTERI ARRIVANO DA QUESTO SITO, non dai server di Google.
+     Si guadagnano due cose: la pagina non deve aprire una conversazione con
+     un dominio di terzi prima di disegnare il testo, e l'indirizzo IP di chi
+     legge non esce piu' di qui. Il `preload` fa partire il file piu' usato
+     insieme al foglio di stile invece che dopo averlo letto. -->
+<link rel="preload" href="caratteri/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="caratteri/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="caratteri.css">
 <link rel="stylesheet" href="tavolozze.css">
 <link rel="stylesheet" href="stile.css">
 <script>
@@ -43,16 +48,19 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 </script>
 
 <header class="barra">
-  <a class="marchio" href="index.html" aria-label="Hadrianus Multiservice, torna all'inizio">
+  <a class="marchio" href="/" aria-label="Hadrianus Multiservice, torna all'inizio">
     <span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
   <span class="tasti">
-    <a class="primario" href="prenota.html">Prenota</a>
-    <a class="secondo" href="#contatti">Contattaci</a>
+    <a class="primario" href="/appartamenti">Prenota</a>
+    <!-- Prima portava a `#contatti`, cioe' al piede della pagina: un
+         recapito scritto, non un posto dove lasciare il proprio. Adesso
+         porta alla pagina con il modulo. -->
+    <a class="secondo" href="/contatti">Contattaci</a>
   </span>
 </header>
 
 <section class="eroe ">
-  <picture><source srcset="immagini/gestione-testa.avif" type="image/avif"><source srcset="immagini/gestione-testa.webp" type="image/webp"><img src="immagini/gestione-testa.webp" alt="Il busto di Adriano in marmo, nel suo tempio, sotto un fascio di luce" fetchpriority="high"></picture>
+  <picture><source srcset="immagini/gestione-testa.avif" type="image/avif"><source srcset="immagini/gestione-testa.webp" type="image/webp"><img src="immagini/gestione-testa.webp" alt="Il busto di Adriano in marmo, nel suo tempio, sotto un fascio di luce" width="1600" height="900" fetchpriority="high"></picture>
   <div class="dentro">
     <p class="occhiello">Per i proprietari</p>
     <h1>La casa resta tua.<br>Il lavoro no.</h1>
@@ -83,7 +91,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   </div>
 </section>
 
-<div class="fascia verso-inversa"><picture><source srcset="immagini/gestione-fascia.avif 1600w, immagini/gestione-fascia@2400.avif 2400w" sizes="100vw" type="image/avif"><source srcset="immagini/gestione-fascia.webp 1600w, immagini/gestione-fascia@2400.webp 2400w" sizes="100vw" type="image/webp"><img src="immagini/gestione-fascia.webp" alt="Una delle case in gestione: cucina, tavolo apparecchiato e soggiorno" loading="lazy"></picture></div>
+<div class="fascia verso-inversa"><picture><source srcset="immagini/gestione-fascia.avif 1600w, immagini/gestione-fascia@2400.avif 2400w" sizes="100vw" type="image/avif"><source srcset="immagini/gestione-fascia.webp 1600w, immagini/gestione-fascia@2400.webp 2400w" sizes="100vw" type="image/webp"><img src="immagini/gestione-fascia.webp" alt="Una delle case in gestione: cucina, tavolo apparecchiato e soggiorno" width="1600" height="900" loading="lazy"></picture></div>
 
 <section class="inversa">
   <div class="dentro">
@@ -106,7 +114,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
           squilla alle due di notte &egrave; il nostro.</p></div></li>
       <li><span class="numero">V</span><div><h3>La pulizia</h3>
         <p>Protocollo scritto a ogni cambio, biancheria da lavanderia
-          industriale. <a href="pulizie.html">Com&rsquo;&egrave; fatta</a>.</p></div></li>
+          industriale. <a href="/pulizie">Com&rsquo;&egrave; fatta</a>.</p></div></li>
       <li><span class="numero">VI</span><div><h3>Il controllo</h3>
         <p>A ogni check-out: elettrodomestici, rubinetteria, velocit&agrave;
           del wi-fi, serrature e accessi. Prevenzione, non emergenza.</p></div></li>
@@ -135,7 +143,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <div class="monumento"><b>15%</b><i>sul lordo.<br>Nessun canone fisso.</i></div>
     <p>Se la casa non lavora, non ci paghi. Guadagniamo quando guadagni tu, ed
       &egrave; l&rsquo;unico modo onesto di far combaciare i due interessi.
-      <a href="compenso.html">Cosa c&rsquo;&egrave; dentro quel 15%</a>.</p>
+      <a href="/compenso">Cosa c&rsquo;&egrave; dentro quel 15%</a>.</p>
     <!-- ❗ LA PROVA, RIFATTA COME DICE IL FRAMEWORK DI VENDITA.
          Qui c'era un paragrafo su Rome Smart Sea: prezzo medio da 120 a 186 €
          nei mesi di picco. Numeri veri e datati, ma il framework lo vieta a
@@ -173,7 +181,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   <div class="dentro">
     <!-- L'INSEGNA ANCHE QUI. Chi arriva in fondo scorrendo ha perso di vista
          la barra in alto: il nome va ridetto, e porta all'ingresso. -->
-    <a class="marchio insegna-piede" href="index.html"
+    <a class="marchio insegna-piede" href="/"
        aria-label="Hadrianus Multiservice, torna all&rsquo;ingresso"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
     <p class="mestiere">Gestione di case vacanza a Roma e sul litorale di
       Ostia. Pulizia alberghiera anche per chi gestisce da s&eacute;.</p>
@@ -182,21 +190,22 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       <div class="gruppo">
         <h2>Cosa facciamo</h2>
         <span class="qui">Gestione completa</span>
-        <a href="pulizie.html">Le pulizie</a>
-        <a href="prenota.html">Prenota un soggiorno</a>
+        <a href="/pulizie">Le pulizie</a>
+        <a href="/appartamenti">Gli appartamenti</a>
       </div>
       <div class="gruppo">
         <h2>Prima di decidere</h2>
-        <a href="compenso.html">Il compenso</a>
-        <a href="domande.html">Domande frequenti</a>
-        <a href="notizie.html">Notizie del settore</a>
+        <a href="/compenso">Il compenso</a>
+        <a href="/domande">Domande frequenti</a>
+        <a href="/notizie">Notizie del settore</a>
       </div>
       <div class="gruppo">
         <h2>L'azienda</h2>
-        <a href="chi-siamo.html">Chi siamo</a>
-        <a href="index.html">La pagina d'ingresso</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="cookie.html">Cookie</a>
+        <a href="/chi-siamo">Chi siamo</a>
+        <a href="/contatti">Contatti</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookie">Cookie</a>
+        <a href="/termini">Termini</a>
       </div>
     </nav>
 
@@ -208,6 +217,11 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <div class="recapiti">
       <a href="mailto:info@hadrianusmultiservice.it">info@hadrianusmultiservice.it</a>
       <a href="tel:+393517305472">+39 351 730 5472</a>
+      <!-- L'etichetta sta scritta accanto al segno, non solo dentro
+           `aria-label`: un'icona sola la riconosce chi gia' sa cos'e', e
+           chi non la riconosce non ci clicca. -->
+      <a class="social" href="https://www.instagram.com/hadrianus_multiservice/" rel="me noopener"
+         target="_blank" aria-label="Il profilo Instagram di Hadrianus Multiservice"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
       <span>Roma e il litorale di Ostia</span>
     </div>
 
@@ -222,7 +236,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     </div>
     <div class="legale ultimo">
       <span>&copy; 2026 Hadrianus Multiservice S.R.L.S.</span>
-      <a href="privacy.html">Privacy</a><a href="cookie.html">Cookie</a>
+      <a href="/privacy">Privacy</a><a href="/cookie">Cookie</a>
     </div>
   </div>
 
@@ -242,12 +256,13 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     "@type": "LocalBusiness",
     "name": "Hadrianus Multiservice S.R.L.S.",
     "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
-    "url": "https://hadrianusmultiservice.it/prova/",
+    "url": "https://hadrianusmultiservice.it/",
     "email": "info@hadrianusmultiservice.it",
     "telephone": "+39 351 730 5472",
     "vatID": "IT18302601002",
     "taxID": "18302601002",
     "foundingDate": "2025-11-12",
+    "sameAs": ["https://www.instagram.com/hadrianus_multiservice/"],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Via Francesco Donati 274",

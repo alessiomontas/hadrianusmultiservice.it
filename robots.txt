@@ -3,4 +3,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://hadrianusmultiservice.it/prova/sitemap.xml
+Sitemap: https://hadrianusmultiservice.it/sitemap.xml

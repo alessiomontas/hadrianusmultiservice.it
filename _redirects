@@ -1,0 +1,50 @@
+# ══════════════════════════════════════════════════════════════════
+#  GLI INDIRIZZI DEL SITO VECCHIO — 11 novembre 2026
+#
+#  Il sito nuovo ha preso il posto di quello vecchio sullo stesso
+#  dominio. Su Google c'erano VENTI indirizzi: senza questo file,
+#  chi ci trova cercando «gestione case vacanze Ostia» o ha un
+#  collegamento salvato finisce su «pagina non trovata» — e una
+#  posizione guadagnata in mesi si perde in un giorno.
+#
+#  301 e non 302: dice a Google «questa pagina si e' TRASFERITA li'»,
+#  e la posizione si sposta con lei. Il 302 dice «torno fra poco» e
+#  non trasferisce niente.
+#
+#  NON stanno in questo file — e non e' una dimenticanza — gli
+#  indirizzi che il sito nuovo ha GIA' identici: /chi-siamo,
+#  /privacy, /cookie, /termini, /contatti, /appartamenti. Quelli
+#  rispondono da soli, senza nessun rimando: e' il caso migliore.
+# ══════════════════════════════════════════════════════════════════
+
+# ── le due pagine dei servizi, che hanno cambiato nome
+/gestione/immobili                                /gestione       301
+/gestione/pulizie                                 /pulizie        301
+
+# ── i contatti erano tre pagine separate, adesso sono una
+/contatti/gestione                                /contatti       301
+/contatti/pulizie                                 /contatti       301
+
+# ── LE OTTO PAGINE «RISORSE».
+#    Erano l'unica parte del sito vecchio scritta per farsi trovare
+#    su Google da chi cerca un gestore, ed e' roba che vale.
+#    ⚠️ QUESTO E' UN RIPARO, NON LA SOLUZIONE: ognuna va qui sulla
+#    pagina nuova che le somiglia di piu', cosi' nessuno trova un
+#    buco. Ma una pagina che rispondeva a «quanto costa gestire una
+#    casa vacanza a Roma» mandata su /compenso risponde a meta'.
+#    Vanno riscritte nel nostro linguaggio, e allora questi rimandi
+#    si cambiano uno per uno con l'indirizzo vero.
+/risorse/quanto-costa-gestire-casa-vacanza-roma   /compenso       301
+/risorse/gestione-autonoma-vs-property-manager    /gestione       301
+/risorse/pulizie-case-vacanze-ostia               /pulizie        301
+/risorse/gestione-case-vacanze-ostia              /gestione       301
+/risorse/gestione-case-vacanze-roma-eur           /gestione       301
+/risorse/gestione-affitti-brevi-lido-di-ostia     /gestione       301
+/risorse/property-manager-roma-litorale           /gestione       301
+/risorse/cir-cin-affitti-brevi-lazio              /domande        301
+/risorse/*                                        /notizie        301
+/risorse                                          /notizie        301
+
+# ── i nomi di lavorazione nostri, che non deve vedere nessuno
+/prenota                                          /appartamenti   301
+/prova/*                                          /:splat         301
