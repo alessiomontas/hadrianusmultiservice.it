@@ -2,7 +2,7 @@
 <html lang="it" class="p-gestione">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gestione case vacanza a Roma e Ostia &middot; Hadrianus Multiservice</title>
+<title>Gestione case vacanza a Roma e Ostia &middot; Hadrianus</title>
 <meta name="description" content="Gestione completa di case vacanza a Roma e Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti. 15% sul lordo, nessun canone fisso.">
 <link rel="canonical" href="https://hadrianusmultiservice.it/gestione">
 <!-- L'ANTEPRIMA QUANDO SI CONDIVIDE IL COLLEGAMENTO.
@@ -91,7 +91,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   </div>
 </section>
 
-<div class="fascia verso-inversa"><picture><source srcset="immagini/gestione-fascia.avif 1600w, immagini/gestione-fascia@2400.avif 2400w" sizes="100vw" type="image/avif"><source srcset="immagini/gestione-fascia.webp 1600w, immagini/gestione-fascia@2400.webp 2400w" sizes="100vw" type="image/webp"><img src="immagini/gestione-fascia.webp" alt="Una delle case in gestione: cucina, tavolo apparecchiato e soggiorno" width="1600" height="900" loading="lazy"></picture></div>
+<div class="fascia verso-inversa"><picture><source srcset="immagini/gestione-fascia.avif 1600w, immagini/gestione-fascia@2400.avif 2400w" sizes="100vw" type="image/avif"><source srcset="immagini/gestione-fascia.webp 1600w, immagini/gestione-fascia@2400.webp 2400w" sizes="100vw" type="image/webp"><img src="immagini/gestione-fascia.webp" alt="Una delle case vacanza che gestiamo a Roma: cucina, tavolo apparecchiato e soggiorno" width="1600" height="900" loading="lazy"></picture></div>
 
 <section class="inversa">
   <div class="dentro">
@@ -457,4 +457,55 @@ addEventListener('pageshow', function () {
   addEventListener('scroll', chiedi, { passive: true });
   addEventListener('resize', chiedi, { passive: true });
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Hadrianus Multiservice",
+      "item": "https://hadrianusmultiservice.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Gestione case vacanza a Roma e Ostia",
+      "item": "https://hadrianusmultiservice.it/gestione"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Gestione completa di case vacanza",
+  "serviceType": "Property management per affitti brevi",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Hadrianus Multiservice S.R.L.S.",
+    "url": "https://hadrianusmultiservice.it/"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Roma"
+    },
+    {
+      "@type": "Place",
+      "name": "Ostia, Lido di Roma"
+    }
+  ],
+  "url": "https://hadrianusmultiservice.it/gestione",
+  "description": "Prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti di una casa in affitto breve.",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "EUR",
+    "description": "15% sull'incassato lordo, nessun canone fisso",
+    "url": "https://hadrianusmultiservice.it/compenso"
+  }
+}
 </script>

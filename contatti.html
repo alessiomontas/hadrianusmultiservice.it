@@ -2,7 +2,7 @@
 <html lang="it" class="p-gestione">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contatti &middot; parliamo della tua casa &middot; Hadrianus Multiservice</title>
+<title>Contatti &middot; parliamo della tua casa &middot; Hadrianus</title>
 <meta name="description" content="Scrivici per un sopralluogo gratuito a Roma o a Ostia: veniamo a vedere la casa e ti diciamo quanto pu&ograve; rendere. Senza impegno.">
 <link rel="canonical" href="https://hadrianusmultiservice.it/contatti">
 <!-- L'ANTEPRIMA QUANDO SI CONDIVIDE IL COLLEGAMENTO.
@@ -60,7 +60,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 </header>
 
 <section class="eroe titolo-lungo">
-  <picture><source srcset="immagini/testa-facciata.avif" type="image/avif"><source srcset="immagini/testa-facciata.webp" type="image/webp"><img src="immagini/testa-facciata.webp" alt="La facciata del palazzo vista dalla strada" width="1600" height="900" fetchpriority="high"></picture>
+  <picture><source srcset="immagini/testa-facciata.avif" type="image/avif"><source srcset="immagini/testa-facciata.webp" type="image/webp"><img src="immagini/testa-facciata.webp" alt="La facciata di un palazzo romano vista dalla strada" width="1600" height="900" fetchpriority="high"></picture>
   <div class="dentro">
     <p class="occhiello">Parliamone</p>
     <h1>Raccontaci<br>la casa.</h1>
@@ -546,4 +546,39 @@ addEventListener('pageshow', function () {
   addEventListener('scroll', chiedi, { passive: true });
   addEventListener('resize', chiedi, { passive: true });
 })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Hadrianus Multiservice",
+      "item": "https://hadrianusmultiservice.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contatti · parliamo della tua casa",
+      "item": "https://hadrianusmultiservice.it/contatti"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "url": "https://hadrianusmultiservice.it/contatti",
+  "name": "Contatti — Hadrianus Multiservice",
+  "mainEntity": {
+    "@type": "LocalBusiness",
+    "name": "Hadrianus Multiservice S.R.L.S.",
+    "telephone": "+39 351 730 5472",
+    "email": "info@hadrianusmultiservice.it",
+    "url": "https://hadrianusmultiservice.it/"
+  }
+}
 </script>
