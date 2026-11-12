@@ -702,9 +702,10 @@ p{margin:0}
      del menu nel piede di pagina.
      Il tasto rimasto prende il vestito pieno, se no da solo in una barra
      un riquadro vuoto sembra spento. */
-  .barra .primario{display:none}
-  .barra .secondo{background:var(--oro);border-color:var(--oro);
-    color:#1A1309;font-weight:600}
+  /* 12/11: i due si sono scambiati il vestito, quindi adesso il tasto da
+     nascondere e' «Prenota», che porta la classe `secondo`. Quello che
+     resta e' gia' pieno di suo e non serve rivestirlo. */
+  .barra .secondo{display:none}
   /* la chiusura e il piede di pagina */
   /* IL PIEDE DI PAGINA. Non ha vincoli di altezza — e' una sezione che
      scorre — quindi qui comanda solo la larghezza. «SCRIVICI ORA» col suo
@@ -753,9 +754,16 @@ p{margin:0}
        fondo al file, cercato per `#al-piede`. -->
   <a class="marchio" id="al-piede" href="#contatti"
      aria-label="Hadrianus Multiservice, vai ai contatti"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
+  <!-- ⚠️ IL VESTITO PIENO STA SU «CONTATTACI», NON SU «PRENOTA» (12/11/2026).
+       Chiesto da Alessio, e ha ragione: questa pagina parla ai PROPRIETARI.
+       Chi arriva qui deve affidarci una casa, non prenotarne una. Il tasto
+       pieno e' quello che l'occhio prende per primo, e deve essere quello
+       che porta i clienti.
+       `primario` e `secondo` restano i nomi dei due VESTITI, non dei due
+       collegamenti: si sono scambiati di posto, le regole di stile no. -->
   <span class="tasti">
-    <a class="primario" href="/appartamenti">Prenota</a>
-    <a class="secondo"  href="#contatti">Contattaci</a>
+    <a class="secondo"  href="/appartamenti">Prenota</a>
+    <a class="primario" id="al-contatti" href="#contatti">Contattaci</a>
   </span>
 </header>
 
@@ -2102,13 +2110,25 @@ function nelFilm() {
    come un'altra, e il piede si accende con il suo tempo.
    Vale anche cliccandolo DAL piede: riporta in cima al piede, che e'
    esattamente quello che serviva a chi era in fondo. */
+/* ❗❗ IL DIFETTO CHE BLOCCAVA LA PAGINA (trovato da Alessio il 12/11/2026).
+   «Contattaci» nella barra era un'ancora nuda verso `#contatti`. Il marchio
+   qui accanto aveva il suo gestore; quello no. Premuto a META' del filmato
+   faceva il salto NATIVO del browser: la pagina si spostava, ma il motore
+   che tiene il film agganciato allo scorrimento non ne sapeva niente e
+   restava convinto di stare alla tappa di prima. Da quel momento i due
+   erano scollegati — lo scorrimento non rispondeva piu' e i pannelli non
+   comparivano. Sembrava il sito rotto, ed era un collegamento senza
+   gestore.
+   La cura: lo stesso trattamento del marchio. E si prendono TUTTI i
+   collegamenti a `#contatti` dentro la barra, non solo quello di oggi, cosi'
+   il giorno che se ne aggiunge un terzo non si ripresenta. */
 {
-  const alPiede = document.getElementById('al-piede');
-  if (alPiede) alPiede.addEventListener('click', e => {
+  const versoIlPiede = document.querySelectorAll('.barra a[href="#contatti"], #al-piede');
+  versoIlPiede.forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
     bersaglio = ULTIMA;
     atterra();
-  });
+  }));
 }
 
 /* LA BARRA DELL'INDIRIZZO NON E' UN CAMBIO DI FINESTRA.
