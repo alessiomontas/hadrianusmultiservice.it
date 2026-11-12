@@ -846,19 +846,44 @@ window.__film = (function () {
 
 <div id="soglia" role="dialog" aria-modal="true" aria-labelledby="soglia-titolo">
   <div class="scatola">
-    <h2 id="soglia-titolo">Prima di entrare</h2>
-    <p>Questo sito non ti segue e non vende i tuoi dati.
-      Usa una sola memoria tecnica, sul tuo dispositivo, per ricordare questa scelta.</p>
+    <!-- ⚠️ IL TESTO DI QUESTO PANNELLO E' STATO RIFATTO IL 12/11/2026.
+         Prima diceva «Prima di entrare» e spiegava in due righe che il sito
+         non segue nessuno. Era vero ed era scritto bene, ma Alessio ha
+         centrato il problema: «attira troppo l'attenzione, non e' una scritta
+         che uno e' abituato a vedere». Un avviso sui cookie deve essere
+         ORDINARIO. Uno lo guarda, riconosce la forma che ha visto mille
+         volte, preme e va avanti. Se si mette a leggerlo perche' e' scritto
+         in modo originale, abbiamo perso il visitatore sulla soglia — che e'
+         esattamente il punto del sito dove non ce lo possiamo permettere.
+         La forma e' quella standard. Il contenuto resta vero: qui non c'e'
+         nessun cookie di profilazione da accettare. -->
+    <h2 id="soglia-titolo">Cookie</h2>
+    <p>Questo sito usa solo cookie tecnici, necessari al funzionamento.
+      Nessun tracciamento pubblicitario e nessun dato ceduto a terzi.</p>
     <div class="tasti">
       <button id="accetta" class="primario" type="button">Accetta</button>
+      <!-- ❗ I DUE PULSANTI FANNO DAVVERO DUE COSE DIVERSE.
+           Mettere «Solo essenziali» accanto ad «Accetta» e farli finire nello
+           stesso identico posto e' la bugia piu' diffusa del web, e qui non la
+           facciamo. La differenza vera: «Accetta» segna la scelta e non te lo
+           chiede piu'; «Solo essenziali» non scrive niente sul tuo
+           dispositivo — quindi alla prossima visita il pannello ricompare.
+           E' poco, ma e' esattamente quello che i due pulsanti promettono. -->
+      <button id="essenziali" class="secondario" type="button">Solo essenziali</button>
       <button id="piuinfo" class="secondario" type="button" aria-expanded="false"
               aria-controls="dettagli">Maggiori informazioni</button>
     </div>
     <div id="dettagli" hidden>
+      <h3>Cosa cambia fra i due pulsanti</h3>
+      <p>Con <b>Accetta</b> salviamo una voce sola nella memoria del browser
+        (<i>hadrianus-consenso</i>) con la data: serve a non richiedertelo a ogni visita.
+        Con <b>Solo essenziali</b> non scriviamo niente, e la prossima volta ti
+        richiederemo la stessa cosa. In tutti e due i casi il sito funziona uguale,
+        perch&eacute; non c'&egrave; nient'altro da accettare.</p>
       <h3>Cosa salviamo</h3>
-      <p>Una voce sola nella memoria del browser (<i>hadrianus-consenso</i>) con la data
-        in cui hai accettato. Serve a non richiedertelo a ogni visita. Resta sul tuo
-        dispositivo: non viene mandata a nessuno e si cancella svuotando i dati del sito.</p>
+      <p>Quella voce resta sul tuo dispositivo: non viene mandata a nessuno e si cancella
+        svuotando i dati del sito. Nessun cookie di profilazione, nessun identificativo
+        che ti segue da una pagina all'altra.</p>
       <h3>Cosa non facciamo</h3>
       <p>Nessun cookie di profilazione. Nessuna statistica di terze parti, nessun pixel
         pubblicitario, nessun social collegato. Non sappiamo chi sei, da dove arrivi,
@@ -1252,6 +1277,7 @@ const soglia      = document.getElementById('soglia');
 const insegna     = document.getElementById('insegna');
 const barraAlta   = document.querySelector('.barra');
 const bottoneSi   = document.getElementById('accetta');
+const bottoneNo   = document.getElementById('essenziali');
 const bottonePiu  = document.getElementById('piuinfo');
 const dettagli    = document.getElementById('dettagli');
 const CHIAVE = 'hadrianus-consenso';
@@ -1403,14 +1429,22 @@ function cartaDiTesta() {
   })();
 }
 
-function accetta() {
-  segna(CHIAVE, new Date().toISOString().slice(0, 10));
+function chiudiSoglia() {
   sblocca();                      // il tocco vero: da qui l'iPhone puo' suonare
   sogliaAlzata = false;           // la gabbia del fuoco si apre
   soglia.classList.add('via');
   setTimeout(() => { soglia.hidden = true; cartaDiTesta(); }, 520);
 }
+function accetta() {
+  segna(CHIAVE, new Date().toISOString().slice(0, 10));
+  chiudiSoglia();
+}
+function soloEssenziali() {
+  // NON si scrive niente: e' questa la differenza, e il pannello tornera'.
+  chiudiSoglia();
+}
 bottoneSi.addEventListener('click', accetta);
+bottoneNo.addEventListener('click', soloEssenziali);
 
 /* LA SEQUENZA D'APERTURA.
    nero voluto -> la barra in alto -> il consenso. Chi e' gia' stato qui salta

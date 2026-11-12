@@ -84,7 +84,7 @@ body::after{content:'';position:fixed;inset:-50%;z-index:60;pointer-events:none;
 .occhiello::before{content:'';width:clamp(28px,6vw,64px);height:1px;flex:none;
   background:linear-gradient(to right,transparent,var(--oro-testo))}
 h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
-h1{font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
+h1{--tetto:7rem;font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
   font-size:clamp(2.9rem,1.5rem + 6.4vw,7rem);line-height:.98;
   letter-spacing:-.012em;text-wrap:balance;text-shadow:0 2px 44px rgba(0,0,0,.65)}
 .eroe .sommario{margin:1.6rem 0 0;max-width:50ch;color:#EFE8DA;
@@ -109,7 +109,7 @@ h1{font-family:var(--display);font-weight:500;margin:0;color:#F8F3E8;
    titolo supera le otto lettere. Vale solo sotto i 700 px: sul computer
    il titolo resta grande come l'ha approvato Alessio. */
 @media (max-width:700px){
-  .eroe.titolo-lungo h1{font-size:clamp(2.3rem,1.1rem + 7vw,3.4rem)}
+  .eroe.titolo-lungo h1{--tetto:3.4rem;font-size:clamp(2.3rem,1.1rem + 7vw,3.4rem)}
 }
 .eroe.chiara{color:var(--inchiostro);background:var(--fondo)}
 .eroe.chiara::before{
@@ -171,7 +171,7 @@ section.inversa{background:var(--fondo-inv);color:var(--inchiostro-inv)}
 .inversa .citazione p{color:var(--inchiostro-inv)}
 .inversa .citazione span{color:var(--oro-testo-inv)}
 
-h2{font-family:var(--display);font-weight:500;margin:0 0 1.2rem;color:var(--inchiostro);
+h2{--tetto:3.9rem;font-family:var(--display);font-weight:500;margin:0 0 1.2rem;color:var(--inchiostro);
   font-size:clamp(2.1rem,1.4rem + 3.2vw,3.9rem);line-height:1.06;
   letter-spacing:-.008em;text-wrap:balance;max-width:20ch}
 h3{font-family:var(--display);font-weight:500;margin:0 0 .45rem;color:var(--inchiostro);
@@ -543,7 +543,7 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
    veste coi nostri colori — non si copia nessun pixel.
    ================================================================== */
 .annuncio{padding-top:clamp(28px,4vw,54px)}
-.annuncio h1{font-size:clamp(2.1rem,1.5rem + 2.6vw,3.4rem);line-height:1.08;
+.annuncio h1{--tetto:3.4rem;font-size:clamp(2.1rem,1.5rem + 2.6vw,3.4rem);line-height:1.08;
   color:var(--inchiostro);text-shadow:none;margin-bottom:.7rem}
 .riga-fatti{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;
   color:var(--morbido);font-size:1.02rem;margin-bottom:1.8rem}
@@ -708,3 +708,57 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
   min-height:44px;border-bottom:0}
 .recapiti .social svg{flex:none;display:block}
 .recapiti .social:hover{color:var(--oro-pieno)}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   I TITOLI SPEZZATI A MANO TENGONO LE LORO RIGHE — 12 novembre 2026
+
+   Detto da Alessio: «non voglio che le parole vadano a capo in base a
+   come e' grande lo schermo, voglio che si adatti la dimensione delle
+   scritte». Due cose lo impedivano:
+
+   1 · `text-wrap: balance` qui sopra: a ogni pixel di larghezza
+       RIORGANIZZA le righe per pareggiarle. Su un titolo dove le righe
+       le ha scelte chi scrive, e' il contrario di quello che serve.
+   2 · il carattere cresceva col `clamp` senza sapere quanto e' lunga la
+       riga piu' lunga. Misurato su `pulizie` a 1280 px: colonna 983 px,
+       «si perde su un capello» ne chiedeva 1222. Andava a capo per forza.
+
+   LA CURA. `genera.py` misura la riga piu' lunga **con il file vero di
+   Cinzel** e scrive quanto e' larga in `em` dentro l'attributo `--em`.
+   Qui il carattere diventa «il piu' grande che fa stare quella riga»:
+   `100cqi` e' la larghezza della colonna, diviso `--em` da' la misura
+   esatta. Le righe restano quelle scritte e il titolo rimpicciolisce.
+
+   `white-space:nowrap` e' la garanzia: con la misura giusta non serve a
+   niente, ma se un giorno la misura sbaglia il titolo esce invece di
+   riorganizzarsi di nascosto — un difetto che si vede, non uno che si
+   subisce.
+
+   ⚠️ SOLO SOPRA I 700 px. Su un telefono «si perde su un capello» a 11,9
+   em vorrebbe un titolo da 28 px, e la pagina del telefono Alessio
+   l'aveva chiesta apposta tutta piu' grande. Sotto i 700 px il titolo va
+   a capo come prima: li' il difetto non c'e', perche' nessuno sta
+   stringendo la finestra.
+   ══════════════════════════════════════════════════════════════════ */
+/* IL RIQUADRO SU CUI SI MISURA. `100cqi` vuol dire «la larghezza del
+   contenitore»: va dichiarato quale. `.dentro` e' la colonna del testo, ma
+   dove la pagina si divide in due (la scheda dell'appartamento, i passi) il
+   titolo vive in META' di quella — e misurando sulla colonna intera usciva
+   di 167 px. Si segnano quindi anche i mezzi. */
+.dentro,.due-colonne>*,.annuncio .scheda{container-type:inline-size}
+
+@media (min-width:700px){
+  /* ❗ IL SELETTORE DEVE ESSERE `h2.righe-fisse`, NON `.righe-fisse`.
+     `.p-gestione h2{max-width:16ch}` pesa di piu' di una classe sola, e
+     vinceva: il titolo restava largo 614 px mentre il testo ne chiedeva
+     1000, e usciva dal riquadro. Con il tag davanti i due pesi pareggiano
+     e vince questo, che viene dopo. */
+  h1.righe-fisse,h2.righe-fisse{
+    font-size:min(var(--tetto,3.9rem),calc(100cqi / var(--em,99)));
+    white-space:nowrap;
+    text-wrap:nowrap;      /* spegne `balance`: le righe le decide il testo */
+    max-width:none;        /* il `max-width` di h2 taglierebbe la riga */
+    hyphens:none;
+  }
+}
