@@ -64,16 +64,35 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   <div class="dentro">
     <p class="occhiello">Parliamone</p>
     <h1 class="righe-fisse" style="--em:6.69">Raccontaci<br>la casa.</h1>
-    <p class="sommario">Rispondiamo noi, non un sistema. Se preferisci sentire una voce, il numero &egrave; in fondo a questa pagina.</p>
+    <p class="sommario">Rispondiamo noi, non un sistema. Chiama, oppure lascia due righe qui sotto: come preferisci.</p>
   </div>
 </section>
 
-<section>
+<section class="scelta">
   <div class="dentro stretto">
-    <p class="occhiello">Il modulo</p>
-    <h2 class="righe-fisse" style="--em:9.25">Quattro righe,<br>e ti richiamiamo.</h2>
-    <p class="sotto">Serve solo a sapere di cosa parliamo prima di
-      sentirci. Nessun dato esce di qui: <a href="/privacy">come li
+    <!-- ⚠️ QUI C'ERANO QUATTROCENTO PIXEL DI VUOTO FRA LA TESTA E IL
+         MODULO, e dentro non c'era niente da leggere: un occhiello, un
+         titolo e una riga di servizio. Alessio l'ha visto subito — «c'e'
+         troppa distanza». Lo spazio adesso lo occupa una cosa utile: la
+         SECONDA strada. Chi arriva ai contatti non vuole tutti la stessa
+         cosa — c'e' chi scrive volentieri e c'e' chi vuole sentire una
+         voce, e quello che vuole la voce, se gli dai solo un modulo, se
+         ne va. Le due strade stanno affiancate, allo stesso livello.
+         ⚠️ IL PULSANTE DEL TELEFONO E' «VUOTO», NON PIENO. In pagina il
+         pieno ce l'ha gia' «Mandaci la richiesta», e DESIGN.md dice un
+         solo pulsante pieno per schermata: due pieni affiancati si
+         annullano a vicenda e non si capisce piu' qual e' la strada
+         principale. -->
+    <p class="occhiello">Come preferisci</p>
+
+    <div class="due-strade">
+      <a class="chiamata vuota" href="tel:+393517305472">+39&nbsp;351&nbsp;730&nbsp;5472</a>
+      <p>Risponde una persona, non un centralino: la stessa che poi la casa
+        verr&agrave; a vederla.</p>
+    </div>
+
+    <p class="sotto spiega-modulo">Se preferisci scrivere, bastano quattro
+      righe. Nessun dato esce di qui: <a href="/privacy">come li
       trattiamo</a>.</p>
 
     <form class="modulo" id="modulo" novalidate>

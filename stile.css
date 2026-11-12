@@ -762,3 +762,37 @@ h2.sale{transform:translateY(26px);transition-duration:.64s}
     hyphens:none;
   }
 }
+
+/* ---- LE DUE STRADE, SULLA PAGINA DEI CONTATTI (12/11/2026) -----
+   Fra la testa e il modulo c'erano 401 px di vuoto occupati da un
+   titolo e una riga di servizio. Adesso li' c'e' la seconda strada:
+   il telefono, allo stesso livello del modulo e non nascosto in fondo.
+   Chi vuole sentire una voce, se trova solo un modulo, se ne va.
+
+   Il numero e' un pulsante VUOTO, non pieno: il pieno in questa
+   schermata ce l'ha gia' «Mandaci la richiesta», e DESIGN.md dice uno
+   solo per schermata. Due pieni affiancati si annullano.
+   Il filetto sotto separa le due strade senza mettere una scatola
+   dentro un'altra — che e' l'altro cliche' vietato. */
+.due-strade{display:flex;align-items:center;gap:clamp(1rem,2.5vw,2rem);
+  flex-wrap:wrap;margin:1.6rem 0 0}
+.due-strade .chiamata{margin-top:0;flex:none;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.due-strade p{margin:0;max-width:30ch;font-size:1.05rem;color:var(--morbido)}
+/* La riga che spiega il modulo chiude le due strade e apre la terza. */
+.spiega-modulo{margin-top:clamp(1.8rem,3vw,2.6rem);padding-top:clamp(1.4rem,2.4vw,2rem);
+  border-top:1px solid var(--riga)}
+/* Sul telefono il numero va a tutta larghezza: e' un bersaglio per il
+   pollice, e un bottone stretto in mezzo allo schermo si manca. */
+@media (max-width:560px){
+  .due-strade{gap:1rem}
+  .due-strade .chiamata{width:100%;text-align:center}
+}
+
+/* La sezione della scelta si stringe addosso alla testa: era staccata di
+   102 px come tutte le altre, ma qui non c'e' niente da «aprire» — si
+   arriva, si legge una riga e si sceglie come scrivere. Lo stacco grande
+   serve dove comincia un discorso nuovo, non dove si risponde a uno. */
+.scelta{padding-top:clamp(30px,3.8vw,46px)}
+.scelta .occhiello{margin-bottom:1rem}
+.scelta .due-strade{margin-top:0}
