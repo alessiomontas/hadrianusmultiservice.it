@@ -116,6 +116,10 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
             <option>Solo le pulizie</option>
             <option>Gestione e pulizie</option>
             <option>Non lo so ancora, ne parliamo</option>
+            <!-- Dalla pagina degli appartamenti arriva anche chi vuole
+                 DORMIRE da noi, non farsi gestire una casa. Senza questa
+                 voce dovrebbe scegliere una cosa falsa per poter mandare. -->
+            <option>Una domanda su un soggiorno</option>
           </select>
         </div>
         <div class="riga">
@@ -223,6 +227,28 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     }
     return 'diretto';
   }
+
+  /* DA DOVE SI ARRIVA DECIDE COSA C'E' GIA' SCRITTO.
+     I pulsanti sparsi per il sito portano qui con `?di=gestione`,
+     `?di=pulizie`, `?di=soggiorno`. Chi ha premuto «Scrivici ora» sulla
+     pagina delle pulizie sta chiedendo delle pulizie: fargli riscegliere
+     la stessa cosa da una tendina e' un passo in piu' per niente, e ogni
+     passo in piu' e' gente che lascia il modulo a meta'. */
+  (function () {
+    var quale = new URLSearchParams(location.search).get('di');
+    var mappa = {
+      gestione: 'Gestione completa della casa',
+      pulizie: 'Solo le pulizie',
+      entrambe: 'Gestione e pulizie',
+      soggiorno: 'Una domanda su un soggiorno'
+    };
+    if (quale && mappa[quale]) {
+      var s = document.getElementById('c-cosa');
+      for (var i = 0; i < s.options.length; i++) {
+        if (s.options[i].text === mappa[quale]) { s.selectedIndex = i; break; }
+      }
+    }
+  })();
 
   function dillo(testo, classe) {
     esito.textContent = testo;
