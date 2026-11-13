@@ -2,7 +2,7 @@
 <html lang="it" class="p-gestione">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contatti &middot; parliamo della tua casa &middot; Hadrianus</title>
+<title>Contatti &middot; parliamo della tua casa &middot; Hadrianus Multiservice</title>
 <meta name="description" content="Scrivici per un sopralluogo gratuito a Roma o a Ostia: veniamo a vedere la casa e ti diciamo quanto pu&ograve; rendere. Senza impegno.">
 <link rel="canonical" href="https://hadrianusmultiservice.it/contatti">
 <!-- L'ANTEPRIMA QUANDO SI CONDIVIDE IL COLLEGAMENTO.
@@ -15,7 +15,10 @@
 <meta property="og:title" content="Contatti &middot; parliamo della tua casa &middot; Hadrianus Multiservice">
 <meta property="og:description" content="Scrivici per un sopralluogo gratuito a Roma o a Ostia: veniamo a vedere la casa e ti diciamo quanto pu&ograve; rendere. Senza impegno.">
 <meta property="og:url" content="https://hadrianusmultiservice.it/contatti">
-<meta property="og:image" content="https://hadrianusmultiservice.it/immagini/testa-facciata.webp">
+<meta property="og:image" content="https://hadrianusmultiservice.it/immagini/testa-facciata.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Contatti &middot; parliamo della tua casa &middot; Hadrianus Multiservice">
 <meta name="twitter:card" content="summary_large_image">
 <!-- LE ICONE. Non c'e' nessun `favicon.svg`: il marchio e' una fotografia di
      marmo, e per farne un SVG lo si sarebbe dovuto RIDISEGNARE — che e'
@@ -388,6 +391,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://hadrianusmultiservice.it/#azienda",
     "name": "Hadrianus Multiservice S.R.L.S.",
     "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
     "url": "https://hadrianusmultiservice.it/",
@@ -396,7 +400,22 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     "vatID": "IT18302601002",
     "taxID": "18302601002",
     "foundingDate": "2025-11-12",
-    "sameAs": ["https://www.instagram.com/hadrianus_multiservice/"],
+    "priceRange": "€€",
+    "image": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+    "logo": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+    "sameAs": [
+      "https://www.instagram.com/hadrianus_multiservice/",
+      "https://www.facebook.com/hadrianusmultiservice",
+      "https://www.linkedin.com/company/hadrianus-multiservice",
+      "https://www.google.com/maps?cid=13831442001728680114"
+    ],
+    "openingHoursSpecification": [
+      {"@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"],
+        "opens": "10:00", "closes": "19:00"},
+      {"@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday", "opens": "10:00", "closes": "13:00"}
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Via Francesco Donati 274",

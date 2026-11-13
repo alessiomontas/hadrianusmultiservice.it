@@ -15,7 +15,10 @@
 <meta property="og:title" content="Pulizie per case vacanza a Roma e Ostia &middot; Hadrianus Multiservice">
 <meta property="og:description" content="Pulizia alberghiera per case vacanza a Roma e Ostia, su protocollo scritto. Da 65 € a intervento. Anche per immobili che non gestiamo.">
 <meta property="og:url" content="https://hadrianusmultiservice.it/pulizie">
-<meta property="og:image" content="https://hadrianusmultiservice.it/immagini/pulizie-testa.webp">
+<meta property="og:image" content="https://hadrianusmultiservice.it/immagini/pulizie-testa.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Pulizie per case vacanza a Roma e Ostia &middot; Hadrianus Multiservice">
 <meta name="twitter:card" content="summary_large_image">
 <!-- LE ICONE. Non c'e' nessun `favicon.svg`: il marchio e' una fotografia di
      marmo, e per farne un SVG lo si sarebbe dovuto RIDISEGNARE — che e'
@@ -234,6 +237,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://hadrianusmultiservice.it/#azienda",
     "name": "Hadrianus Multiservice S.R.L.S.",
     "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
     "url": "https://hadrianusmultiservice.it/",
@@ -242,7 +246,22 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     "vatID": "IT18302601002",
     "taxID": "18302601002",
     "foundingDate": "2025-11-12",
-    "sameAs": ["https://www.instagram.com/hadrianus_multiservice/"],
+    "priceRange": "€€",
+    "image": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+    "logo": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+    "sameAs": [
+      "https://www.instagram.com/hadrianus_multiservice/",
+      "https://www.facebook.com/hadrianusmultiservice",
+      "https://www.linkedin.com/company/hadrianus-multiservice",
+      "https://www.google.com/maps?cid=13831442001728680114"
+    ],
+    "openingHoursSpecification": [
+      {"@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"],
+        "opens": "10:00", "closes": "19:00"},
+      {"@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday", "opens": "10:00", "closes": "13:00"}
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Via Francesco Donati 274",
@@ -484,8 +503,12 @@ addEventListener('pageshow', function () {
   "offers": {
     "@type": "Offer",
     "priceCurrency": "EUR",
-    "price": "60",
-    "description": "Pulizia standard a intervento",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "EUR",
+      "minPrice": "65"
+    },
+    "description": "Pulizia standard, da 65 euro a intervento",
     "url": "https://hadrianusmultiservice.it/pulizie"
   }
 }

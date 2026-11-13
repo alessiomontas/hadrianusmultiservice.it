@@ -59,7 +59,15 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 <meta property="og:title" content="Hadrianus Multiservice &middot; Gestione case vacanza a Roma e Ostia">
 <meta property="og:description" content="Gestione completa di case vacanza a Roma e a Ostia: prenotazioni, ospiti, pulizie, manutenzione e pratiche. 15% sul lordo, nessun canone fisso.">
 <meta property="og:url" content="https://hadrianusmultiservice.it/">
-<meta property="og:image" content="https://hadrianusmultiservice.it/copertina.jpg">
+<!-- ⚠️ NON e' `copertina.jpg`: quella e' il fotogramma nero che tiene il
+     posto del filmato (`poster`) e deve restare 1600x1600 e nera. Questa e'
+     il biglietto da visita del collegamento: 1200x630, il marchio in marmo e
+     la proposta. Su WhatsApp la nera usciva come un rettangolo buio. -->
+<meta property="og:image" content="https://hadrianusmultiservice.it/copertina-social.jpg"
+  >
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hadrianus Multiservice &middot; gestione case vacanza a Roma e Ostia">
 <meta name="twitter:card" content="summary_large_image">
 <noscript><style>
 /* SE JAVASCRIPT NON PARTE, NON SI RESTA SUL NERO.
@@ -1004,31 +1012,74 @@ window.__film = (function () {
        voto e' contro le regole di Google e si rischia una penalizzazione.
        Il 5,0 resta scritto dov'e' vero, nelle pagine. -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Hadrianus Multiservice S.R.L.S.",
-    "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
-    "url": "https://hadrianusmultiservice.it/",
-    "email": "info@hadrianusmultiservice.it",
-    "telephone": "+39 351 730 5472",
-    "vatID": "IT18302601002",
-    "taxID": "18302601002",
-    "foundingDate": "2025-11-12",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Via Francesco Donati 274",
-      "postalCode": "00126",
-      "addressLocality": "Roma",
-      "addressRegion": "RM",
-      "addressCountry": "IT"
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://hadrianusmultiservice.it/#azienda",
+  "name": "Hadrianus Multiservice S.R.L.S.",
+  "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
+  "url": "https://hadrianusmultiservice.it/",
+  "email": "info@hadrianusmultiservice.it",
+  "telephone": "+39 351 730 5472",
+  "vatID": "IT18302601002",
+  "taxID": "18302601002",
+  "foundingDate": "2025-11-12",
+  "priceRange": "€€",
+  "image": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+  "logo": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+  "sameAs": [
+    "https://www.instagram.com/hadrianus_multiservice/",
+    "https://www.facebook.com/hadrianusmultiservice",
+    "https://www.linkedin.com/company/hadrianus-multiservice",
+    "https://www.google.com/maps?cid=13831442001728680114"
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Sunday"
+      ],
+      "opens": "10:00",
+      "closes": "19:00"
     },
-    "areaServed": [
-      {"@type": "City", "name": "Roma"},
-      {"@type": "Place", "name": "Ostia, Lido di Roma"}
-    ],
-    "knowsLanguage": ["it", "en", "fr", "es", "de"]
-  }
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "10:00",
+      "closes": "13:00"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Francesco Donati 274",
+    "postalCode": "00126",
+    "addressLocality": "Roma",
+    "addressRegion": "RM",
+    "addressCountry": "IT"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Roma"
+    },
+    {
+      "@type": "Place",
+      "name": "Ostia, Lido di Roma"
+    }
+  ],
+  "knowsLanguage": [
+    "it",
+    "en",
+    "fr",
+    "es",
+    "de"
+  ]
+}
   </script>
 </section>
 
