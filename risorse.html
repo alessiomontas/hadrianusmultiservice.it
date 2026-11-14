@@ -1,18 +1,488 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" class="p-gestione">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Questa pagina si &egrave; spostata &middot; Hadrianus</title>
-<link rel="canonical" href="https://hadrianusmultiservice.it/notizie">
-<meta http-equiv="refresh" content="0; url=/notizie">
-<meta name="robots" content="follow">
-<style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;
-  background:#14100B;color:#C3B6A3;
-  font:400 1.05rem/1.6 Archivo,"Helvetica Neue",Arial,sans-serif;
-  padding:2rem;text-align:center}
-a{color:#C8A24B}
-</style>
-<p>Questa pagina si &egrave; spostata.<br>
-<a href="/notizie">Vai a &laquo;Notizie del settore&raquo;</a></p>
-<script>location.replace('/notizie');</script>
+<title>Risorse &middot; guide sulla gestione delle case vacanze &middot; Hadrianus</title>
+<meta name="description" content="Guide su costi, rendimento, regole e zone per chi ha una casa vacanze a Roma e sul litorale.">
+<link rel="canonical" href="https://hadrianusmultiservice.it/risorse">
+<!-- L'ANTEPRIMA QUANDO SI CONDIVIDE IL COLLEGAMENTO.
+     Senza queste righe, un collegamento incollato su WhatsApp o LinkedIn
+     esce come una riga di testo nuda. Con queste esce col titolo, la frase
+     e l'immagine — ed e' la prima cosa che vede chi lo riceve. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Hadrianus Multiservice">
+<meta property="og:title" content="Risorse &middot; guide sulla gestione delle case vacanze &middot; Hadrianus Multiservice">
+<meta property="og:description" content="Guide su costi, rendimento, regole e zone per chi ha una casa vacanze a Roma e sul litorale.">
+<meta property="og:url" content="https://hadrianusmultiservice.it/risorse">
+<meta property="og:image" content="https://hadrianusmultiservice.it/immagini/gestione-testa.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Risorse &middot; guide sulla gestione delle case vacanze &middot; Hadrianus Multiservice">
+<meta name="twitter:card" content="summary_large_image">
+<!-- LE ICONE. Non c'e' nessun `favicon.svg`: il marchio e' una fotografia di
+     marmo, e per farne un SVG lo si sarebbe dovuto RIDISEGNARE — che e'
+     proprio la cosa vietata. Si usa il marchio vero rimpicciolito (`icone.py`).
+     Il .ico tiene dentro 16, 32 e 48 px ed e' anche quello che il browser va
+     a cercare da solo su /favicon.ico quando non trova altro. -->
+<link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" href="icona-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="icona-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#140F0B">
+<!-- I CARATTERI ARRIVANO DA QUESTO SITO, non dai server di Google.
+     Si guadagnano due cose: la pagina non deve aprire una conversazione con
+     un dominio di terzi prima di disegnare il testo, e l'indirizzo IP di chi
+     legge non esce piu' di qui. Il `preload` fa partire il file piu' usato
+     insieme al foglio di stile invece che dopo averlo letto. -->
+<link rel="preload" href="caratteri/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="caratteri/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="caratteri.css">
+<link rel="stylesheet" href="tavolozze.css">
+<link rel="stylesheet" href="stile.css">
+<script>
+/* OGNI PAGINA COMINCIA DALL'ALTO.
+   Il browser, di suo, RIMETTE la pagina dov'era: e' comodo quando si torna
+   indietro, ed e' sbagliato quando si apre una pagina nuova — ci si ritrova
+   in fondo e bisogna risalire per vederla. Alessio l'ha visto subito.
+   Questa riga va qui, in testa e prima di tutto: se si mettesse in fondo, il
+   browser avrebbe gia' deciso dove mettere la pagina e sarebbe tardi. */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+</script>
+
+<header class="barra">
+  <a class="marchio" href="/" aria-label="Hadrianus Multiservice, torna all'inizio">
+    <span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
+  <span class="tasti">
+    <a class="primario" href="/appartamenti">Prenota</a>
+    <!-- Prima portava a `#contatti`, cioe' al piede della pagina: un
+         recapito scritto, non un posto dove lasciare il proprio. Adesso
+         porta alla pagina con il modulo. -->
+    <a class="secondo" href="/contatti">Contattaci</a>
+  </span>
+</header>
+
+<main>
+<section class="calma testa-legge">
+  <div class="dentro">
+    <p class="occhiello">Risorse</p>
+    <h1 class="righe-fisse" style="--em:15.23">Le domande che ci fanno<br>prima di affidarci una casa.</h1>
+    <p class="sotto">Quanto costa, quanto rende, cosa dice la legge, e zona per zona com&rsquo;&egrave; fatto davvero il mercato. Scritto da chi le case le gestisce, non da chi le racconta.</p>
+    <p class="quando">Aggiornata il 14 novembre 2026</p>
+  </div>
+</section>
+
+<section>
+  <div class="dentro">
+    <ul class="voci">
+      <li><a href="/risorse/gestione-case-vacanze-ostia">Gestione case vacanze a Ostia</a>
+        &mdash; Gestiamo case vacanza a Ostia e sul litorale: annunci, ospiti, pulizie e adempimenti. 15% sull'incassato lordo, nessun canone fisso.</li>
+      <li><a href="/risorse/gestione-affitti-brevi-lido-di-ostia">Affitti brevi al Lido di Ostia: come funzionano</a>
+        &mdash; Stagione, tariffe e regole dell'affitto breve al Lido di Ostia: quando rende, quando no, e cosa serve per metterlo a norma.</li>
+      <li><a href="/risorse/property-manager-roma-litorale">Property manager fra Roma e il litorale</a>
+        &mdash; Cosa fa davvero un property manager, cosa non fa, e le sei domande da fargli prima di consegnargli le chiavi di casa.</li>
+      <li><a href="/risorse/gestione-case-vacanze-roma-eur">Gestione case vacanze all'EUR</a>
+        &mdash; L'EUR non vive di turismo: vive di lavoro, fiere e congressi. Come cambia la gestione di un affitto breve in una zona d'affari.</li>
+      <li><a href="/risorse/gestione-autonoma-vs-property-manager">Gestire da sé o affidarsi: il conto onesto</a>
+        &mdash; Quante ore costa davvero gestire una casa vacanza da soli, e a che punto conviene affidarla. Senza promesse, col conto in chiaro.</li>
+      <li><a href="/risorse/quanto-costa-gestire-casa-vacanza-roma">Quanto costa far gestire una casa vacanza a Roma</a>
+        &mdash; Il mercato romano sta fra il 20% e il 30%. Noi prendiamo il 15% sul lordo, pulizia da 65 euro, nessun canone fisso. Cosa c'è dentro e cosa no.</li>
+      <li><a href="/risorse/pulizie-case-vacanze-ostia">Pulizie per case vacanze a Ostia</a>
+        &mdash; Pulizia fra un ospite e l'altro a Ostia e sul litorale, su protocollo scritto. Da 65 euro a intervento, anche per immobili che non gestiamo.</li>
+      <li><a href="/risorse/cir-cin-affitti-brevi-lazio">CIN e CIR per gli affitti brevi nel Lazio</a>
+        &mdash; Cosa sono il CIN nazionale e il CIR regionale, a cosa servono, e perché dal 2026 senza CIN i portali non pubblicano più l'annuncio.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="dentro">
+    <h2>Non trovi la tua domanda?</h2>
+    <p>Le <a href="/domande">domande frequenti</a> rispondono alle piu&#8217;
+      comuni, e le <a href="/notizie">notizie del settore</a> seguono quello
+      che cambia nelle regole. Se la tua non c&rsquo;&egrave;, scrivila: risponde
+      una persona.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="dentro">
+    <h2 class="righe-fisse" style="--em:16.68">Parliamone sulla tua casa,<br>e ti diciamo cosa pu&ograve; rendere.</h2>
+    <p>Veniamo sul posto, guardiamo la casa e ti lasciamo una stima scritta
+      con i numeri del quartiere. Gratis e senza impegno: se poi decidi di
+      fare da solo, ti resta comunque la stima.</p>
+    <p><a class="chiamata" href="/contatti?di=gestione">Chiedi il sopralluogo</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="piede-pagina" id="contatti">
+  <div class="dentro">
+    <!-- L'INSEGNA ANCHE QUI. Chi arriva in fondo scorrendo ha perso di vista
+         la barra in alto: il nome va ridetto, e porta all'ingresso. -->
+    <a class="marchio insegna-piede" href="/"
+       aria-label="Hadrianus Multiservice, torna all&rsquo;ingresso"><span class="nome">HADRIANUS</span><span class="ditta">MULTISERVICE</span></a>
+    <p class="mestiere">Gestione di case vacanza a Roma e sul litorale di
+      Ostia. Pulizia alberghiera anche per chi gestisce da s&eacute;.</p>
+
+    <nav class="colonne" aria-label="Le pagine del sito">
+      <div class="gruppo">
+        <h2>Cosa facciamo</h2>
+        <a href="/gestione">Gestione completa</a>
+        <a href="/pulizie">Le pulizie</a>
+        <a href="/appartamenti">Gli appartamenti</a>
+      </div>
+      <div class="gruppo">
+        <h2>Prima di decidere</h2>
+        <a href="/compenso">Il compenso</a>
+        <a href="/domande">Domande frequenti</a>
+        <a href="/notizie">Notizie del settore</a>
+      </div>
+      <div class="gruppo">
+        <h2>L'azienda</h2>
+        <a href="/chi-siamo">Chi siamo</a>
+        <a href="/contatti">Contatti</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cookie">Cookie</a>
+        <a href="/termini">Termini</a>
+      </div>
+    </nav>
+
+    <!-- Il numero CHIAMA, non e' un testo da copiare: DESIGN.md.
+         ⚠️ 21/10: Alessio ha tolto i pulsanti «Chiama» dal corpo delle
+         pagine — resta solo «Scrivici ora». Il numero QUI nel piede NON si
+         tocca: non e' un pulsante, e' il recapito, e dal telefono chiama
+         lo stesso. -->
+    <div class="recapiti">
+      <a href="mailto:info@hadrianusmultiservice.it">info@hadrianusmultiservice.it</a>
+      <a href="tel:+393517305472">+39 351 730 5472</a>
+      <!-- L'etichetta sta scritta accanto al segno, non solo dentro
+           `aria-label`: un'icona sola la riconosce chi gia' sa cos'e', e
+           chi non la riconosce non ci clicca. -->
+      <a class="social" href="https://www.instagram.com/hadrianus_multiservice/" rel="me noopener"
+         target="_blank" aria-label="Il profilo Instagram di Hadrianus Multiservice"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+      <span>Roma e il litorale di Ostia</span>
+    </div>
+
+    <!-- Dalla visura camerale e dal certificato di attribuzione P.IVA.
+         Per una S.R.L.S. vanno scritti sul sito: non sono decorazione. -->
+    <div class="legale">
+      <span>Hadrianus Multiservice S.R.L.S.</span>
+      <span>Via Francesco Donati 274, 00126 Roma</span>
+      <span>P.IVA e C.F. 18302601002</span>
+      <span>REA RM&#8209;1775809</span>
+      <span>PEC hadrianus@pec.it</span>
+    </div>
+    <div class="legale ultimo">
+      <span>&copy; 2026 Hadrianus Multiservice S.R.L.S.</span>
+      <a href="/privacy">Privacy</a><a href="/cookie">Cookie</a>
+    </div>
+  </div>
+
+  <!-- ─────────── LA SCHEDA PER I MOTORI DI RICERCA ───────────
+       Gli stessi dati di sopra, scritti nel formato che Google legge per
+       mostrare l'attivita' nella mappa e nella scheda a lato: nome,
+       indirizzo, telefono, zona servita. Non e' testo nuovo e non promette
+       niente: e' la stessa visura, in una forma che una macchina capisce.
+       ⚠️ NON c'e' `aggregateRating` con il 5,0 di Google, e NON e' una
+       dimenticanza: dichiarare da soli il proprio voto medio e' contro le
+       regole di Google (le recensioni le deve contare lui, non noi) e si
+       rischia una penalizzazione manuale. Il 5,0 resta scritto in pagina,
+       dov'e' vero e verificabile. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://hadrianusmultiservice.it/#azienda",
+    "name": "Hadrianus Multiservice S.R.L.S.",
+    "description": "Gestione completa di case vacanza a Roma e sul litorale di Ostia: prenotazioni, ospiti, pulizie, manutenzione, adempimenti e conti.",
+    "url": "https://hadrianusmultiservice.it/",
+    "email": "info@hadrianusmultiservice.it",
+    "telephone": "+39 351 730 5472",
+    "vatID": "IT18302601002",
+    "taxID": "18302601002",
+    "foundingDate": "2025-11-12",
+    "priceRange": "€€",
+    "image": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+    "logo": "https://hadrianusmultiservice.it/immagini/logo-hadrianus.jpg",
+    "sameAs": [
+      "https://www.instagram.com/hadrianus_multiservice/",
+      "https://www.facebook.com/hadrianusmultiservice",
+      "https://www.linkedin.com/company/hadrianus-multiservice",
+      "https://www.google.com/maps?cid=13831442001728680114"
+    ],
+    "openingHoursSpecification": [
+      {"@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                      "Saturday", "Sunday"],
+        "opens": "00:00", "closes": "23:59"}
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via Francesco Donati 274",
+      "postalCode": "00126",
+      "addressLocality": "Roma",
+      "addressRegion": "RM",
+      "addressCountry": "IT"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Roma"},
+      {"@type": "Place", "name": "Ostia, Lido di Roma"}
+    ],
+    "knowsLanguage": ["it", "en", "fr", "es", "de"]
+  }
+  </script>
+</footer>
+
+<script>
+/* IL MOVIMENTO DELLE PAGINE — ricette 3 e 1 della dottrina
+   (`web/.claude/skills/movimento`). Nessuna libreria: GSAP sarebbe 70 kB
+   compressi, e per un'entrata a scaglioni e uno strato che scorre non
+   servono. Il budget delle librerie resta intatto.
+
+   Due cose sole, e tutte e due legate allo scorrimento:
+     1. le scritte entrano salendo, a scaglioni, quando le si raggiunge;
+     2. le fotografie a tutta larghezza scorrono piu' piano della pagina.
+
+   `pageshow` e non `load`: scatta anche quando il browser ripesca la pagina
+   dalla sua memoria tornando indietro, dove `load` non scatta affatto.
+   Se c'e' un'ancora nell'indirizzo (#contatti) non si tocca niente: li'
+   andare in fondo e' proprio quello che ha chiesto chi ha cliccato. */
+addEventListener('pageshow', function () {
+  if (!location.hash) scrollTo(0, 0);
+});
+
+/* ❗ IL MARCHIO: MULTISERVICE LARGO QUANTO HADRIANUS. (21/10)
+   Difetto visto da Alessio: sulla pagina d'ingresso le due righe cominciano
+   e finiscono nello stesso punto, su queste no — MULTISERVICE restava corta
+   e il marchio sembrava storto.
+
+   Perche': sulla landing c'e' uno script che le misura, qui c'era solo una
+   spaziatura scritta a mano (`letter-spacing:.05em`), indovinata una volta
+   e mai piu' vera. Questo e' LO STESSO script della landing, portato qui.
+
+   ⚠️ NON si fa con `text-align-last:justify`: quello distribuisce lo spazio
+   FRA LE PAROLE, e MULTISERVICE e' una parola sola — non c'e' niente da
+   distribuire e le lettere restano dove sono. Si misura e si spalma.
+
+   ⚠️ STA SOPRA IL BLOCCO DEL MOVIMENTO, E NON SI SPOSTA. Piu' in giu' c'e'
+   un `return` per chi ha chiesto «meno movimento»: mettendolo dopo, a quelle
+   persone il marchio resterebbe storto. Allineare due righe non e'
+   un'animazione — e' impaginazione, e vale per tutti. */
+(function () {
+  function larghezzaInchiostro(el) {
+    /* L'inchiostro VERO, dalla prima lettera all'ultima. La scatola
+       dell'elemento e' piu' larga: la spaziatura resta appesa anche dopo
+       l'ultima lettera, e quella coda va tolta, se no le due righe
+       risultano disallineate esattamente di quel tanto. */
+    var t = el.firstChild;
+    if (!t || t.nodeType !== 3) return el.getBoundingClientRect().width;
+    var r = document.createRange();
+    r.setStart(t, 0); r.setEnd(t, t.length);
+    var coda = parseFloat(getComputedStyle(el).letterSpacing) || 0;
+    return r.getBoundingClientRect().width - coda;
+  }
+  function allineaMarchio() {
+    var marchi = document.querySelectorAll('.marchio');
+    for (var i = 0; i < marchi.length; i++) {
+      var nome = marchi[i].querySelector('.nome');
+      var ditta = marchi[i].querySelector('.ditta');
+      if (!nome || !ditta || !ditta.firstChild) continue;
+      var quante = ditta.textContent.trim().length;
+      if (quante < 2) continue;
+      ditta.style.letterSpacing = '0px';
+      ditta.style.marginRight = '0px';
+      var bersaglio = larghezzaInchiostro(nome);
+      var naturale = larghezzaInchiostro(ditta);
+      var passo = (bersaglio - naturale) / (quante - 1);
+      ditta.style.letterSpacing = passo.toFixed(3) + 'px';
+      ditta.style.marginRight = (-passo).toFixed(3) + 'px';
+    }
+  }
+  allineaMarchio();
+  /* Cinzel scende dalla rete: la prima misura e' su un carattere di
+     ripiego, e va rifatta quando arriva quello vero. E a ogni cambio di
+     finestra, perche' la misura del marchio cresce con la larghezza. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(allineaMarchio);
+  addEventListener('resize', allineaMarchio);
+})();
+
+(function () {
+  /* CHI HA CHIESTO MENO MOVIMENTO RICEVE MENO MOVIMENTO. Non e' opzionale,
+     ed e' la prima riga perche' da qui in giu' non deve succedere nulla.
+     Il foglio di stile rimette gia' tutto a posto da solo. */
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  /* ---------- 1 · le scritte entrano a scaglioni ---------- */
+
+  /* TRE O QUATTRO PER SEZIONE, NON TUTTE. Sta scritto nella dottrina e ha
+     una ragione: se si muove tutto, non si muove niente — l'occhio non ha
+     piu' un punto fermo da cui giudicare. Si animano i primi quattro figli
+     (occhiello, titolo, frase, elenco o pulsante) e il resto sta fermo.
+     Prima si animavano TUTTI, fino all'ultima riga del piede. */
+  var QUANTI = 4;
+  var PASSO = 70;        // ms fra un elemento e il successivo (dottrina: 60-90)
+
+  var sezioni = document.querySelectorAll('section:not(.eroe) > .dentro');
+  var roba = [];
+  for (var s = 0; s < sezioni.length; s++) {
+    var figli = sezioni[s].children;
+    for (var i = 0; i < figli.length && i < QUANTI; i++) {
+      /* MAI ANIMARE QUELLO CHE E' GIA' SULLO SCHERMO AL CARICAMENTO.
+         Su uno schermo alto la prima sezione si vede subito: farla
+         "arrivare" vorrebbe dire farla sparire e ricomparire sotto gli
+         occhi di chi ha appena aperto la pagina. */
+      if (figli[i].getBoundingClientRect().top < innerHeight * 0.92) continue;
+      figli[i].style.setProperty('--ritardo', (i * PASSO) + 'ms');
+      figli[i].classList.add('sale');
+      roba.push(figli[i]);
+    }
+  }
+
+  var occhio = new IntersectionObserver(function (viste) {
+    for (var k = 0; k < viste.length; k++) {
+      if (!viste[k].isIntersecting) continue;
+      viste[k].target.classList.add('dentro-schermo');
+      /* UNA VOLTA SOLA. Un elemento che si rianima ogni volta che ci
+         ripassi davanti e' la firma del sito fatto in fretta. */
+      occhio.unobserve(viste[k].target);
+    }
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+  for (var j = 0; j < roba.length; j++) occhio.observe(roba[j]);
+
+  /* ---------- 2 · le fasce scorrono piu' piano ---------- */
+
+  /* Un solo strato, un solo tasso. La fotografia e' alta il 124% della
+     fascia, quindi puo' muoversi di 12 punti per parte senza mai scoprire
+     il fondo. `--scorre` va da 1 (fascia che entra dal basso) a -1 (che
+     esce dall'alto), ed e' una proporzione lineare: MAI un'easing su una
+     cosa legata al dito, se no l'immagine arriva dopo di lui.
+
+     Si scrive solo dentro `requestAnimationFrame`, e solo per le fasce che
+     si vedono: scriverlo a ogni evento di scorrimento vorrebbe dire far
+     ricalcolare al telefono anche quelle che stanno tre schermate piu' in
+     giu'. */
+  var fasce = [].slice.call(document.querySelectorAll('.fascia'));
+  if (!fasce.length) return;
+
+  var inVista = [];
+  var occhioFasce = new IntersectionObserver(function (viste) {
+    for (var k = 0; k < viste.length; k++) {
+      var f = viste[k].target;
+      var dove = inVista.indexOf(f);
+      if (viste[k].isIntersecting && dove < 0) inVista.push(f);
+      else if (!viste[k].isIntersecting && dove >= 0) inVista.splice(dove, 1);
+    }
+    if (inVista.length) chiedi();
+  }, { rootMargin: '20% 0px 20% 0px' });
+  for (var q = 0; q < fasce.length; q++) occhioFasce.observe(fasce[q]);
+
+  /* UN GIRO PER OGNI SCORRIMENTO, NON UNO CONTINUO.
+     La prima versione si richiamava da sola finche' una fascia era in
+     vista: anche a pagina ferma il telefono restava a disegnare sessanta
+     volte al secondo per niente, e si sente sulla batteria. Adesso il
+     giro lo chiede l'evento di scorrimento — che e' `passive`, quindi
+     non rallenta il dito — e dopo aver disegnato si ferma. */
+  var inCoda = false;
+  function chiedi() {
+    if (inCoda || !inVista.length) return;
+    inCoda = true;
+    requestAnimationFrame(disegna);
+  }
+  function disegna() {
+    inCoda = false;
+    var h = innerHeight || 1;
+    for (var k = 0; k < inVista.length; k++) {
+      var r = inVista[k].getBoundingClientRect();
+      /* 1 quando la fascia sta tutta sotto il bordo basso dello schermo,
+         -1 quando sta tutta sopra: il centro della fascia al centro dello
+         schermo vale 0, e li' l'inquadratura e' esattamente quella scelta
+         da chi ha ritagliato la fotografia. In mezzo e' una proporzione
+         dritta — MAI un'easing su una cosa legata al dito, se no
+         l'immagine arriva dopo di lui e sembra rotta. */
+      var centro = r.top + r.height / 2;
+      var p = (centro - h / 2) / ((h + r.height) / 2);
+      p = p < -1 ? -1 : p > 1 ? 1 : p;
+      var im = inVista[k].querySelector('img');
+      if (im) im.style.setProperty('--scorre', p.toFixed(3));
+    }
+  }
+  addEventListener('scroll', chiedi, { passive: true });
+  addEventListener('resize', chiedi, { passive: true });
+})();
+</script>
+
+<script>
+(function () {
+  try {
+    /* Chi ha chiesto di non essere seguito non viene contato, anche se
+       qui non c'e' niente da seguire: costa una riga e si rispetta. */
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1'
+        || navigator.globalPrivacyControl) return;
+
+    var manda = function (evento) {
+      try {
+        var q = new URLSearchParams(location.search);
+        var d = new URLSearchParams();
+        d.set('v', '1');
+        d.set('evento', evento);
+        d.set('pagina', location.pathname);
+        /* Da dove arriva: l'etichetta se c'e', se no il NOME del sito che
+           ha mandato la persona — mai l'indirizzo intero, che a volte si
+           porta dietro quello che uno stava cercando. */
+        var da = q.get('utm_source') || '';
+        if (!da && document.referrer) {
+          try {
+            var h = new URL(document.referrer).hostname;
+            if (h && h !== location.hostname) da = h;
+          } catch (e) {}
+        }
+        d.set('provenienza', da);
+        /* Arrotondata a cento: serve a sapere se si legge da telefono o da
+           computer, non a riconoscere uno schermo. */
+        /* `innerWidth` puo' essere 0 quando la pagina si misura troppo
+           presto o dentro certi browser: si prende il primo valore sensato
+           fra i tre, se no non si manda affatto. */
+        var W = document.documentElement.clientWidth || window.innerWidth
+                || (screen && screen.width) || 0;
+        if (W > 0) d.set('largo', String(Math.round(W / 100) * 100));
+        d.set('lingua', (navigator.language || '').slice(0, 5));
+        fetch("https://script.google.com/macros/s/AKfycbyDfborRluecojXLmZurf34uvRvZLJudo_V3WMbRPgI_iGrVG4pW4Y52RpQ1gen59-q/exec", { method: 'POST', body: d, keepalive: true })
+          .catch(function () {});
+      } catch (e) {}
+    };
+
+    /* L'apertura si manda quando la pagina ha finito di disegnarsi. */
+    if (document.readyState === 'complete') manda('apertura');
+    else addEventListener('load', function () { manda('apertura'); }, { once: true });
+
+    /* IL MOMENTO CHE MANCAVA: qualcuno ha toccato il modulo. Fra questo
+       numero e le richieste ricevute sta tutto quello che non funziona
+       nel modulo, e prima non si vedeva. */
+    var f = document.querySelector('form.modulo');
+    if (f) f.addEventListener('focusin', function () { manda('modulo toccato'); },
+                              { once: true });
+  } catch (e) {}
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Hadrianus Multiservice",
+      "item": "https://hadrianusmultiservice.it/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Risorse · guide sulla gestione delle case vacanze",
+      "item": "https://hadrianusmultiservice.it/risorse"
+    }
+  ]
+}
+</script>

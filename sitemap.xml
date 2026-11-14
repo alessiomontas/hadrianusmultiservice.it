@@ -61,6 +61,11 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://hadrianusmultiservice.it/risorse</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-ostia</loc>
     <lastmod>2026-11-14</lastmod>
     <priority>0.6</priority>
