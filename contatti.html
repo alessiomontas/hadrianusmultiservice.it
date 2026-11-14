@@ -179,7 +179,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <h2 class="righe-fisse" style="--em:8.92">Tre passi,<br>nessun impegno.</h2>
     <ol class="passi">
       <li><span class="numero">I</span><div><h3>Ti rispondiamo</h3>
-        <p>In giornata, se scrivi in orario di lavoro. Risponde una persona
+        <p>In giornata, sette giorni su sette. Risponde una persona
           che poi la casa la vedr&agrave; davvero.</p></div></li>
       <li><span class="numero">II</span><div><h3>Veniamo a vederla</h3>
         <p>Un&rsquo;ora in casa, gratis. Guardiamo com&rsquo;&egrave; messa,
@@ -411,10 +411,9 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     ],
     "openingHoursSpecification": [
       {"@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sunday"],
-        "opens": "10:00", "closes": "19:00"},
-      {"@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday", "opens": "10:00", "closes": "13:00"}
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                      "Saturday", "Sunday"],
+        "opens": "00:00", "closes": "23:59"}
     ],
     "address": {
       "@type": "PostalAddress",
