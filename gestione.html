@@ -477,6 +477,55 @@ addEventListener('pageshow', function () {
   addEventListener('resize', chiedi, { passive: true });
 })();
 </script>
+
+<script>
+(function () {
+  try {
+    /* Chi ha chiesto di non essere seguito non viene contato, anche se
+       qui non c'e' niente da seguire: costa una riga e si rispetta. */
+    if (navigator.doNotTrack === '1' || window.doNotTrack === '1'
+        || navigator.globalPrivacyControl) return;
+
+    var manda = function (evento) {
+      try {
+        var q = new URLSearchParams(location.search);
+        var d = new URLSearchParams();
+        d.set('v', '1');
+        d.set('evento', evento);
+        d.set('pagina', location.pathname);
+        /* Da dove arriva: l'etichetta se c'e', se no il NOME del sito che
+           ha mandato la persona — mai l'indirizzo intero, che a volte si
+           porta dietro quello che uno stava cercando. */
+        var da = q.get('utm_source') || '';
+        if (!da && document.referrer) {
+          try {
+            var h = new URL(document.referrer).hostname;
+            if (h && h !== location.hostname) da = h;
+          } catch (e) {}
+        }
+        d.set('provenienza', da);
+        /* Arrotondata a cento: serve a sapere se si legge da telefono o da
+           computer, non a riconoscere uno schermo. */
+        d.set('largo', String(Math.round(window.innerWidth / 100) * 100));
+        d.set('lingua', (navigator.language || '').slice(0, 5));
+        fetch("https://script.google.com/macros/s/AKfycbyDfborRluecojXLmZurf34uvRvZLJudo_V3WMbRPgI_iGrVG4pW4Y52RpQ1gen59-q/exec", { method: 'POST', body: d, keepalive: true })
+          .catch(function () {});
+      } catch (e) {}
+    };
+
+    /* L'apertura si manda quando la pagina ha finito di disegnarsi. */
+    if (document.readyState === 'complete') manda('apertura');
+    else addEventListener('load', function () { manda('apertura'); }, { once: true });
+
+    /* IL MOMENTO CHE MANCAVA: qualcuno ha toccato il modulo. Fra questo
+       numero e le richieste ricevute sta tutto quello che non funziona
+       nel modulo, e prima non si vedeva. */
+    var f = document.querySelector('form.modulo');
+    if (f) f.addEventListener('focusin', function () { manda('modulo toccato'); },
+                              { once: true });
+  } catch (e) {}
+})();
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
