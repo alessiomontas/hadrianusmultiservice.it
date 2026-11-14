@@ -596,7 +596,12 @@ addEventListener('pageshow', function () {
         d.set('provenienza', da);
         /* Arrotondata a cento: serve a sapere se si legge da telefono o da
            computer, non a riconoscere uno schermo. */
-        d.set('largo', String(Math.round(window.innerWidth / 100) * 100));
+        /* `innerWidth` puo' essere 0 quando la pagina si misura troppo
+           presto o dentro certi browser: si prende il primo valore sensato
+           fra i tre, se no non si manda affatto. */
+        var W = document.documentElement.clientWidth || window.innerWidth
+                || (screen && screen.width) || 0;
+        if (W > 0) d.set('largo', String(Math.round(W / 100) * 100));
         d.set('lingua', (navigator.language || '').slice(0, 5));
         fetch("https://script.google.com/macros/s/AKfycbyDfborRluecojXLmZurf34uvRvZLJudo_V3WMbRPgI_iGrVG4pW4Y52RpQ1gen59-q/exec", { method: 'POST', body: d, keepalive: true })
           .catch(function () {});

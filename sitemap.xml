@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hadrianusmultiservice.it/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -59,5 +59,45 @@
     <loc>https://hadrianusmultiservice.it/termini</loc>
     <lastmod>2026-11-14</lastmod>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-ostia</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-affitti-brevi-lido-di-ostia</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/property-manager-roma-litorale</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-roma-eur</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-autonoma-vs-property-manager</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/quanto-costa-gestire-casa-vacanza-roma</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/pulizie-case-vacanze-ostia</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/cir-cin-affitti-brevi-lazio</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

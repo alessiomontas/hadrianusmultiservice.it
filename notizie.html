@@ -217,6 +217,36 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     <a class="chiamata" href="/contatti">Chiedici di una di queste</a>
   </div>
 </section>
+
+<!-- LE OTTO RISORSE, collegate da qui.
+     Senza questo blocco sarebbero pagine vere che nessuno raggiunge: ne'
+     una persona ne' Google, che una pagina la trova seguendo i
+     collegamenti. Stanno su `/notizie` perche' e' la pagina che parla di
+     regole e di mercato, cioe' lo stesso argomento. -->
+<section class="alt">
+  <div class="dentro">
+    <p class="occhiello">Approfondimenti</p>
+    <h2 class="righe-fisse" style="--em:13.51">Otto pagine,<br>una domanda per volta.</h2>
+    <ul class="voci">
+      <li><a href="risorse/gestione-case-vacanze-ostia.html">Gestione case vacanze a Ostia</a>
+        &mdash; perch&eacute; il litorale non si prezza come Roma</li>
+      <li><a href="risorse/gestione-affitti-brevi-lido-di-ostia.html">Affitti brevi al Lido di Ostia</a>
+        &mdash; la stagione, le carte, il numero che conta</li>
+      <li><a href="risorse/property-manager-roma-litorale.html">Property manager fra Roma e il litorale</a>
+        &mdash; le sei domande da fare prima delle chiavi</li>
+      <li><a href="risorse/gestione-case-vacanze-roma-eur.html">Gestione case vacanze all&rsquo;EUR</a>
+        &mdash; dove la settimana vale pi&ugrave; del fine settimana</li>
+      <li><a href="risorse/gestione-autonoma-vs-property-manager.html">Gestire da s&eacute; o affidarsi</a>
+        &mdash; il conto onesto, con le ore dentro</li>
+      <li><a href="risorse/quanto-costa-gestire-casa-vacanza-roma.html">Quanto costa far gestire una casa a Roma</a>
+        &mdash; il mercato, il nostro prezzo, cosa c&rsquo;&egrave; dentro</li>
+      <li><a href="risorse/pulizie-case-vacanze-ostia.html">Pulizie per case vacanze a Ostia</a>
+        &mdash; la sabbia, il sale e le poche ore fra un ospite e l&rsquo;altro</li>
+      <li><a href="risorse/cir-cin-affitti-brevi-lazio.html">CIN e CIR nel Lazio</a>
+        &mdash; cosa sono, chi li d&agrave;, cosa &egrave; cambiato nel 2026</li>
+    </ul>
+  </div>
+</section>
 </main>
 
 <footer class="piede-pagina" id="contatti">
@@ -545,7 +575,12 @@ addEventListener('pageshow', function () {
         d.set('provenienza', da);
         /* Arrotondata a cento: serve a sapere se si legge da telefono o da
            computer, non a riconoscere uno schermo. */
-        d.set('largo', String(Math.round(window.innerWidth / 100) * 100));
+        /* `innerWidth` puo' essere 0 quando la pagina si misura troppo
+           presto o dentro certi browser: si prende il primo valore sensato
+           fra i tre, se no non si manda affatto. */
+        var W = document.documentElement.clientWidth || window.innerWidth
+                || (screen && screen.width) || 0;
+        if (W > 0) d.set('largo', String(Math.round(W / 100) * 100));
         d.set('lingua', (navigator.language || '').slice(0, 5));
         fetch("https://script.google.com/macros/s/AKfycbyDfborRluecojXLmZurf34uvRvZLJudo_V3WMbRPgI_iGrVG4pW4Y52RpQ1gen59-q/exec", { method: 'POST', body: d, keepalive: true })
           .catch(function () {});
