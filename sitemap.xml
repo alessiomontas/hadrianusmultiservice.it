@@ -67,7 +67,7 @@
   </url>
   <url>
     <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-ostia</loc>
-    <lastmod>2026-11-19</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -103,6 +103,21 @@
   <url>
     <loc>https://hadrianusmultiservice.it/risorse/cir-cin-affitti-brevi-lazio</loc>
     <lastmod>2026-11-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-fiumicino</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-torvaianica</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-ostia-antica</loc>
+    <lastmod>2026-11-23</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
