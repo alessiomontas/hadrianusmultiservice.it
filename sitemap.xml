@@ -81,11 +81,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-roma-eur</loc>
-    <lastmod>2026-11-19</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://hadrianusmultiservice.it/risorse/gestione-autonoma-vs-property-manager</loc>
     <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
@@ -119,5 +114,10 @@
     <loc>https://hadrianusmultiservice.it/risorse/gestione-case-vacanze-ostia-antica</loc>
     <lastmod>2026-11-23</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hadrianusmultiservice.it/risorse/gestori-case-vacanze</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>
